@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {margin: 0; padding: 0;}
+        html, body {
+            height: 100%;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+        var c = null,
+            ctx = null,
+            plane = null;
+            isMoving = null;
+            isChangingDirection = null
+        window.addEventListener('resize', resize);
+        window.addEventListener('load', init);
+        function init () {
+            initData();
+            resize();
+            drawPlane();
+            setListener();
+        }
+        function setListener () {
+            setInterval(() => {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                if (isMoving) {
+                    if (plane.deg >= -90) { //往左上方向
+                        plane.x += Math.sin(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v * -1;
+                        plane.y += Math.cos(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v * -1;
+                    } else if (plane.deg >= -180) { //往左下方向
+                        plane.x += Math.cos(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v * -1;
+                        plane.y += Math.sin(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v;
+                    } else if (plane.deg >=-270) { //往右下方向
+                        plane.x += Math.sin(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v;
+                        plane.y += Math.cos(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v;
+                    } else if (plane.deg <= 0) { //往右上方向
+                        plane.x += Math.cos(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v;
+                        plane.y += Math.sin(Math.abs(plane.deg) % 91 * Math.PI / 180) * plane.v * -1;
+                    }
+                    drawFlame();
+                    plane.v += plane.av;
+                }
+                if (isChangingDirection) {
+                    plane.deg = plane.deg % 360;
+                    switch (isChangingDirection) {
+                        case 37:
+                            plane.deg += -plane.degSize;
+                            break;
+                        case 39:
+                            if (plane.deg >= 0) {
+                                plane.deg += plane.degSize - 360;
+                            } else {
+                                plane.deg += plane.degSize;
+                            }
+                            
+                            break;
+                    }
+                }
+                drawPlane();
+            }, 17);
+        }
+        function initData () {
+            c = document.querySelector('#canvas');
+            ctx = c.getContext('2d');
+            plane = {
+                x: c.offsetWidth / 2, 
+                y: c.offsetHeight / 2,
+                v: 0,
+                av: 0.2,
+                deg: 0,
+                degSize: 3,
+                size: 50,
+                }
+            isMoving = false,
+            isChangingDirection = 0;
+        }
+        function resize () {
+            c.width = c.offsetWidth;
+            c.height = c.offsetHeight;
+        }
+        function drawPlane () {
+            ctx.strokeStyle = 'black';
+            ctx.save();
+            ctx.translate(plane.x, plane.y);
+            ctx.rotate(plane.deg * Math.PI / 180);
+            ctx.scale(plane.size, plane.size);
+            ctx.beginPath();
+            ctx.lineTo(0, -0.5);
+            ctx.lineTo(0.4, 0.5);
+            ctx.lineTo(0, 0.2);
+            ctx.lineTo(-0.4, 0.5);
+            ctx.closePath();
+            ctx.restore();
+            ctx.stroke();
+        }
+        function drawFlame () {
+            ctx.strokeStyle = 'red';
+            ctx.save();
+            ctx.translate(plane.x, plane.y);
+            ctx.rotate(plane.deg * Math.PI / 180);
+            ctx.scale(plane.size, plane.size);
+            ctx.beginPath();
+            ctx.lineTo(0.2, 0.35);
+            ctx.lineTo(0, 0.7);
+            ctx.lineTo(-0.2, 0.35);
+            ctx.restore();
+            ctx.stroke();
+        }
+        document.addEventListener('keydown', function (e) {
+            // up -> 38, left -> 37, right -> 39, down -> 40
+            switch (e.keyCode) {
+                case 38:
+                    isMoving = true;
+                    break;
+                case 37:
+                    isChangingDirection = 37;
+                    break;
+                case 39: 
+                    isChangingDirection = 39;
+                    break;
+                default:
+                    break;
+            }
+        });
+        document.addEventListener('keyup', function (e) {
+            if (e.keyCode === 38) {
+                isMoving = false;
+                plane.v = 0;
+            } else if (e.keyCode === 37 || e.keyCode === 39) {
+                isChangingDirection = 0;
+            }
+        });
+    </script>
+</body>
+</html>
