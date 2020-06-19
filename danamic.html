@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 0 20px;
+            height: 0;
+            overflow-x: hidden;
+        }
+
+        .item {
+            transition: background-color .4s;
+            width: 100%;
+            line-height: 50px;
+            margin: 40px 0;
+            text-align: center;
+            background-color: rgb(59, 79, 250);
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item:hover {
+            background-color: rgb(43, 62, 231);
+        }
+
+        .item>div {
+            float: left;
+        }
+
+        .item-name,
+        .item-move {
+            width: 50%;
+        }
+
+        .item-move>span {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .item-move>span:hover {
+            color: rgb(255, 238, 6);
+        }
+
+        .add-wrapper {
+            text-align: center;
+        }
+
+        .add-ipt,
+        .add-btn {
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .add-ipt {
+            width: 50px;
+            height: 30px;
+            border: 1px solid rgb(59, 79, 250);
+            padding-left: 10px;
+            transition: width .4s ease-in;
+        }
+
+        .add-ipt:focus {
+            width: 200px;
+        }
+
+        .add-btn {
+            height: 32px;
+            width: 60px;
+            background-color: rgb(59, 79, 250);
+            vertical-align: middle;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: background-color .4s;
+        }
+
+        .add-btn:hover {
+            background-color: rgb(43, 62, 231);
+        }
+
+        #msg {
+            text-align: center;
+            margin: 20px;
+            font-size: 14px;
+            color: rgb(4, 17, 134);
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+    </div>
+    <div class="add-wrapper">
+        <input type="text" class="add-ipt" placeholder="添加项">
+        <button class="add-btn">添加</button>
+    </div>
+    <p id="msg">请输入些内容</p>
+    <script src="https://cdn.jsdelivr.net/gh/jquery/jquery/dist/jquery.js"></script>
+    <script>
+        $(function () {
+            append('JavaScript');
+            append('NodeJs');
+            append('Java');
+            $('.wrapper').on('click', '.item-move-up', function() {
+                var $cur = $(this).parents('.item'),
+                    $prev = $cur.prev();
+
+                var curTop, prevTop;
+
+                if ($prev[0]) {
+
+                    prevTop = ($cur.offset().top - $prev.offset().top);
+                    curTop = prevTop * -1;
+
+                    $cur.animate({ top: curTop }, 'slow');
+
+                    $prev.animate({ top: prevTop }, 'slow', function() {
+                        $cur.css('top', 0);
+                        $prev.css('top', 0);
+                        $prev.before($cur);
+                    });
+
+                } else {
+
+                    var $last = $('.item').last();
+                    var lastTop;
+
+                    curTop = $last.offset().top - $cur.offset().top;
+                    lastTop = curTop * -1;
+
+                    $cur.animate({ top: curTop }, 'slow');
+
+                    $last.animate({ top: lastTop }, 'slow', function() {
+                        $cur.css('top', 0);
+                        $last.css('top', 0);
+                        $('.wrapper').append($cur).prepend($last);
+                    });
+
+                }
+
+
+
+            }).on('click', '.item-move-down', function() {
+
+                var $cur = $(this).parents('.item'),
+                    $next = $cur.next();
+
+                var curTop, nextTop;
+
+                if ($next[0]) {
+
+                    nextTop = ($cur.offset().top - $next.offset().top);
+                    curTop = nextTop * -1;
+
+                    $cur.animate({ top: curTop }, 'slow');
+
+                    $next.animate({ top: nextTop }, 'slow', function() {
+                        $cur.css('top', 0);
+                        $next.css('top', 0);
+                        $next.after($cur);
+                    });
+                } else {
+                    var $first = $('.item').first();
+                    var firstTop;
+
+                    curTop = $first.offset().top - $cur.offset().top;
+                    firstTop = curTop * -1;
+
+                    $cur.animate({ top: curTop }, 'slow');
+
+                    $first.animate({ top: firstTop }, 'slow', function() {
+                        $cur.css('top', 0);
+                        $first.css('top', 0);
+                        $('.wrapper').append($first).prepend($cur);
+                    });
+                }
+
+            }).on('click', '.item-move-del', function() {
+
+                if ($(':animated').length) return;
+
+                var left = ($('.wrapper').innerWidth() * 2) + 'px',
+                    $curItem = $(this).parents('.item'),
+                    itemNum = $('.item').length,
+                    height = parseFloat($curItem.css('margin-top')) * itemNum + $curItem.height() * (itemNum - 1);
+
+                $curItem.animate({ left: left }, 'slow', function() {
+
+                    var top = ($curItem.height() + parseFloat($curItem.css('margin-top')));
+
+                    if ($curItem.nextAll().length) {
+
+                        $curItem.nextAll().each(function() {
+                            var $curNextItem = $(this);
+
+                            $curNextItem.animate({ top: '-=' + top }, 'slow', function() {
+
+                                $curItem.css('position', 'absolute');
+                                $curNextItem.css('top', 0);
+
+                                $('.wrapper').animate({ height: height }, 'slow', function() {
+                                    $curItem.remove();
+                                });
+                            })
+                        });
+
+                    } else {
+
+                        $('.wrapper').animate({ height: height }, 'slow', function() {
+                            $curItem.remove();
+                        });
+
+                    }
+
+                });
+
+            });
+
+            $('.add-btn').on('click', function() {
+
+                var $ipt = $('.add-ipt');
+
+                if (!$ipt.val()) {
+
+                    $('#msg').slideDown();
+                    setTimeout(() => {
+                        $('#msg').slideUp();
+                    }, 2000);
+
+                } else {
+
+                    $('#msg').slideUp();
+                    append($ipt.val());
+                    $ipt.val('');
+
+                }
+            });
+        });
+
+        function append(itemName) {
+            var left = ($('.wrapper').innerWidth() * -1) + 'px';
+
+            var template = '';
+            template += '<div class="item" style="left: ' + left + '">';
+            template += '    <div class="item-name">' + itemName + '</div>';
+            template += '    <div class="item-move">';
+            template += '        <span class="item-move-up">上移</span>';
+            template += '        <span class="item-move-down">下移</span>';
+            template += '        <span class="item-move-del">删除</span>';
+            template += '    </div>';
+            template += '</div>';
+
+
+            var $last = $('.wrapper').append(template).children().last(),
+                itemNum = $('.item').length;
+
+            var height = parseFloat($last.css('margin-top')) * (itemNum + 1) + $last.height() * itemNum;
+
+            $('.wrapper').animate({ height: height }, 'slow', function () {
+                $last.animate({ left: 0 }, 'slow');
+            });
+        };
+    </script>
+</body>
+
+</html>
