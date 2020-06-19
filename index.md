@@ -2,5 +2,5 @@
 
 ### 一些小实例
 
-* [飞机大战](./danamic.html)
-* [动画操作](./aircraft.html)
+* [飞机大战](./aircraft.html)
+* [动画操作](./danamic.html)
