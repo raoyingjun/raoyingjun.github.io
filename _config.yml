@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 饶英俊的博客
-subtitle: 饶英俊的个人博客
-description: 欢迎来到饶英俊的博客，在这里分享相关的知识给大家，欢迎探讨~
+title: 饶英俊（Royin）的个人博客
+subtitle:
+description: 欢迎来到饶英俊（Royin）的博客，在这里分享相关的知识给大家，欢迎探讨~
 keywords: 前端,javascript,html,vue,css
-author: Royin (YingJun Rao)
+author: 饶英俊（Royin）
 language: zh-CN
 timezone: Asia/Shanghai
 
