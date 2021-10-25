@@ -23,16 +23,10 @@ babel官方制作了loader，使babel支持在webpack构建工具中使用
 // 以下省略了其他的loader
 {
     test: /\.js$/,
-        exclude
-:
-    /node_modules/,
-        use
-:
-    {
-        loader: 'babel-loader',
-            options
-    :
-        {
+        exclude:/node_modules/,
+        use:{
+         loader: 'babel-loader', 
+         options:{
             presets: [
                 [
                     '@babel/preset-env',
@@ -51,9 +45,7 @@ babel官方制作了loader，使babel支持在webpack构建工具中使用
                     }
                 ]
             ],
-                plugins
-        :
-            ['@babel/plugin-transform-runtime']
+            plugins: ['@babel/plugin-transform-runtime']
         }
     }
 }
