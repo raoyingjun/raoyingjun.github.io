@@ -106,5 +106,3 @@ deploy:
   repo: https://github.com/raoyingjun/raoyingjun.github.io
   # example, https://github.com/hexojs/hexojs.github.io
   branch: gh-pages
-
-# token: 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
