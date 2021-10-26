@@ -1,5 +1,5 @@
 ---
-title: font-family怎么玩？
+title: font-family怎么玩
 date: 2021-10-26 20:19:46
 tags: css
 ---
@@ -29,9 +29,12 @@ tags: css
 多个属性值用 `,`分割
 
 ```css
-font-family: “Microsoft YaHei”, Helvetica, sans-serif
 
-/* Microsoft YaHei和Helvetica为两个不同的字体，sans-serif为通用字体族*/
+selector {
+  /* Microsoft YaHei和Helvetica为两个不同的字体，sans-serif为通用字体族*/
+  font-family: "Microsoft YaHei", Helvetica, sans-serif
+}
+
 ```
 
 ### 使用font-family的注意事项

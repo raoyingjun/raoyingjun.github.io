@@ -26,7 +26,7 @@ babel官方制作了loader，使babel支持在webpack构建工具中使用
 
 ```js
 // webpack.config.js
-// 以下省略了其他的loader
+// 以下省略了其他的配置项
 {
     test: /\.js$/,
         exclude:/node_modules/,
