@@ -1,3 +1,9 @@
+---
+title: vue3的组合式API
+date: 2021-10-26 20:19:46
+tags: vue
+---
+
 ### 引入
 
 在学vue3的时候接触到了组合式API，vue提供了在setup中使用组合式API的方式

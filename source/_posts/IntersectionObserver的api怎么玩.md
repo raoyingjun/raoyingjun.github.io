@@ -1,3 +1,9 @@
+---
+title: IntersectionObserver的api怎么玩
+date: 2021-10-26 20:19:46
+tags: javascript
+---
+
 ### 首先来看看mdn的对它介绍
 
 IntersectionObserver，一种异步观察目标元素与其容器元素或顶级文档视窗(viewport)相交状态的方法。

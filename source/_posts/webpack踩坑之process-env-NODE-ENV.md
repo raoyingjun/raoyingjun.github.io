@@ -1,3 +1,9 @@
+---
+title: webpack踩坑之process-env-NODE-ENV
+date: 2021-10-26 20:19:46
+tags: webpack
+---
+
 ##### 问题引入
 
 当你尝试在 `webpack.config.js` 文件中访问 `process.env.NODE_ENV`(以下简称`NODE_ENV`) 。很遗憾，结果是`undefined`

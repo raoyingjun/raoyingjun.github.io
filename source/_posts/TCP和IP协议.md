@@ -1,3 +1,9 @@
+---
+title: TCP和IP协议
+date: 2021-10-26 20:19:46
+tags: 计算机网络
+---
+
 ### 什么是TCP/IP协议
 
 TCP/IP中的TCP是Transmission Control Protocol传输控制协议，IP是Internet

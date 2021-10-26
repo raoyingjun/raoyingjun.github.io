@@ -1,3 +1,9 @@
+---
+title: linux的screen命令
+date: 2021-10-26 20:19:46
+tags: linux
+---
+
 ### 前言
 
 一般部署在linux的服务器的项目如何在退出shell后仍然保持进程运行状态。可以使用nohub、screen等命令解决，这里讲解screen命令

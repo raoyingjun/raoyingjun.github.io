@@ -1,3 +1,9 @@
+---
+title: Babel配置问题
+date: 2021-10-26 20:19:46
+tags: webpack
+---
+
 ### @babel/core
 
 是babel进行语法转换的核心实现

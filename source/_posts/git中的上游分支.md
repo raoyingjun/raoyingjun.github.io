@@ -1,3 +1,9 @@
+---
+title: git中的上游分支
+date: 2021-10-26 20:19:46
+tags: git
+---
+
 ### 预备知识
 
 什么是`fork`？在github的某个仓库上通过`fork`按钮，`fork`一份项目到你的仓库，称其为`origin（源）`，并且还可以关联被`fork`的仓库，称其为`upstream（上游）`

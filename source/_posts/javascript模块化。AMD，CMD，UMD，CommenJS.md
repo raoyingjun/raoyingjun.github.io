@@ -1,3 +1,9 @@
+---
+title: javascript模块化。AMD，CMD，UMD，CommenJS
+date: 2021-10-26 20:19:46
+tags: nodejs
+---
+
 * AMD(Asynchronous Module Definition)指异步模块定义。是requirejs推广模块化规范的产物。
 
   看个例子，了解其是如何定义一个AMD模块的：
