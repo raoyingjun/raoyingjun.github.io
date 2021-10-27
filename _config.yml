@@ -5,7 +5,7 @@
 # Site
 title: 饶英俊（Royin）的个人博客
 subtitle:
-description: 欢迎来到饶英俊（Royin）的博客，在这里分享相关的知识给大家，欢迎探讨~
+description: 饶英俊（Royin）的博客_web前端技术文章博客
 keywords: 前端,javascript,html,vue,css
 author: 饶英俊（Royin）
 language: zh-CN
@@ -44,7 +44,7 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace: ''
