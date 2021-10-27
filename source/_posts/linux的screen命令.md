@@ -2,6 +2,7 @@
 title: linux的screen命令
 date: 2021-10-26 20:19:46
 tags: linux
+categories: linux
 ---
 
 ### 前言

@@ -2,6 +2,7 @@
 title: IntersectionObserver的api怎么玩
 date: 2021-10-26 20:19:46
 tags: javascript
+categories: javascript
 ---
 
 ### 首先来看看mdn的对它介绍

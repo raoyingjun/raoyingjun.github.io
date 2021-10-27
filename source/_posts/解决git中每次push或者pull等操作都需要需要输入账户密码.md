@@ -2,6 +2,7 @@
 title: 解决git中每次push或者pull等操作都需要需要输入账户密码
 date: 2021-10-26 20:19:46
 tags: git
+categories: git
 ---
 
 #### 前景引入

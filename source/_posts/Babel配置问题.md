@@ -2,6 +2,7 @@
 title: Babel配置问题
 date: 2021-10-26 20:19:46
 tags: webpack
+categories: webpack
 ---
 
 ### @babel/core

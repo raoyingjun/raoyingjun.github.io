@@ -2,6 +2,7 @@
 title: 版本控制工具git的基本使用
 date: 2021-10-26 20:19:46
 tags: git
+categories: git
 ---
 
 ### 什么是版本控制工具？
