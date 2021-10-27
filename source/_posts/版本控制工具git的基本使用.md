@@ -33,7 +33,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 配置提交时所使用的个人信息
 
-  ```git
+  ```bash
   git config --global user.name "raoyingjun" // 用户名
   git config --global user.email "raoyingjun@foxmail.com" // 邮箱
   ```
@@ -42,7 +42,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 初始化本地git仓库
 
-  ```git
+  ```bash
   git init
   ```
 
@@ -50,7 +50,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 查看文件的状态
 
-  ```git
+  ```bash
   git status
   ```
 
@@ -66,7 +66,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 提交更改到本地git仓库
 
-  ```git
+  ```bash
   git commit
   ```
 
@@ -74,7 +74,7 @@ git操作文件时候，工作流顺序下表所示：
 
   指定`-m`参数可以直接写入提交说明，不会拉起编辑器，比较方便快捷，命令如下
 
-  ```git
+  ```bash
   git commit -m <description>
   ```
 
@@ -82,13 +82,13 @@ git操作文件时候，工作流顺序下表所示：
 
   指定`-a`参数设置修改文件后无需执行 git add 命令，直接提交。将会拉取编辑器，在编辑器写入提交说明，命令如下
 
-  ```git
+  ```bash
   git commit -a
   ```
 
   可以同时指定`-am`将add添加到暂存区操作和commit提交操作合并到一起。或者使用`git commit * -m `也可以达到同样的效果
 
-  ```git
+  ```bash
   git commit -am <description> 
   // 或者
   git commit * -m <description> 
@@ -100,7 +100,7 @@ git操作文件时候，工作流顺序下表所示：
 
   使用`git log` 查看提交的日志记录信息，**该命令只能查看到当前版本为止的记录**
 
-  ```git
+  ```bash
   HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
   $ git log
   commit 73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -> master)
@@ -112,7 +112,7 @@ git操作文件时候，工作流顺序下表所示：
 
   使用`git log --pretty=oneline`查看提交的日志记录信息
 
-  ```git
+  ```bash
   HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
   $ git log --pretty=oneline
   73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -> master) 本次提交的说明
@@ -120,7 +120,7 @@ git操作文件时候，工作流顺序下表所示：
 
   使用`git log --oneline`查看提交的日志记录信息
 
-  ```git
+  ```bash
   HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
   $ git log --oneline
   73ad93b (HEAD -> master) 本次提交的说明
@@ -128,7 +128,7 @@ git操作文件时候，工作流顺序下表所示：
 
   使用`git log --graph`查看提交的日志记录信息。方便直观的查看分支合并的情况
 
-  ```git
+  ```bash
   $ git log --graph
   *   commit 2819958ace45d4ba7377e81d539ce80ff78a16c8 (HEAD -> main)
   |\  Merge: 8467fbd 8d2e09d
@@ -164,7 +164,7 @@ git操作文件时候，工作流顺序下表所示：
 
 使用`git reflog`查看提交的日志信息，**该命令可以查看所有版本的提交记录**
 
-  ```git
+  ```bash
   HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
   $ git reflog
   73ad93b (HEAD -> master) HEAD@{0}: commit: 本次提交的说明
@@ -172,7 +172,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 从暂存区移除文件
 
-  ```git
+  ```bash
   git restore --staged <file>
   ```
 
@@ -182,7 +182,7 @@ git操作文件时候，工作流顺序下表所示：
 
   当文件被添加到暂存区，如果对文件进行了修改，使用以下命令来丢弃修改，回撤到文件被暂存时的状态
 
-  ```git
+  ```bash
   git restore <file>
   ```
 
@@ -194,13 +194,13 @@ git操作文件时候，工作流顺序下表所示：
 
     * 无参数传入，比较工作区和暂存区的差异
 
-      ```git
+      ```bash
       git diff
       ```
 
     * 比较暂存区和`HEAD`的差异
 
-      ```git
+      ```bash
       git diff --cached
       // 或者
       git diff --staged
@@ -208,13 +208,13 @@ git操作文件时候，工作流顺序下表所示：
 
     * 比较工作区和HEAD的差异
 
-      ```git
+      ```bash
       git diff HEAD
       ```
 
     * 比较工作区和HEAD同名文件的差异
 
-      ```git
+      ```bash
       git diff HEAD -- <file>
       ```
 
@@ -224,7 +224,7 @@ git操作文件时候，工作流顺序下表所示：
 
         * 比较最新的HEAD和前3次的HEAD的差异
 
-          ```git
+          ```bash
           git diff HEAD^ HEAD
           ```
 
@@ -232,7 +232,7 @@ git操作文件时候，工作流顺序下表所示：
 
         * 比较最新的HEAD和前3个版本的比较
 
-          ```git
+          ```bash
           git diff HEAD~3 HEAD
           ```
 
@@ -240,13 +240,13 @@ git操作文件时候，工作流顺序下表所示：
 
         * 比较两个历史版本的差异
 
-          ```git
+          ```bash
           git diff hash1 hash2
           ```
 
   命令返回的结果示例如下：
 
-  ```git
+  ```bash
   HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
   $ git diff
   diff --git a/text.txt b/text.txt
@@ -284,7 +284,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 切换到指定的版本
 
-      ```git
+      ```bash
       git reset --hard <hash>
       ```
 
@@ -292,7 +292,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 切换到前1个版本
 
-      ```git
+      ```bash
       git reset --hard HEAD^
       ```
 
@@ -300,7 +300,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 切换到前两个版本
 
-      ```git
+      ```bash
       git reset --hard HEAD~1
       ```
 
@@ -310,7 +310,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 在暂存区和工作区删除该文件
 
-      ```git
+      ```bash
       git rm <file>
       ```
 
@@ -318,7 +318,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 仅暂存区删除该文件
 
-      ```git
+      ```bash
       git rm --cached <file>
       ```
 
@@ -328,7 +328,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 从本地git仓库拉取一份回工作区
 
-      ```git
+      ```bash
       git checkout <file>
       ```
 
@@ -336,7 +336,7 @@ git操作文件时候，工作流顺序下表所示：
 
     * 恢复工作区被删除的文件
 
-      ```git
+      ```bash
       git restore <file>
       ```
 
@@ -348,7 +348,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 创建分支
 
-  ```git
+  ```bash
   git checkout -b <newbranch>
   // or
   git branch <newbranch>
@@ -358,7 +358,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 切换分支
 
-  ```git
+  ```bash
   git checkout <branchname>
   ```
 
@@ -366,7 +366,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 删除分支
 
-  ```git
+  ```bash
   git branch -d <branchname>
   ```
 
@@ -374,7 +374,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 查看分支
 
-  ```git
+  ```bash
   git branch
   ```
 
@@ -382,13 +382,13 @@ git操作文件时候，工作流顺序下表所示：
 
   指定`-v`参数可以查看各个分支最后一次提交的信息，命令如下
 
-  ```git
+  ```bash
   git branch -v
   ```
 
 * 合并分支
 
-  ```git
+  ```bash
   git merge <branchname>
   ```
 
@@ -404,7 +404,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 添加远程仓库
 
-  ```git
+  ```bash
   git remote add <remotename> <url>
   ```
 
@@ -413,19 +413,19 @@ git操作文件时候，工作流顺序下表所示：
 
 * 查看所有的远程仓库别名
 
-  ```git
+  ```bash
   git remote
   ```
 
   指定`-v`参数同时显示其远程仓库所对应的地址`url`
 
-  ```git
+  ```bash
   git remote -v
   ```
 
 * 删除远程仓库
 
-  ```git
+  ```bash
   git remote rm <remotename>
   ```
 
@@ -433,65 +433,27 @@ git操作文件时候，工作流顺序下表所示：
 
 * 修改远程仓库名称
 
-  ```git
+  ```bash
   git remote rename <oldremotename> <newremotename>
   ```
 
   `oldremotename`和`newremotename`分别表示旧名称和新名称
 
-### git中使用SSH
-
-使用`SSH`避免了每次推送操作等都需要输入用户名和密码的繁琐
-
-1. 使用以下命令生成`SSH`公钥和私钥
-
-   ```git
-   ssh-keygen -t rsa -C email
-   ```
-
-   `email`为github账户邮箱。命令执行后将会在在`~/.ssh`目录下生成公钥和私钥
-
-2. 执行以下命令确保`ssh-agent`正在运行
-
-   ```git
-   eval `ssh-agent -s`
-   ```
-
-3. 使用下面命令将`SSH`私钥添加到`ssh-agent`
-
-   ```git
-   ssh-add ~/.ssh/privatekeyname
-   ```
-
-   其中`privatekeyname`为私钥文件的名称
-
-4. 将ssh公钥添加到github账户
-
-5. 使用以下命令测试连接
-
-   ```git
-   ssh -T git@github.com
-   ```
-
-   如果该命令返回结果的信息中包含`You've successfully authenticated`，说明没有问题，可以使用`SSH`进行推送了。
-
-6. 最后使用相关命令正常使用`SSH`方式进行推送了
-
 ### git远程仓库的常用命令
 
 * 从远程仓库克隆项目到本地
 
-  ```git
+  ```bash
   git clone <url>
   ```
 
-  ```git
+  ```bash
   `url`为远程仓库的地址
   ```
 
 * 取回远程仓库最新内容
 
-  ```git
+  ```bash
   git fetch <remotehost> <remotebranch>
   ```
 
@@ -499,7 +461,7 @@ git操作文件时候，工作流顺序下表所示：
 
   如果仅指定了`remotehost`，则将`remotehost`所对应的远程仓库与本地当前同名分支的最新内容取回到本地当前分支，命令如下
 
-  ```git
+  ```bash
   git fetch <remotehost>
   ```
 
@@ -507,7 +469,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 将使用`fetch`命令下载到本地的内容合并到本地仓库
 
-  ```git
+  ```bash
   git merge <remotehost>/<remotebranch>
   ```
 
@@ -515,7 +477,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 查看远程分支
 
-  ```git
+  ```bash
   git branch -a
   ```
 
@@ -523,19 +485,19 @@ git操作文件时候，工作流顺序下表所示：
 
 * 推送本地分支到远程仓库
 
-  ```git
+  ```bash
     git push <remotehost> <localbranch>:<remotebranch>
   ```
 
   `remotehost`为远程仓库的地址或远程仓库的别名，`localbranch`和`remotebranch`分别对应本地分支名和远程分支名。如果本地分支名和远程分支名相同，则可以略写为：
 
-    ```git
+    ```bash
   git push <remotehost> <localbranch>
     ```
 
   指定`-u`参数同时指定默认远程仓库和分支，直接使用`git push`即可，命令如下：
 
-    ```git
+    ```bash
   git push -u <remotehost> <localbranch>
     ```
 
@@ -543,7 +505,7 @@ git操作文件时候，工作流顺序下表所示：
 
   如果要推送当前所在的本地分支到远程仓库同名分支，则可以直接使用以下命令：
 
-  ```git
+  ```bash
   git push <remotehost>
   ```
 
@@ -551,7 +513,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 删除远程分支
 
-  ```git
+  ```bash
   git push <remotehost> :<remotebranchname>
   // 或者
   git push <remotehost> --delete <remotebranchname>
@@ -561,7 +523,7 @@ git操作文件时候，工作流顺序下表所示：
 
 * 拉取远程分支到本地
 
-  ```git
+  ```bash
   git checkout -b <localbranch> <remotehost>/<branchname>
   ```
 
@@ -572,19 +534,19 @@ git操作文件时候，工作流顺序下表所示：
 
   `pull`操作是将`fetch`和`merge`操作合并在一起，关系为`pull = fetch + merge`，具体的命令如下：
 
-  ```git
+  ```bash
   git pull <remotehost> <remotebranch>:<localbranch>
   ```
 
   `remotehost`为远程仓库的地址或远程仓库的别名，`remotebranch`为要拉取的远程仓库的分支名称，`localbranch`为要被合并的分支名称。如果本地分支名和远程分支名相同，则可以略写为：
 
-  ```git
+  ```bash
   git pull <remotehost> <localbranch>
   ```
 
   如果要从远程仓库拉取的分支名和本地仓库当前所在分支名同名，则可以直接使用以下命令
 
-  ```git
+  ```bash
   git pull <remotehost>
   ```
 
@@ -602,7 +564,7 @@ git操作文件时候，工作流顺序下表所示：
 
       假设存在分支`a`和分支`b`，将分支`b`合并到分支`a`，合并途中在某文件产生了冲突，产生冲突的文件内容如下：
 
-      ```git
+      ```bash
       some text
       <<<<<<< HEAD
       edit by branch a
@@ -639,13 +601,13 @@ git标签用来给分支打上标签。可以使用标签来做版本记号，�
 
 * 新建标签
 
-  ```git
+  ```bash
   git tag <tagname>
   ```
 
   `tagname`为要新建的标签名。同时指定`-a`和 `-m`参数可以同时指定标签名和标签的描述信息，如下示例：
 
-  ```git
+  ```bash
   git tag -a <tagname> -m <message>
   ```
 
@@ -653,7 +615,7 @@ git标签用来给分支打上标签。可以使用标签来做版本记号，�
 
 * 查看标签
 
-  ```git
+  ```bash
   git tag
   ```
 
