@@ -6,7 +6,7 @@ categories: git
 ---
 #### 前景引入
 
-在使用git时，可以使用`SSH`避免了每次推送操作等都需要输入用户名和密码的繁琐。
+在使用`git`时，可以使用`SSH`避免了每次推送操作等都需要输入用户名和密码的繁琐。
 
 #### 如何使用ssh设置免密登录
 
@@ -16,8 +16,9 @@ categories: git
 ```bash
 git clone git@github.com:xxx/xxxxxx.git
 ```
+
 ##### 操作步骤
-**注意：以下命令如果无法在工作，请尝试在 `git bash` 终端环境下尝试**
+注意：以下命令如果无法在工作，请尝试在 `git bash` 终端环境下尝试
 
 1. 使用以下命令生成`SSH`公钥和私钥
 
@@ -28,22 +29,27 @@ git clone git@github.com:xxx/xxxxxx.git
    `email`为github账户邮箱。命令执行后将会在在`~/.ssh`目录下生成公钥和私钥
 
 
-2. 执行以下命令确保`ssh-agent`正在运行
+2. 接着会提示你输入生成存储密钥（公钥和私钥）文件名 、输入密码、确
+   认密码等。可直接输入回车省略跳过，默认生成私钥文件名为`id_rsa`以及公钥
+   文件名为`id_rsa.pub`
 
+
+3. 执行以下命令确保`ssh-agent`正在运行
+   
    ```bash
    eval `ssh-agent -s`
    ```
 
-3. 使用下面命令将`SSH`私钥添加到`ssh-agent`
+4. 使用下面命令将`SSH`私钥添加到`ssh-agent`
 
    ```bash
    ssh-add ~/.ssh/privatekeyname
    ```
 
-   其中`privatekeyname`为私钥文件的名称
+   其中`privatekeyname`为私钥文件的名称，也就是在步骤2生成的存储私钥的文件名
 
 
-4. 将ssh公钥添加到github账户
+4. 进入github，将`SSH`公钥添加到github账户
 
 
 5. 使用以下命令测试连接
