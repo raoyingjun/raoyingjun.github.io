@@ -37,4 +37,4 @@ jobs:
         git config --global user.name Royin
         git config --global user.email raoyingjun@foxmail.com
         git commit -m "Site deployed by GitHub Actions"
-        git push --force "https://$GH_TOKEN@$REPO" master:master
+        git push "https://$GH_TOKEN@$REPO" gh-pages:gh-pages
