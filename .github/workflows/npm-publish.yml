@@ -30,4 +30,6 @@ jobs:
         hexo g
     - name: Deploy to Github Pages
       run: |
+        git config --global user.name Royin
+        git config --global user.email raoyingjun@foxmail.com
         hexo deploy
