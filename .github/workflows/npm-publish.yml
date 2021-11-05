@@ -30,7 +30,7 @@ jobs:
         hexo g
     - name: Deploy to Github Pages
       env:
-        REPO: git@github.com:raoyingjun/raoyingjun.github.io.git
+        REPO: https://github.com/raoyingjun/raoyingjun.github.io.git
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         cd ./public && git init && git add .
