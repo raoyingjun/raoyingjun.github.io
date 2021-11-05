@@ -29,12 +29,5 @@ jobs:
         hexo clean
         hexo g
     - name: Deploy to Github Pages
-      env:
-        REPO: github.com/raoyingjun/raoyingjun.github.io
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        cd ./public && git init && git add .
-        git config --global user.name Royin
-        git config --global user.email raoyingjun@foxmail.com
-        git commit -m "Site deployed by GitHub Actions"
-        git push "https://$GH_TOKEN@$REPO" gh-pages:gh-pages
+        hexo deploy
