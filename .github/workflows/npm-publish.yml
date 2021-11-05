@@ -22,14 +22,21 @@ jobs:
         node-version: '12.x'
 
     - name: Install dependencies & Generate static files
+      env:
+        ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_KEY }}
       run: |
-        node -v
-        npm i -g hexo-cli
-        npm i
+        mkdir -p ~/.ssh/
+        echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git config --global user.email "raoyingjun@foxmail.com"
+        git config --global user.name "Royin"
+        npm install hexo-cli -g
+        npm install
+
+    - name: Setup config & Deploy to Github Pages
+      run: |
         hexo clean
-        hexo g
-    - name: Deploy to Github Pages
-      run: |
-        git config --global user.name Royin
-        git config --global user.email raoyingjun@foxmail.com
+        hexo generate
         hexo deploy
