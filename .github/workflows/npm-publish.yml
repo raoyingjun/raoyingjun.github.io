@@ -23,7 +23,7 @@ jobs:
 
     - name: Install dependencies & Generate static files
       env:
-        ACTION_DEPLOY_KEY: ${{ secrets.HEXO_DEPLOY_KEY }}
+        ACTION_DEPLOY_KEY: ${{ secrets.HEXO_BLOG_DEPLOY_KEY }}
       run: |
         mkdir -p ~/.ssh/
         echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
