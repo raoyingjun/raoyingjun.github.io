@@ -21,7 +21,7 @@ jobs:
       with:
         node-version: '12.x'
 
-    - name: Install dependencies & Generate static files
+    - name: Config ssh key & Install dependencies
       env:
         ACTION_DEPLOY_KEY: ${{ secrets.HEXO_BLOG_DEPLOY_KEY }}
       run: |
@@ -35,7 +35,7 @@ jobs:
         npm install hexo-cli -g
         npm install
 
-    - name: Setup config & Deploy to Github Pages
+    - name: Generate static files & Deploy to Github Pages
       run: |
         hexo clean
         hexo generate
