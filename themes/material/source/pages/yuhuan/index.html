@@ -1,0 +1,203 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, p, span {
+            color: white;
+            text-align: center;
+            letter-spacing: 2px;
+            animation-duration: 1000ms;
+            animation-fill-mode: both;
+        }
+
+        h1 {
+            font-size: 48px;
+        }
+
+        p {
+            font-size: 24px;
+            padding: 20px 0;
+        }
+
+        .slider {
+            height: 100vh;
+            overflow: auto;
+        }
+
+        .slider-item {
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .slider-item.home {
+            background: #ff8080;
+        }
+
+        .slider-item.home.active h1 {
+            animation-name: zoomInDown;
+        }
+
+        .slider-item.home.active p {
+            animation-name: fadeInUp;
+        }
+
+        .slider-item.intro {
+            background: #ffc755;
+        }
+
+        .slider-item.intro img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .slider-item.intro.active h1 {
+            animation-name: bounceInLeft;
+        }
+
+        .slider-item.intro.active p {
+            animation-name: bounceInRight;
+        }
+
+        .slider-item.about {
+            background: #ea81ff;
+        }
+
+        .slider-item.about video {
+            width: 60%;
+        }
+
+        .slider-item.about.active h1 {
+            animation-name: slideInDown;
+        }
+
+        .slider-item.about.active p {
+            animation-name: slideInUp;
+        }
+
+        .slider-item.join {
+            background: #59c0ff;
+        }
+
+        .slider-item.join img {
+            width: 70%
+        }
+
+        .slider-item.join.active h1 {
+            animation-name: zoomIn;
+        }
+
+        .slider-item.join.active p {
+            animation-name: slideInUp;
+        }
+    </style>
+</head>
+<body>
+<div class="slider">
+    <div class="slider-item home active" data-current="home">
+        <h1>🍎</h1>
+        <p>平安夜快乐，宝</p>
+    </div>
+    <div class="slider-item intro" data-current="intro">
+        <h1>看美女！</h1>
+        <p>
+            <img src="./images/a.jpg" alt="">
+            <img src="./images/b.jpg" alt="">
+            <img src="./images/c.jpg" alt="">
+            <img src="./images/d.jpg" alt="">
+        </p>
+    </div>
+    <div class="slider-item about" data-current="about">
+        <h1>看宝的Dance（舞蹈）</h1>
+        <p>
+            <video src="./media/dance.mp4">
+                很遗憾，不支持播放
+            </video>
+        </p>
+    </div>
+    <div class="slider-item join" data-current="join">
+        <h1>大哥好</h1>
+        <p>请大哥抽烟！</p>
+        <p>
+            <img src="./images/chouyan.jpg" alt="">
+        </p>
+        <span onclick="alert('我是猪~')">点我点我！！！</span>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+        // 获取dom
+        const $slider = $('.slider')
+        const $sliderItem = $slider.find('.slider-item')
+        // 获取视窗高度
+        const viewportHeight = $slider.height()
+        watchSlider() // 开始监听用户滚轮的滑动
+        function watchSlider() {
+            let oScrollY = 0
+            let cScrollY = 0
+            let current = 0
+            $slider.scroll(function (e) {
+                oScrollY = cScrollY
+                cScrollY = $slider.scrollTop()
+                if ($slider.css('overflow') === 'hidden') {
+                    return
+                }
+                if (oScrollY !== cScrollY) {
+                    current = oScrollY > cScrollY ? current - 1 : current + 1
+                    console.log(current)
+                    hideAllAnimationElement()
+                    animateSliderBy(current, function () {
+                        setTimeout(() => {
+                            $slider.css('overflow', 'auto')
+                            activeAnimation($sliderItem.eq([current]).data('current'))
+                        }, 200)
+                    })
+                }
+            })
+        }
+
+        function hideAllAnimationElement() {
+            $sliderItem.find('p, h1').hide()
+        }
+
+        function showAnimationElement(current) {
+            $sliderItem.filter(`.${current}`).find('p, h1').show()
+        }
+
+        function getCurrent() {
+            console.log($slider.scrollTop(), viewportHeight)
+            console.log(parseInt($slider.scrollTop() / viewportHeight))
+            return parseInt($slider.scrollTop() / viewportHeight)
+        }
+
+        function activeAnimation(current) {
+            showAnimationElement(current)
+            $sliderItem.filter(`.${current}`).addClass('active')
+        }
+
+        function animateSliderBy(current, callback) {
+            $slider.css('overflow', 'hidden')
+            $slider.animate({
+                scrollTop: current * viewportHeight,
+            }, callback)
+        }
+    })
+
+</script>
+</body>
+</html>
