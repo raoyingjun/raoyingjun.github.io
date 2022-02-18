@@ -47,7 +47,7 @@ categories: 计算机网络
 
 * https是什么
 
-  为了解决http的弊端，进而出现了https。可以把https理解为https+ssl/tls,通过ssl/tls证书来验证服务器身份，并为客户端和服务器之间的通信提供加密
+  为了解决http的弊端，进而出现了https。可以把http理解为https+ssl/tls，通过ssl/tls证书来验证服务器身份，并为客户端和服务器之间的通信提供加密
 
   > ssl（Secure Socket Layer，安全套接字层）和tls（Transport Layer Secure，传输层安全）。ssl由netscape研发，后基于ssl建立了tls。ssl/tls在网络数据传输时起到保护隐私和数据的完整性
 
