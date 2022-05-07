@@ -4,9 +4,9 @@
 
 # Head info
 head:
-    favicon: "/img/favicon.png"
-    high_res_favicon: "/img/favicon.png"
-    apple_touch_icon: "/img/favicon.png"
+    favicon: "/img/favicon.jpg"
+    high_res_favicon: "/img/favicon.jpg"
+    apple_touch_icon: "/img/favicon.jpg"
     keywords: "web, 前端, web前端, HTML5, CSS3, html, CSS, jQuery, JS, JavaScript, vue, canvas，nodejs"
     site_verification:
         google:
