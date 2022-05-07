@@ -34,12 +34,12 @@ scheme: Paradox
 # UI & UX: slogan, color, effect
 uiux:
     slogan: "欢迎来到饶英俊（Royin）的博客"
-    theme_color: "#0097A7"
-    theme_sub_color: "#00838F"
-    hyperlink_color: "#00838F"
-    button_color: "#757575"
-    android_chrome_color: "#0097A7"
-    nprogress_color: "#29d"
+    theme_color: "#5148ed"
+    theme_sub_color: "#e12020"
+    hyperlink_color: "#5148ed"
+    button_color: "#5148ed"
+    android_chrome_color: "#5148ed"
+    nprogress_color: "#5148ed"
     nprogress_buffer: "800"
 
 # JS Effect Switches
