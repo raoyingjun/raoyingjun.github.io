@@ -1,3 +1,10 @@
+---
+title: Git Rebase详解
+date: 2022-05-09 09:53:21
+tags: git
+categories: git
+---
+
 ### 介绍git rebase
 
 Rebase，理解为“变基”，意思是“变更基底”。基于某分支（称为”基分支“）创建另一个分支（称为”待基变分支“），通过 rebase 操作，将待基变分支上的 Commit 暂存，然后将基分支上最新产生的 Commit 合并到待基变分支，最后将待基变分支上暂存的 Commit 合并到待基变分支

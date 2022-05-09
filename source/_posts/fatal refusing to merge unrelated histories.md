@@ -1,6 +1,11 @@
+---
+title: fatal refusing to merge unrelated histories
+date: 2022-05-09 10:05:58
+tags: git
+categories: git
+---
+
 ### git 合并代码提示 fatal: refusing to merge unrelated histories
-
-
 
 合并代码中出现错误 fatal: refusing to merge unrelated histories 原因是本地仓库和远程仓库实际上是两个独立不相关联的仓库。如果是本地基于 git clone 远程 github 仓库则不会产生该问题
 
