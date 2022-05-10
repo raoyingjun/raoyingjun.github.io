@@ -13,7 +13,7 @@ IntersectionObserver，一种异步观察目标元素与其容器元素或顶级
 
 Viewport 是可视区域（容器/视窗），绿色背景的为元素（目标元素）。
 
-![元素和容器/视窗相交和未相交时的示例](https://upload-images.jianshu.io/upload_images/4060631-17210430f2cbf15c.png)
+![元素和容器/视窗相交和未相交时的示例](http://mms0.baidu.com/it/u=3362364854,2905473064&fm=253&app=138&f=PNG&fmt=auto&q=75?w=499&h=216)
 
 左图表示还未相交，而右图表示的是元素和容器/视窗相交了。
 
