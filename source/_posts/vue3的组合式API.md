@@ -1,8 +1,8 @@
 ---
 title: Vue3 的组合式 API
 date: 2021-10-26 20:19:46
-tags: Vue
-categories: Vue
+tags: vue
+categories: vue
 ---
 
 ### 引入
