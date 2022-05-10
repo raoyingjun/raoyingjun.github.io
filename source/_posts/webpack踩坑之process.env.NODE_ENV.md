@@ -15,7 +15,7 @@ webpack是在编译后运行时提供了 `NODE_ENV` 。而当 Webpack读取配�
 
 ##### 解决办法
 
-使用 npm包 `cross-env`，该命令支持跨系统设置环境变量。使用如下命令安装：
+使用 npm 包 `cross-env`，该命令支持跨系统设置环境变量。使用如下命令安装：
 
 ```bash
 npm install cross-env -D
