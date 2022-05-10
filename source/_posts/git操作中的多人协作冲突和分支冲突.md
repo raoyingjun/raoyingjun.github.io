@@ -31,7 +31,7 @@ categories: git
 
 假设存在某 `txt` 文件，有两个分支，分支 A 和分支 B。现在我们将分支 B 合并到分支 A，合并途中在某文件产生了冲突，产生冲突的文件内容如下：
 
-  ```bash
+  ```text
   some text
   <<<<<<< HEAD
   edit by branch A
