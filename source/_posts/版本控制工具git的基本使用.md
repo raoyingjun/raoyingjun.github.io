@@ -58,9 +58,9 @@ git操作文件时候，工作流顺序下表所示：
 
 * 添加文件到暂存区
 
-  ````git
+  ```bash
   git add <file>
-  ````
+  ```
 
   `file`为要被添加到暂存区的文件名。返回的结果包含`Changes to be committed`说明文件被添加到了暂存区，等待被提交到本地git仓库
 

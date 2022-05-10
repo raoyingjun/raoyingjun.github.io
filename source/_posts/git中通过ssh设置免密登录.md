@@ -4,6 +4,7 @@ date: 2021-10-26 20:19:46
 tags: git
 categories: git
 ---
+
 #### 前景引入
 
 在使用`git`时，可以使用`SSH`避免了每次推送操作等都需要输入用户名和密码的繁琐。
@@ -11,6 +12,7 @@ categories: git
 #### 如何使用ssh设置免密登录
 
 ##### 注意事项
+
 请先确认你是以下面这种方式clone项目的，则ssh免密登录才会生效：
 
 ```bash
@@ -18,6 +20,7 @@ git clone git@github.com:xxx/xxxxxx.git
 ```
 
 ##### 操作步骤
+
 注意：以下命令如果无法在工作，请尝试在 `git bash` 终端环境下尝试
 
 1. 使用以下命令生成`SSH`公钥和私钥
@@ -35,7 +38,7 @@ git clone git@github.com:xxx/xxxxxx.git
 
 
 3. 执行以下命令确保`ssh-agent`正在运行
-   
+
    ```bash
    eval `ssh-agent -s`
    ```

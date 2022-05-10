@@ -32,8 +32,8 @@ categories: css
 ```css
 
 selector {
-  /* Microsoft YaHei和Helvetica为两个不同的字体，sans-serif为通用字体族*/
-  font-family: "Microsoft YaHei", Helvetica, sans-serif
+    /* Microsoft YaHei和Helvetica为两个不同的字体，sans-serif为通用字体族*/
+    font-family: "Microsoft YaHei", Helvetica, sans-serif
 }
 
 ```
