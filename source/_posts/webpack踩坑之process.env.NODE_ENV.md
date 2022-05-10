@@ -11,7 +11,7 @@ categories: webpack
 
 ##### 解析原因
 
-webpack是在编译后运行时提供了 `NODE_ENV` 。而当 Webpack读取配置文件 `webpack.congig.js` 时，此时 ``NODE_ENV` 并未赋值
+webpack是在编译后运行时提供了 `NODE_ENV` 。而当 Webpack读取配置文件 `webpack.congig.js` 时，此时 `NODE_ENV` 并未赋值
 
 ##### 解决办法
 
