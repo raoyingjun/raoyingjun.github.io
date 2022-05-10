@@ -23,6 +23,7 @@ git标签用来给分支打上标签。可以使用标签来做版本记号，�
 
   `tagname` 为要新建的标签名，`message` 为标签的描述信息。如果不指定描述信息，默认为最后一次 `commit` 提交的说明。
 
+
 * 查看标签
 
   ```bash
@@ -37,29 +38,33 @@ git标签用来给分支打上标签。可以使用标签来做版本记号，�
 
   `tagname` 为要查看的标签信息以及对应的提交信息。
 
-    * 删除标签
 
-      ```
-      git tag -d <tagname>
-      ```
+* 删除标签
 
-      `tagname` 为删除的标签名
+  ```
+  git tag -d <tagname>
+  ```
 
-    * 推送标签到远程仓库
+  `tagname` 为删除的标签名
 
-      ```
-      git push <remotehost> <tagname>
-      ```
 
-      `remotehost` 为远程仓库的地址或远程仓库的别名，`tagname` 为要推送到远程仓库的的标签名
+* 推送标签到远程仓库
 
-    * 推送全部**未推送过的**标签到远程仓库
+  ```
+  git push <remotehost> <tagname>
+  ```
 
-      ```
-      git push <remotehost> --tags
-      ```
+  `remotehost` 为远程仓库的地址或远程仓库的别名，`tagname` 为要推送到远程仓库的的标签名
 
-      `remotehost` 为远程仓库的地址或远程仓库的别名
+
+* 推送全部**未推送过的**标签到远程仓库
+
+  ```
+  git push <remotehost> --tags
+  ```
+
+  `remotehost` 为远程仓库的地址或远程仓库的别名
+
 
 * 删除远程仓库的标签
 
