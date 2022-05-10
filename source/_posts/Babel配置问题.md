@@ -27,34 +27,41 @@ babel官方制作了loader，使babel支持在webpack构建工具中使用
 
 ```js
 // webpack.config.js
-// 以下省略了其他的配置项
-{
-    test: /\.js$/,
-        exclude:/node_modules/,
-        use:{
-         loader: 'babel-loader', 
-         options:{
-            presets: [
-                [
-                    '@babel/preset-env',
-                    {
-                        // usage表示按需加载
-                        useBuiltIns: 'usage',
-                        corejs: {
-                            /**
-                             * corejs的版本。低版本不在维护和更新。
-                             * 官方推荐使用具体的版本号。例如`3.11`，而不是`3`
-                             */
-                            version: '3.11',
-                            // 提供了对处于提议阶段的js语法的支持
-                            proposals: true
-                        }
+module.exports = {
+    // 其他项略..
+    module: {
+        rules: [
+            // 其他 rule 略...
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            [
+                                '@babel/preset-env',
+                                {
+                                    // usage表示按需加载
+                                    useBuiltIns: 'usage',
+                                    corejs: {
+                                        /**
+                                         * corejs的版本。低版本不在维护和更新。
+                                         * 官方推荐使用具体的版本号。例如`3.11`，而不是`3`
+                                         */
+                                        version: '3.11',
+                                        // 提供了对处于提议阶段的js语法的支持
+                                        proposals: true
+                                    }
+                                }
+                            ]
+                        ],
+                        plugins: ['@babel/plugin-transform-runtime']
                     }
-                ]
-            ],
-            plugins: ['@babel/plugin-transform-runtime']
-        }
-    }
+                }
+            }
+        ]
+    },
 }
 ```
 
