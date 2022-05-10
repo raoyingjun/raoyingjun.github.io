@@ -1,5 +1,5 @@
 ---
-title: Git Rebase详解
+title: git rebase 详解
 date: 2022-05-09 09:53:21
 tags: git
 categories: git

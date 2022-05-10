@@ -1,41 +1,40 @@
 ---
-title: http和https协议
+title: HTTP 和 HTTPS 协议
 date: 2021-10-26 20:19:46
 tags: 计算机网络
 categories: 计算机网络
 ---
 
-### http和https协议
+### HTTP 和 HTTPS 协议
 
 * 协议的来源
 
-  计算机相互之间需要进行网络通信需要一种协议，进而产生了http,https协议
+  计算机相互之间需要进行网络通信需要一种协议，进而产生了 HTTP、HTTPS 协议
 
-* http是什么
+    * HTTP 是什么
 
-  http译为```超文本传输协议```，英文是```Hyper Text Transfer Protocol```，指定了客户端与服务器进行超文本（文本，视频，图片等）传输的协议
+      HTTP 译为 ```超文本传输协议``` ，英文是 ```Hyper Text Transfer Protocol```，指定了客户端与服务器进行超文本（文本，视频，图片等）传输的协议
 
-* http的原理
+* HTTP 的原理
 
-  基于tcp协议传输数据
+  基于 TCP 协议传输数据
 
-* http的特点
+* HTTP 的特点
 
     * 请求/响应模式
     * 灵活。不限制传输数据的类型
     * 无连接。每次连接只能处理一个请求
     * 无状态。处理事务没有记忆功能，每次数据都需要重新传递
 
-* http报文组成
+* HTTP 报文组成
 
-    * 请求报文
-      ![http请求报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=951219728,1775466506&fm=26&gp=0.jpg)
+    * 请求报文（图片来源于网络）
+      ![HTTP 请求报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=951219728,1775466506&fm=26&gp=0.jpg)
 
-    * 响应报文
+    * 响应报文（图片来源于网络）
+      ![HTTP 响应报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=835731624,4211516312&fm=26&gp=0.jpg)
 
-      ![http响应报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=835731624,4211516312&fm=26&gp=0.jpg)
-
-* http的弊端
+* HTTP 的弊端
 
   由于数据明文传输，可能会出现以下问题：
 
@@ -45,23 +44,24 @@ categories: 计算机网络
 
     * 被冒充的风险。第三方可以伪装成通信方与你通信
 
-* https是什么
+* HTTPS 是什么
 
-  为了解决http的弊端，进而出现了https。可以把http理解为https+ssl/tls，通过ssl/tls证书来验证服务器身份，并为客户端和服务器之间的通信提供加密
+  为了解决 HTTP 的弊端，进而出现了 HTTPS 。可以把 HTTPS 简单理解为 HTTP + SSL/TLS，通过 SSL/TLS 证书来验证服务器身份，并为客户端和服务器之间的通信提供加密
 
-  > ssl（Secure Socket Layer，安全套接字层）和tls（Transport Layer
-  Secure，传输层安全）。ssl由netscape研发，后基于ssl建立了tls。ssl/tls在网络数据传输时起到保护隐私和数据的完整性
+  > SSL（Secure Socket Layer，安全套接字层）和 TLS（Transport Layer
+  Secure，传输层安全）。SSL 由 Netscape 研发，后基于 SSL 建立了 TLS。SSL/TLS 在网络数据传输时起到保护隐私和数据的完整性
 
 
-* https的通信过程
+* HTTPS 的通信过程
 
-  ![https通信](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2684211715,474224861&fm=26&gp=0.jpg)
+  下图描述了 HTTPS 的通信过程（图片来源于网络）：
+  ![HTTPS 通信](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2684211715,474224861&fm=26&gp=0.jpg)
 
-  一、客户端请求建立https连接
+  一、客户端请求建立 HTTPS 连接
 
   二、服务器向客户端发送包含服务器公钥的证书
 
-  三、客户端检查证书或者CA（Certificate Authority，证书颁发机构）的颁发者是否受信任。否则，他将要求用户接受他负责的证书
+  三、客户端检查证书或者 CA（Certificate Authority，证书颁发机构）的颁发者是否受信任。否则，他将要求用户接受他负责的证书
 
   四、浏览器生成对称密钥，该密钥将使用服务器的公钥进行加密，以便安全地发送给服务器
 
@@ -69,10 +69,10 @@ categories: 计算机网络
 
   六、服务器使用对称密钥加密与客户端之间的通信，而客户端则使用该对称密钥解密该通信
 
-* https的弊端
+* HTTPS 的弊端
 
     * 协议多次握手，导致页面的加载时间延长
     * 证书需要付费，功能越强大的证书费用越高
-    * 安全算法会消耗CPU资源，对服务器资源占用比较高
-    * HTTPS连接缓存不如HTTP高效，建立通信导致了耗时延长
+    * 安全算法会消耗 CPU 资源，对服务器资源占用比较高
+    * HTTPS 连接缓存不如 HTTP 高效，建立通信导致了耗时延长
 

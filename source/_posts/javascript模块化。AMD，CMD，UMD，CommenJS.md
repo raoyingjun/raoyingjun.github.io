@@ -1,13 +1,13 @@
 ---
-title: javascript模块化。AMD，CMD，UMD，CommenJS
+title: javascript 模块化。AMD、CMD、UMD、CommonJS
 date: 2021-10-26 20:19:46
 tags: nodejs
 categories: nodejs
 ---
 
-* AMD(Asynchronous Module Definition)指异步模块定义。是requirejs推广模块化规范的产物。
+* AMD（Asynchronous Module Definition）指异步模块定义。是 RequireJS 推广模块化规范的产物。
 
-  看个例子，了解其是如何定义一个AMD模块的：
+  看个例子，了解其是如何定义一个 AMD 模块的：
 
   ```javascript
   /**
@@ -24,21 +24,21 @@ categories: nodejs
   })
   ```
 
-> **AMD推崇前置依赖**
+> **AMD 推崇前置依赖**
 >
 > 指所需的依赖在定义模块时就要提前引入
 
 * CMD
 
-  CMD(Common Module Definition)指通用模块定义。是seajs推广模块化规范的产物。
+  CMD（Common Module Definition）指通用模块定义。是 SeaJS推广模块化规范的产物。
 
-  通过一个例子，看如何定义一个CMD模块：
+  通过一个例子，看如何定义一个 CMD 模块：
 
   ```javascript
   /**
    * 接收一个工厂函数作为参数。该工厂函数接受3个参数
-   * require是一个函数，用来引入模块
-   * exports是一个对象，可以在其上定义属性和方法。暴露供外部使用
+   * require 是一个函数，用来引入模块
+   * exports 是一个对象，可以在其上定义属性和方法。暴露供外部使用
    * module是一个对象，指向当前模块
    */
   define(function (require, exports, module) {
@@ -50,23 +50,23 @@ categories: nodejs
   
   ```
 
-  > **CMD推崇就近依赖**
+  > **CMD 推崇就近依赖**
   >
   > 指依赖在需要时引入
 
 
 * CommonJS
 
-  CommonJS是服务器模端块化规范。由nodejs推广使用。
+  CommonJS 是服务器模端块化规范。由 NodeJS 推广使用。
 
-  来个例子，帮助了解使用CommonJS模块：
+  来个例子，帮助了解使用 CommonJS 模块：
 
   ```javascript
   // a.js
   /**
-   * nodojs 为每个文件提供了一个module对象和exports对象
-   * module指代当前模块的对象，提供了一些属性供使用
-   * exports是一个对象，暴露供外部使用。同时该对象指向module.exports。
+   * nodojs 为每个文件提供了一个 module 对象和 exports 对象
+   * module 指代当前模块的对象，提供了一些属性供使用
+   * exports 是一个对象，暴露供外部使用。同时该对象指向 module.exports。
    * module.exports === exports -> true
    */
   module.exports.add = function () {}
@@ -82,7 +82,7 @@ categories: nodejs
 
 * UMD
 
-  UMD(Universal Module Definition)通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范。
+  UMD（Universal Module Definition）通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范。
 
   最后，还是来个例子来了解它。
 
