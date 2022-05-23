@@ -937,8 +937,8 @@ minimatch@^5.0.1:
     brace-expansion "^2.0.1"
 
 minimist@^1.2.5:
-  version "1.2.5"
-  resolved "https://mirrors.tencent.com/npm/minimist/-/minimist-1.2.5.tgz"
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
 
 mkdirp@0.5.x:
   version "0.5.5"
@@ -964,8 +964,8 @@ moment-timezone@^0.5.21:
     moment ">= 2.9.0"
 
 "moment@>= 2.9.0", moment@^2.18.0, moment@^2.22.2:
-  version "2.29.1"
-  resolved "https://mirrors.tencent.com/npm/moment/-/moment-2.29.1.tgz"
+  version "2.29.3"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
 
 morgan@^1.9.1:
   version "1.10.0"
@@ -1104,8 +1104,8 @@ pretty-hrtime@^1.0.3:
   resolved "https://registry.npmjs.org/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz"
 
 prismjs@^1.17.1:
-  version "1.25.0"
-  resolved "https://mirrors.tencent.com/npm/prismjs/-/prismjs-1.25.0.tgz"
+  version "1.28.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.28.0.tgz#0d8f561fa0f7cf6ebca901747828b149147044b6"
 
 psl@^1.1.33:
   version "1.8.0"
