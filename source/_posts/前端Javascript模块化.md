@@ -98,7 +98,8 @@ UMD（Universal Module Definition）规范是通用模块定义，为兼容其�
 
 ```javascript
   (function (root, factory) {
-    if (typeof define === 'function') { // AMD 规范或 CMD 规范
+    // AMD 规范或 CMD 规范
+    if (typeof define === 'function') {
         define(factory)
     }
     // nodejs 使用的 CommonJS 规范
