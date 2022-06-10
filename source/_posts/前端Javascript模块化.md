@@ -98,14 +98,16 @@ UMD（Universal Module Definition）规范是通用模块定义，为兼容其�
 
 ```javascript
   (function (root, factory) {
-    // AMD 规范或 CMD 规范
-    if (typeof define === 'function') {
+    if (typeof define === 'function') { // AMD 规范或 CMD 规范
         define(factory)
-    } else if (typeof exports === 'object') {
-        // nodejs 使用的 CommonJS 规范
+    }
+    // nodejs 使用的 CommonJS 规范
+    else if (typeof exports === 'object') { 
         module.exports = factory()
-    } else {
-        // 浏览器环境。NumberUtil 是导出模块的名称
+    }
+    // 浏览器环境
+    else {
+        // NumberUtil 是导出暴露的模块名称
         root.NumberUtil = factory()
     }
 })(this, function () {
