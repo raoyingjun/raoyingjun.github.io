@@ -65,7 +65,7 @@ CommonJS 规范是服务器模端块化规范。由 NodeJS 推广使用。来个
 ```javascript
 // a.js
 /**
- * nodojs 为每个文件提供了一个 module 对象和 exports 对象
+ * nodejs 为每个文件提供了一个 module 对象和 exports 对象
  * module 指代当前模块的对象，提供了一些属性供使用
  * exports 是一个对象，暴露供外部使用。同时该对象指向 module.exports。
  * module.exports === exports -> true
@@ -93,7 +93,7 @@ import { a } from 'a.js'
 
 ### UMD 规范
 
-UMD（Universal Module Definition）规范通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范，兼容在多个运行环境（nodejs、浏览器端）都能正常工作。
+UMD（Universal Module Definition）规范是通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范，兼容在多个运行环境（nodejs、浏览器端）都能正常工作。
 最后，还是来个例子来了解它。
 
 ```javascript
