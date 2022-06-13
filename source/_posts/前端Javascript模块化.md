@@ -85,15 +85,20 @@ util.mul()
 由 ES6 引入至浏览器原生支持的模块化规范
 
 ```javascript
+// a.js
 // 导出常量 a
 export const a = 10
-// 从 a.js 导入常量 a 
-import { a } from 'a.js'
+// 导出常量数组 likes
+const likes = []
+export default likes
+// b.js
+// 从 a.js 导入常量 likes 和 a 
+import likes, { a } from 'a.js'
 ```
 
 ### UMD 规范
 
-UMD（Universal Module Definition）规范是通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范，兼容在多个运行环境（nodejs、浏览器端）都能正常工作。
+UMD（Universal Module Definition）规范是通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范，确保在多个运行环境（nodejs、浏览器端）都能正常工作。
 最后，还是来个例子来了解它。
 
 ```javascript
