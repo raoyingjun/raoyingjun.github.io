@@ -1,8 +1,8 @@
 ---
 title: js中的各种继承方式
 date: 2022-2-22 0:35:27
-tags: javascript
-categories: javascript
+tags: 前端
+categories: 前端
 ---
 
 ### 原型链继承
