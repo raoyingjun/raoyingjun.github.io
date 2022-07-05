@@ -1,8 +1,8 @@
 ---
 title: HTTP部分状态码介绍
 date: 2022-07-05 12:36:44
-tags:
-categories:
+tags: 计算机网络
+categories: 计算机网络
 ---
 
 ### 介绍
