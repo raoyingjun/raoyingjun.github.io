@@ -1,6 +1,6 @@
----  
-title: CDN 原理
-date: 2022-07-01 13:05:26
+---
+title: CDN 原理介绍
+date: 2022-07-05 10:42:33
 tags: 计算机网络
 categories: 计算机网络
 ---
