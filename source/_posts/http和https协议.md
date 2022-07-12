@@ -54,8 +54,8 @@ categories: 计算机网络
 
 * HTTPS 的通信过程
 
-  下图描述了 HTTPS 的通信过程（图片来源于网络）：
-  ![HTTPS 通信](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2684211715,474224861&fm=26&gp=0.jpg)
+  下图描述了 HTTPS 建立通信的过程（图片来源于网络）：
+  ![HTTPS 通信](https://img2.baidu.com/it/u=39095811,1631134568&fm=253&fmt=auto&app=138&f=JPG?w=598&h=500)
 
   一、客户端请求建立 HTTPS 连接
 
