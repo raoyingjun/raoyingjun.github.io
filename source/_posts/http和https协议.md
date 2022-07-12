@@ -29,10 +29,10 @@ categories: 计算机网络
 * HTTP 报文组成
 
     * 请求报文（图片来源于网络）
-      ![HTTP 请求报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=951219728,1775466506&fm=26&gp=0.jpg)
+      ![HTTP 请求报文](https://img2.baidu.com/it/u=2349534448,1105052924&fm=253&fmt=auto&app=138&f=JPEG?w=720&h=408)
 
     * 响应报文（图片来源于网络）
-      ![HTTP 响应报文](https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=835731624,4211516312&fm=26&gp=0.jpg)
+      ![HTTP 响应报文](https://img0.baidu.com/it/u=856107401,2167089509&fm=253&fmt=auto&app=138&f=JPEG?w=981&h=500)
 
 * HTTP 的弊端
 
