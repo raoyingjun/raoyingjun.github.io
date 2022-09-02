@@ -7,7 +7,7 @@ categories: webpack
 
 ### HMR介绍
 
-webpack 是通过 热模块替换 HMR（ Hot Module Replacement）来实现资源的热更新的，可以仅针对部分资源进行更新而无需重载整个页面
+webpack 是通过“热模块替换” ，也就是 HMR（ Hot Module Replacement）来实现资源的热更新的，可以仅针对部分资源进行更新而无需重载整个页面
 
 ### HMR实现原理
 
