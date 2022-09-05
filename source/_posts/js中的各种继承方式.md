@@ -11,6 +11,7 @@ categories: 前端
 
 ```javascript
 function Super() {
+    this.name = 'Rose'
 }
 
 function Sub() {
