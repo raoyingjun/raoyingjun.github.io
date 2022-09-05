@@ -66,7 +66,7 @@ function Super(name) {
 
 function Sub(name, age) {
     // 盗用 this 实现继承
-    Super.call(this, name, age)
+    Super.call(this, name, age) // or Super.apply(this, [name, age])
     this.age = age
 }
 
