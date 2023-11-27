@@ -1,6 +1,6 @@
 ---
 title: ubuntu 安装可视化界面
-date: 2021-10-26 20:19:46
+date: 2023-11-27 19:48:54
 tags: linux
 categories: linux
 ---
@@ -23,6 +23,6 @@ sudo apt-get install -y ubuntu-desktop
 reboot
 ```
 
-重启虚拟机后，呈现的即是可视化的虚拟机界面。
+重启虚拟机后，呈现的即是可视化界面。
 
   
