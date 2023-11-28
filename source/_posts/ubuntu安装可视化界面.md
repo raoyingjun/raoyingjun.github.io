@@ -23,13 +23,11 @@ sudo apt-get install -y ubuntu-desktop
 reboot
 ```
 
+重启虚拟机后，呈现的即是可视化界面。
+
 ### 补充
 
-如果你正在 `vmware` 中使用 `ubuntu` ，或者其他 linux 分支（RetHat、CentOS 等等），并且你想要直接拖拽文件从你的电脑到 `ubuntu` 中，请：
-
-* 在 `vmware` 设置共享文件夹，
-
-* 安装 `open-vm-tools-desktop`，如下：（可选）
+如果你正在 `vmware` 中使用 `ubuntu` ，或者其他 linux 分支（RetHat、CentOS 等等），并且你想要直接拖拽文件从你的电脑到 `ubuntu` 中，请**安装 `open-vm-tools-desktop`**，如下：（可选）
 
   ```
   sudo apt-get install open-vm-tools-desktop -y
@@ -37,6 +35,5 @@ reboot
 
   > 如果你的 VM Tool 不可用，或者置灰无法重新安装，那么这对你来说则是必选的了！
 
-重启虚拟机后，呈现的即是可视化界面。
 
   
