@@ -16,7 +16,7 @@ categories: webpack
 
 其次是版本号，每次修改包后 package.json 中的 `version` 版本号应该变化，否则会报错。
 
-* webpack 构建 ESM 的问题
+### webpack 构建 ESM 的问题
 
 要使用 webpack 构建 ESM。请参阅如下设置：
 ```txt
@@ -25,7 +25,7 @@ categories: webpack
     output: {
         path: path.resolve(__dirname, 'dist', esm ? 'es' : 'lib'),
         filename:  "index.esm.js",
-         // 必须设置 type 为 module
+         // 必须设置 type 为 module，表示构建类型为 ESM
         library: {type: 'module'}
     },
     ...其他配置项略
