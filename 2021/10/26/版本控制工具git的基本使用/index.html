@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.6 -->
+    <script>
+        window.materialVersion = "1.5.6"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0',
+            '1.5.2',
+            '1.5.5'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
+
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net"/>
+
+
+
+
+
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            版本控制工具git的基本使用 | 
+        
+        饶英俊（Royin）的个人博客
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.jpg">
+    <link rel="icon" href="/img/favicon.jpg">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="饶英俊（Royin）的博客_web前端技术文章博客">
+    <meta name="keywords" content="web, 前端, web前端, HTML5, CSS3, html, CSS, jQuery, JS, JavaScript, vue, canvas，nodejs,git">
+    <meta name="theme-color" content="#5148ed">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?NKhlKQkXw/c66TR5p4wO+w==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?ObwtCYzPAwf1FsCyfI5nxg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/atelier-cave-dark.min.css?eNm7/H0PUmcn6dp0nNCKRA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #5148ed;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #5148ed !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #5148ed !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #5148ed !important;
+  }
+
+  .toTop {
+    background: #5148ed !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #5148ed;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #5148ed;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #5148ed;
+  }
+
+  .post-toc a:hover {
+    color: #5148ed;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="饶英俊（Royin）的个人博客">
+    <meta name="msapplication-starturl" content="https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+    <meta name="msapplication-navbutton-color" content="#5148ed">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="饶英俊（Royin）的个人博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/favicon.jpg">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="版本控制工具git的基本使用 | 饶英俊（Royin）的个人博客">
+    <meta property="og:image" content="/img/favicon.jpg">
+    <meta property="og:description" content="饶英俊（Royin）的博客_web前端技术文章博客">
+    <meta property="og:article:tag" content="git"> 
+
+    
+        <meta property="article:published_time" content="Tue Oct 26 2021 20:19:46 GMT+0800">
+        <meta property="article:modified_time" content="Tue Mar 12 2024 14:27:02 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html",
+    "headline": "版本控制工具git的基本使用",
+    "datePublished": "Tue Oct 26 2021 20:19:46 GMT+0800",
+    "dateModified": "Tue Mar 12 2024 14:27:02 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "饶英俊（Royin）",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar.jpg"
+        },
+        "description": "欢迎来到饶英俊（Royin）的博客"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "饶英俊（Royin）的个人博客",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/favicon.jpg"
+        }
+    },
+    "keywords": ",gitweb, 前端, web前端, HTML5, CSS3, html, CSS, jQuery, JS, JavaScript, vue, canvas，nodejs",
+    "description": "饶英俊（Royin）的博客_web前端技术文章博客",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+        
+            <meta name="baidu-site-verification" content="code-UO5xO8AhJX" />
+        
+    
+
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span id="MD-burger-id" class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%EF%BC%9F"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是版本控制工具？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E7%9A%84%E5%B7%A5%E4%BD%9C%E6%B5%81%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F"><span class="post-toc-number">2.</span> <span class="post-toc-text">git本地仓库的工作流和工作区域</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="post-toc-number">3.</span> <span class="post-toc-text">git 本地操作的常用命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#git-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="post-toc-number">4.</span> <span class="post-toc-text">git 远程仓库的常用命令</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script type="text/ls-javascript" id="post-thumbnail-script">
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
+    $('.post_thumbnail-random').addClass('lazy');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                版本控制工具git的基本使用
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>饶英俊（Royin）</strong>
+        <span>10月 26, 2021</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-none-link" href="/tags/git/" rel="tag">git</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=版本控制工具git的基本使用&url=https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html&pic=https://raoyingjun.github.io/img/favicon.jpg&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html&title=版本控制工具git的基本使用" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 LinkedIn
+            </li>
+        </a>
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=饶英俊（Royin）的个人博客&title=版本控制工具git的基本使用&summary=饶英俊（Royin）的博客_web前端技术文章博客&pics=https://raoyingjun.github.io/img/favicon.jpg&url=https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="什么是版本控制工具？"><a href="#什么是版本控制工具？" class="headerlink" title="什么是版本控制工具？"></a>什么是版本控制工具？</h3><p>git 是一个分布式版本控制工具，顾名思义，是一个控制项目版本管理的工具，记录和备份版本以及回撤到不同版本等操作</p>
+<h3 id="git本地仓库的工作流和工作区域"><a href="#git本地仓库的工作流和工作区域" class="headerlink" title="git本地仓库的工作流和工作区域"></a>git本地仓库的工作流和工作区域</h3><p>git 的工作区域分为三种，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>工作区域</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>工作区</td>
+<td>本地的项目目录，也就是实际的工作目录</td>
+</tr>
+<tr>
+<td>暂存区（索引区）</td>
+<td>一个缓存区域，临时保存的改动</td>
+</tr>
+<tr>
+<td>git 仓库</td>
+<td>最终暂存区的文件都会被提交到本地git仓库</td>
+</tr>
+</tbody></table>
+<p>git 操作文件时候，工作流顺序下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>modified（已修改）</td>
+<td>本地文件已修改了，还未被保存到暂存区</td>
+</tr>
+<tr>
+<td>staged（已暂存）</td>
+<td>本地文件被保存在了暂存区</td>
+</tr>
+<tr>
+<td>committed（已提交）</td>
+<td>本地文件被提交到本地git仓库了</td>
+</tr>
+</tbody></table>
+<p><strong>注意，这里的修改是比较广义的。删除、编辑、增加都是属于修改</strong></p>
+<h3 id="git-本地操作的常用命令"><a href="#git-本地操作的常用命令" class="headerlink" title="git 本地操作的常用命令"></a>git 本地操作的常用命令</h3><ul>
+<li><p>配置提交时所使用的个人信息</p>
+<pre><code class="bash">git config --global user.name &quot;raoyingjun&quot; // 用户名
+git config --global user.email &quot;raoyingjun@foxmail.com&quot; // 邮箱
+</code></pre>
+<p>如果 <code>--global</code> 参数不存在，配置的用户信息仅在该仓库有效</p>
+</li>
+<li><p>初始化本地 git 仓库</p>
+<pre><code class="bash">git init
+</code></pre>
+<p>该命令在指定目录下初始化本地 git 仓库。该目录下将会生成一个 <code>.git</code> 隐藏文件夹。就可以开始进行git的使用了</p>
+</li>
+<li><p>查看文件的状态</p>
+<pre><code class="bash">git status
+</code></pre>
+<p>结果包含 <code>Untracked files</code> 或者说明文件已修改但未被提交到暂存区</p>
+</li>
+<li><p>添加文件到暂存区</p>
+<pre><code class="bash">git add &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要被添加到暂存区的文件名。返回的结果包含 <code>Changes to be committed</code> 说明文件被添加到了暂存区，等待被提交到本地git仓库</p>
+</li>
+<li><p>提交更改到本地git仓库</p>
+<pre><code class="bash">git commit
+</code></pre>
+<p>该命令将会拉起安装 git 时所选择的默认编辑器，在编辑器内写入本次提交的说明。结果显示 <code>working tree clean</code> 说明工作区和暂存区是干净的，没有待暂存或待提交的文件。文件已经提交到了git本地仓库</p>
+<p>指定 <code>-m</code> 参数可以直接写入提交说明，不会拉起编辑器，比较方便快捷，命令如下</p>
+<pre><code class="bash">git commit -m &lt;description&gt;
+</code></pre>
+<p><code>description</code> 为提交时的说明</p>
+<p>指定 <code>-a</code> 参数设置修改文件后无需执行 git add 命令，直接提交。将会拉取编辑器，在编辑器写入提交说明，命令如下</p>
+<pre><code class="bash">git commit -a
+</code></pre>
+<p>可以同时指定 <code>-am</code> 将add添加到暂存区操作和commit提交操作合并到一起。或者使用 <code>git commit * -m </code> 也可以达到同样的效果</p>
+<pre><code class="bash">git commit -am &lt;description&gt; 
+// 或者
+git commit * -m &lt;description&gt; 
+</code></pre>
+<p><code>description</code> 为提交时的说明</p>
+</li>
+<li><p>查看提交日志记录信息</p>
+<p>使用 <code>git log</code> 查看提交的日志记录信息，<strong>该命令只能查看到当前版本为止的记录</strong></p>
+<pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
+$ git log
+commit 73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -&gt; master)
+Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+Date:   Wed Mar 31 17:10:31 2021 +0800
+
+    本次提交的说明
+</code></pre>
+<p>使用 <code>git log --pretty=oneline</code> 查看提交的日志记录信息</p>
+<pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
+$ git log --pretty=oneline
+73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -&gt; master) 本次提交的说明
+</code></pre>
+<p>使用 <code>git log --oneline</code> 查看提交的日志记录信息</p>
+<pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
+$ git log --oneline
+73ad93b (HEAD -&gt; master) 本次提交的说明
+</code></pre>
+<p>使用<code>git log --graph</code> 查看提交的日志记录信息。方便直观的查看分支合并的情况</p>
+<pre><code class="bash">$ git log --graph
+*   commit 2819958ace45d4ba7377e81d539ce80ff78a16c8 (HEAD -&gt; main)
+|\  Merge: 8467fbd 8d2e09d
+| | Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+| | Date:   Thu Apr 1 18:15:52 2021 +0800
+| |
+| |   本次提交的说明
+| |
+| * commit 8d2e09d39e66fd3a29eb892d0346b7de4aa11adb (hotfix)
+| | Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+| | Date:   Thu Apr 1 17:36:31 2021 +0800
+| |
+| |   本次提交的说明
+| |
+* | commit 8467fbddcffb1300f98396480290a07025def49f
+|/  Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+|   Date:   Thu Apr 1 17:37:26 2021 +0800
+|
+|     本次提交的说明
+|
+* commit b4a6f5abf45d65e80b67d53da714cbccc9edb3f2 (origin/main, origin/hotfix)
+| Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+| Date:   Thu Apr 1 09:39:57 2021 +0800
+|
+|     本次提交的说明
+|
+* commit ddf4e6131e6cb13ae67b99456ebe38fa96a3f7bc
+  Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;
+  Date:   Wed Mar 31 23:53:54 2021 +0800
+
+      本次提交的说明
+</code></pre>
+</li>
+</ul>
+<p>使用 <code>git reflog</code> 查看提交的日志信息，<strong>该命令可以查看所有版本的提交记录</strong></p>
+<pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
+$ git reflog
+73ad93b (HEAD -&gt; master) HEAD@&#123;0&#125;: commit: 本次提交的说明
+</code></pre>
+<ul>
+<li><p>从暂存区移除文件</p>
+<pre><code class="bash">git restore --staged &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为从暂存区移除的文件名</p>
+</li>
+<li><p>丢弃修改</p>
+<p>当文件被添加到暂存区，如果对文件进行了修改，使用以下命令来丢弃修改，回撤到文件被暂存时的状态</p>
+<pre><code class="bash">git restore &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要恢复的文件名。</p>
+</li>
+<li><p>比较不同工作区域的文件</p>
+<p>使用 <code>git diff</code> 命令来比较不同区的文件的差异</p>
+<ul>
+<li><p>无参数传入，比较工作区和暂存区的差异</p>
+<pre><code class="bash">git diff
+</code></pre>
+</li>
+<li><p>比较暂存区和<code>HEAD</code>的差异</p>
+<pre><code class="bash">git diff --cached
+// 或者
+git diff --staged
+</code></pre>
+</li>
+<li><p>比较工作区和HEAD的差异</p>
+<pre><code class="bash">git diff HEAD
+</code></pre>
+</li>
+<li><p>比较工作区和HEAD同名文件的差异</p>
+<pre><code class="bash">git diff HEAD -- &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要比较的文件</p>
+</li>
+<li><p>指定版本之间的比较</p>
+<ul>
+<li><p>比较最新的HEAD和前3次的HEAD的差异</p>
+<pre><code class="bash">git diff HEAD^ HEAD
+</code></pre>
+<p><code>HEAD^</code> 表示前1个版本，<code>HEAD^^</code> 则表示前2个版本，以此类推</p>
+</li>
+<li><p>比较最新的HEAD和前3个版本的比较</p>
+<pre><code class="bash">git diff HEAD~3 HEAD
+</code></pre>
+<p><code>HEAD~1</code> 表示前1个版本，<code>HEAD~4</code> 就是前4个版本，数字为几就是前几个版本</p>
+</li>
+<li><p>比较两个历史版本的差异</p>
+<pre><code class="bash">git diff hash1 hash2
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<p>命令返回的结果示例如下：</p>
+<pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)
+$ git diff
+diff --git a/text.txt b/text.txt
+index 0b4bf3f..f034430 100644
+--- a/text.txt
++++ b/text.txt
+@@ -1,4 +1,5 @@
+ 第一行
+-第二行
++我是第一个插入的行^M
+ 第三行
++我是最后插入的行^M
+</code></pre>
+<p>以下是对 <code>git diff</code> 命令返回的结果的释义：</p>
+<ul>
+<li><p><code>diff --git a/text.txt b/text.txt</code> 的<code>a/text.txt</code>表示变动前的版本，<code>b/text.txt</code>表示变动后的版本</p>
+</li>
+<li><p><code>index 0b4bf3f..f034430</code>表示两个版本（a版本和b版本）的git哈希值</p>
+</li>
+<li><p><code>100644</code>表示文件的属性和权限(<code>100</code>表示是普通文件，<code>644</code>同<code>linux</code>权限)</p>
+</li>
+<li><p><code>--- a/text.txt</code>表示变动前的版本</p>
+</li>
+<li><p><code>+++ b/text.txt</code>表示变动后的版本</p>
+</li>
+<li><p><code>@@ -1,4 +1,5 @@</code>表示源代码的1<del>4行和目标文件的1</del>5行有差异</p>
+</li>
+<li><p><code>-</code>表示减少的部分</p>
+</li>
+<li><p><code>+</code>表示增加的部分</p>
+</li>
+</ul>
+</li>
+<li><p>版本的切换</p>
+<ul>
+<li><p>切换到指定的版本</p>
+<pre><code class="bash">git reset --hard &lt;hash&gt;
+</code></pre>
+<p><code>hash</code> 为要切换的版本的哈希值</p>
+</li>
+<li><p>切换到前1个版本</p>
+<pre><code class="bash">git reset --hard HEAD^
+</code></pre>
+<p><code>HEAD^</code> 表示前1个版本，<code>HEAD^^</code> 则表示前2个版本，以此类推</p>
+</li>
+<li><p>切换到前两个版本</p>
+<pre><code class="bash">git reset --hard HEAD~1
+</code></pre>
+<p><code>HEAD~1</code> 表示前1个版本，<code>HEAD~4</code> 就是前4个版本，数字为几就是前几个版本</p>
+</li>
+</ul>
+</li>
+<li><p>删除文件</p>
+<ul>
+<li><p>在暂存区和工作区删除该文件</p>
+<pre><code class="bash">git rm &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要删除的文件。该命令执行后无需再使用 <code>git add</code> 命令将删除操作添加到暂存区了，只用将本次删除提交到本地 git 仓库即可</p>
+</li>
+<li><p>仅暂存区删除该文件</p>
+<pre><code class="bash">git rm --cached &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要删除的文件。在工作区的该文件仍然保留</p>
+</li>
+</ul>
+</li>
+<li><p>工作区文件误删的补救</p>
+<ul>
+<li><p>从本地git仓库拉取一份回工作区</p>
+<pre><code class="bash">git checkout &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要拉回的文件</p>
+</li>
+<li><p>恢复工作区被删除的文件</p>
+<pre><code class="bash">git restore &lt;file&gt;
+</code></pre>
+<p><code>file</code> 为要恢复的文件</p>
+</li>
+</ul>
+</li>
+<li><p>分支介绍</p>
+<p>git提供了分支相关的操作，用来切换到不同的分支。master 一般是主干分支，一般功能增加、BUG 修复、多人协同开发等不会直接在 master 上进行，需要另辟分支进行处理，最后处理完后合并到master</p>
+</li>
+<li><p>创建分支</p>
+<pre><code class="bash">git checkout -b &lt;newbranch&gt;
+// or
+git branch &lt;newbranch&gt;
+</code></pre>
+<p><code>newbranch</code> 为要创建的分支名称。使用第一种方式创建分支时同时会切换到该分支</p>
+</li>
+<li><p>切换分支</p>
+<pre><code class="bash">git checkout &lt;branchname&gt;
+</code></pre>
+<p><code>branchname</code> 为要切换到的分支名称</p>
+</li>
+<li><p>删除分支</p>
+<pre><code class="bash">git branch -d &lt;branchname&gt;
+</code></pre>
+<p><code>branchname</code> 为要删除的分支名称。<strong>不能删除当前所在分支。如需删除，得先切换到其他分支，再执行删除</strong></p>
+</li>
+<li><p>查看分支</p>
+<pre><code class="bash">git branch
+</code></pre>
+<p>带 <code>*</code> 的表示当前所在的分支</p>
+<p>指定 <code>-v</code> 参数可以查看各个分支最后一次提交的信息，命令如下</p>
+<pre><code class="bash">git branch -v
+</code></pre>
+</li>
+<li><p>合并分支</p>
+<pre><code class="bash">git merge &lt;branchname&gt;
+</code></pre>
+<p><code>branchname</code>为要被合并的分支名称，<strong>合并到当前所在的分支</strong></p>
+</li>
+<li><p>重命名分支</p>
+<pre><code>git branch -m &lt;oldbranchname&gt; &lt;newbranchname&gt;
+</code></pre>
+<p><code>oldbranchname</code> 和 <code>newbranchname</code> 分别为原分支名称和新分支名称。如果 <code>newbranchname</code> 分支已存在，指定 <code>-M</code> <strong>代替</strong> <code>-m</code> 可以强制重命名为已存在的分支</p>
+</li>
+<li><p>添加远程仓库</p>
+<pre><code class="bash">git remote add &lt;remotename&gt; &lt;url&gt;
+</code></pre>
+<p><code>remotename</code> 为远程仓库的别名，<code>url</code> 为远程仓库的地址</p>
+</li>
+<li><p>查看所有的远程仓库别名</p>
+<pre><code class="bash">git remote
+</code></pre>
+<p>指定 <code>-v</code> 参数同时显示其远程仓库所对应的地址 <code>url</code></p>
+<pre><code class="bash">git remote -v
+</code></pre>
+</li>
+<li><p>删除远程仓库</p>
+<pre><code class="bash">git remote rm &lt;remotename&gt;
+</code></pre>
+<p><code>remotename</code> 为要删除的远程仓库的名称</p>
+</li>
+<li><p>修改远程仓库名称</p>
+<pre><code class="bash">git remote rename &lt;oldremotename&gt; &lt;newremotename&gt;
+</code></pre>
+<p><code>oldremotename</code> 和 <code>newremotename</code> 分别表示旧名称和新名称</p>
+</li>
+</ul>
+<h3 id="git-远程仓库的常用命令"><a href="#git-远程仓库的常用命令" class="headerlink" title="git 远程仓库的常用命令"></a>git 远程仓库的常用命令</h3><ul>
+<li><p>从远程仓库克隆项目到本地</p>
+<pre><code class="bash">git clone &lt;url&gt;
+</code></pre>
+<pre><code class="bash">`url`为远程仓库的地址
+</code></pre>
+</li>
+<li><p>取回远程仓库最新内容</p>
+<pre><code class="bash">git fetch &lt;remotehost&gt; &lt;remotebranch&gt;
+</code></pre>
+<p>使用 <code>git fetch &lt;remotehost&gt; &lt;remotebranch&gt;</code> 将远程仓库的的最新内容全部取回本地。<code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为远程分支名</p>
+<p>如果仅指定了<code>remotehost</code>，则将<code>remotehost</code>所对应的远程仓库与本地当前同名分支的最新内容取回到本地当前分支，命令如下</p>
+<pre><code class="bash">git fetch &lt;remotehost&gt;
+</code></pre>
+<p><strong><code>fetch</code> 操作不会对本地仓库做任何修改，仅仅是下载到本地</strong></p>
+</li>
+<li><p>将使用 <code>fetch</code> 命令下载到本地的内容合并到本地仓库</p>
+<pre><code class="bash">git merge &lt;remotehost&gt;/&lt;remotebranch&gt;
+</code></pre>
+<p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为远程分支名。<strong>合并到当前所在分支</strong></p>
+</li>
+<li><p>查看远程分支</p>
+<pre><code class="bash">git branch -a
+</code></pre>
+<p>同时也会显示本地的分支。<strong>在查看远程分支时，查看的是数据的快照，也就是上一次调用 <code>git fetch</code> 的结果。并没有与远程仓库实时的连接，也就是查看到的远程分支不一定是最新的，请先使用<code>git fetch</code><br>以确保获取到的是最新内容</strong></p>
+</li>
+<li><p>推送本地分支到远程仓库</p>
+<pre><code class="bash">  git push &lt;remotehost&gt; &lt;localbranch&gt;:&lt;remotebranch&gt;
+</code></pre>
+<p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>localbranch</code> 和 <code>remotebranch</code> 分别对应本地分支名和远程分支名。如果本地分支名和远程分支名相同，则可以略写为：</p>
+<pre><code class="bash">git push &lt;remotehost&gt; &lt;localbranch&gt;
+</code></pre>
+<p>指定<code>-u</code>参数同时指定默认远程仓库和分支，直接使用 <code>git push</code> 即可，命令如下：</p>
+<pre><code class="bash">git push -u &lt;remotehost&gt; &lt;localbranch&gt;
+</code></pre>
+<p><strong>则后面无参数的推送，拉取等命令可以无需加任何参数，默认使用在这时使用 <code>-u</code> 所指定的远程仓库和分支</strong> 。对于没有携带任何参数的推送，默认推送到当前分支。如果需要推送到其他主机或分支，请使用完整的<code>push</code>命令</p>
+<p>如果要推送当前所在的本地分支到远程仓库同名分支，则可以直接使用以下命令：</p>
+<pre><code class="bash">git push &lt;remotehost&gt;
+</code></pre>
+<p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名</p>
+</li>
+<li><p>删除远程分支</p>
+<pre><code class="bash">git push &lt;remotehost&gt; :&lt;remotebranchname&gt;
+// 或者
+git push &lt;remotehost&gt; --delete &lt;remotebranchname&gt;
+</code></pre>
+<p><code>remtoehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranchname</code> 为要删除的远程分支的名称</p>
+</li>
+<li><p>拉取远程分支到本地</p>
+<pre><code class="bash">git checkout -b &lt;localbranch&gt; &lt;remotehost&gt;/&lt;branchname&gt;
+</code></pre>
+<p><code>localbranch</code> 为远程分支拉取到本地后的分支名，<code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>branchname</code><br>为要被拉取到本地的远程仓库的分支名。该命令只适用于当在远程仓库存在该分支，并且通过 <code>git fetch</code> 操作下载到了本地，且本地并没有该分支时</p>
+</li>
+<li><p>拉取远程仓库内容到本地</p>
+<p><code>pull</code> 操作是将 <code>fetch</code> 和 <code>merge</code> 操作合并在一起，关系约等于 <code>pull = fetch + merge</code>，具体的命令如下：</p>
+<pre><code class="bash">git pull &lt;remotehost&gt; &lt;remotebranch&gt;:&lt;localbranch&gt;
+</code></pre>
+<p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为要拉取的远程仓库的分支名称，<code>localbranch</code> 为要被合并的分支名称。如果本地分支名和远程分支名相同，则可以略写为：</p>
+<pre><code class="bash">git pull &lt;remotehost&gt; &lt;localbranch&gt;
+</code></pre>
+<p>如果要从远程仓库拉取的分支名和本地仓库当前所在分支名同名，则可以直接使用以下命令</p>
+<pre><code class="bash">git pull &lt;remotehost&gt;
+</code></pre>
+<p><code>remtoehost</code> 为远程仓库的地址或远程仓库的别名</p>
+</li>
+</ul>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            该博客版权归饶英俊（Royin）所有，严禁抄袭，欢迎转载。如有反馈或建议等可通过<a href="mailto:raoyingjun@foxmail.com">邮箱</a>联系我
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">https://raoyingjun.github.io/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <div id="comment" style='padding:10px;' class="vcomment"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' === 'true';
+    var verify = 'false' === 'true';
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "yrT3Ig3FfLEgnseIPtEgC0fg-gzGzoHsz",
+        appKey: "EtGovhBlFb5PkpS62XX5b3KE",
+        placeholder: "发表一下你的意见吧！",
+        pageSize:'10',
+        avatar:'identicon',
+        lang:'zh-cn',
+        guest_info: guest_info
+    });
+</script>
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2021/10/26/%E5%89%8D%E7%AB%AFJavascript%E6%A8%A1%E5%9D%97%E5%8C%96/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2021/10/26/%E8%A7%A3%E5%86%B3git%E4%B8%AD%E6%AF%8F%E6%AC%A1push%E6%88%96%E8%80%85pull%E7%AD%89%E6%93%8D%E4%BD%9C%E9%83%BD%E9%9C%80%E8%A6%81%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.jpg" alt="饶英俊（Royin）'s avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        raoyingjun@foxmail.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:raoyingjun@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2024/03/">三月 2024<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2023/12/">十二月 2023<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2023/11/">十一月 2023<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2022/07/">七月 2022<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2022/06/">六月 2022<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2022/05/">五月 2022<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2022/02/">二月 2022<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/11/">十一月 2021<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2021/10/">十月 2021<span class="sidebar_archives-count">15</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                <a class="sidebar_archives-link" href="/categories/css/">css<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/git/">git<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/categories/javascript/">javascript<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/linux/">linux<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/vue/">vue<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/webpack/">webpack<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/web%E5%AE%89%E5%85%A8/">web安全<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/%E5%85%B6%E4%BB%96/">其他<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/raoyingjun" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+
+    <!-- V2EX -->
+    
+
+    <!-- Segmentfault -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;<span year></span>&nbsp;饶英俊（Royin）的个人博客
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?Bn9UzEm8RrBSxqyZB0zPjA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#5148ed'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #5148ed, 0 0 15px #5148ed'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#5148ed',
+        'border-left-color': '#5148ed'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('
+<link rel="stylesheet" href="/css/uc.css">
+');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    var copyrightNow = new Date().getFullYear();
+    var textContent = document.querySelector('span[year]')
+
+    copyrightSince = 0000;
+    if (copyrightSince === copyrightNow||copyrightSince === 0000) {
+        textContent.textContent = copyrightNow
+    } else {
+        textContent.textContent = copyrightSince + ' - ' + copyrightNow
+    }
+
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.6 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

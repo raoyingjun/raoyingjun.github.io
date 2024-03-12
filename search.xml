@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>openssl 生成 https 证书密钥</title>
+      <link href="/2024/03/12/openssl%E7%94%9F%E6%88%90https%E8%AF%81%E4%B9%A6%E5%AF%86%E9%92%A5/"/>
+      <url>/2024/03/12/openssl%E7%94%9F%E6%88%90https%E8%AF%81%E4%B9%A6%E5%AF%86%E9%92%A5/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>如何使用 openssl 生成 https 证书及密钥</strong>。当你的在开发、调试、测试等阶段需要使用 https 协议而非 http 时，它对你非常有用。</p><h3 id="openssl-生成证书及密钥"><a href="#openssl-生成证书及密钥" class="headerlink" title="openssl 生成证书及密钥"></a>openssl 生成证书及密钥</h3><pre><code class="cmd">openssl req -x509 -nodes -newkey rsa:2048 -keyout key.pem -out cert.pem</code></pre><blockquote><p>注意，上面的代码表示在<strong>当前</strong>所在目录下生成证书及密钥。 </p></blockquote><h3 id="参数介绍"><a href="#参数介绍" class="headerlink" title="参数介绍"></a>参数介绍</h3><p>仅对本文章所示内容中用到的选项进行介绍，其余请自行查阅 <code>openssl</code> 相关文档。</p><ul><li><p><code>req</code> 表示需要使用 <code>openssl</code> 请求证书相关的操作。</p></li><li><p><code>-x509</code> 表示需要使用 <code>openssl</code> 生成自签名证书。</p></li><li><p><code>-nodes</code> 表示不对私钥进行加密</p></li><li><p><code>-keyout</code> 指定生成的 <code>RSA</code> 私钥文件的输出位置</p></li><li><p><code>-out</code> 指定生成的自签名证书的输出位置</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> web安全 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux 添加用户命令提示符显示不正确</title>
+      <link href="/2023/12/25/linux%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6%E6%98%BE%E7%A4%BA%E4%B8%8D%E6%AD%A3%E7%A1%AE/"/>
+      <url>/2023/12/25/linux%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6%E6%98%BE%E7%A4%BA%E4%B8%8D%E6%AD%A3%E7%A1%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>在 linux 使用 <code>useradd</code> 添加用户的时候，命令提示符显示不正确，如下所示：</p><pre><code class="bash"># 创建用户并添加到自动创建其家目录root@ubuntu:~# useradd -m test# 切换到 test 用户root@ubuntu:~# su - test# 注意看下面一行，命令提示符只显示了一个 $ 符号，有问题$</code></pre><h3 id="问题排除与解决"><a href="#问题排除与解决" class="headerlink" title="问题排除与解决"></a>问题排除与解决</h3><p>经排查是使用 <code>useradd</code> 创建用户时其默认指定的 shell 不正确导致。查询 <code>/etc/default/useradd</code> 文件也就是 <code>useradd</code> 的默认配置，可发现：</p><pre><code class="bash"># /etc/default/useradd# 部分略，仅展示与本文相关部分# 默认使用的 shell 为 /bin/sh ，不正确SHELL=/bin/sh# 进行修改，默认的 shell 应使用 SHELL=/bin/bash</code></pre><p>接着再进行尝试，发现命令提示符显示正常了，如下：</p><pre><code class="bash"># 切换到 test 用户root@ubuntu:~# su - test# 注意看下面一行，命令提示符显示正确test@ubuntu:~$ </code></pre><p>至此，问题解决。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux 的 more 命令翻页和退出</title>
+      <link href="/2023/12/12/linux%E7%9A%84more%E5%91%BD%E4%BB%A4%E7%BF%BB%E9%A1%B5%E5%92%8C%E9%80%80%E5%87%BA/"/>
+      <url>/2023/12/12/linux%E7%9A%84more%E5%91%BD%E4%BB%A4%E7%BF%BB%E9%A1%B5%E5%92%8C%E9%80%80%E5%87%BA/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>linux 使用 <code>more</code> 命令如何翻页和退出，如下做介绍</p><h3 id="more-命令交互"><a href="#more-命令交互" class="headerlink" title="more 命令交互"></a>more 命令交互</h3><p>关于 <code>more</code> 命令交互 的交互如下：</p><ul><li><p>Enter 回车键，<strong>逐行</strong>向下翻阅</p></li><li><p>Space 空格键，<strong>多行</strong>向下翻阅</p></li><li><p>B 字母键，<strong>多行</strong>向上翻阅。B 即单词 Back，此处表“退回”、“回退”。</p></li><li><p>Q 字母键，退出翻阅。Q 即单词 Quit，此处表“退出”。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webpack 开发库的一些问题</title>
+      <link href="/2023/12/04/webpack%E5%BC%80%E5%8F%91%E5%BA%93%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/"/>
+      <url>/2023/12/04/webpack%E5%BC%80%E5%8F%91%E5%BA%93%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>本人在学习开发前端库并发布到 npm 的过程中遇到了一些问题。故记录以供参照和借阅。</p><h3 id="将包发布到-npm-问题"><a href="#将包发布到-npm-问题" class="headerlink" title="将包发布到 npm 问题"></a>将包发布到 npm 问题</h3><p>首先，发包使用 <code>npm publish --access=publish</code> 命令。<code>public</code> 表示包的访问权限是公开的。</p><blockquote><p>建议 public 你的 npm 包，为开源社区贡献！</p></blockquote><p>其次是版本号，每次修改包后 package.json 中的 <code>version</code> 版本号应该变化，否则会报错。</p><h3 id="webpack-构建-ESM-的问题"><a href="#webpack-构建-ESM-的问题" class="headerlink" title="webpack 构建 ESM 的问题"></a>webpack 构建 ESM 的问题</h3><p>要使用 webpack 构建 ESM。请参阅如下设置：</p><pre><code class="txt">// webpack.config.js&#123;    output: &#123;        path: path.resolve(__dirname, &#39;dist&#39;, esm ? &#39;es&#39; : &#39;lib&#39;),        filename:  &quot;index.esm.js&quot;,         // 必须设置 type 为 module，表示构建类型为 ESM        library: &#123;type: &#39;module&#39;&#125;    &#125;,    ...其他配置项略    experiments: &#123;        // 启用实验性的功能，这里是启用构建 ESM 模块        outputModule: true    &#125;,&#125;</code></pre><h3 id="将包发布到-npm-后的使用问题"><a href="#将包发布到-npm-后的使用问题" class="headerlink" title="将包发布到 npm 后的使用问题"></a>将包发布到 npm 后的使用问题</h3><pre><code class="txt">参照项目目录结构如下：--------------root -dist  -lib   -index.js  -es   -index.esm.js -types  -index.d.ts---------------...其他略</code></pre><p>使用 webpack 5 请配置如下设置，再将包发布到 npm，</p><pre><code class="json">// package.json&#123;    // 入口。当你的包被使用时，将会以这个文件作为入口    &quot;main&quot;: &quot;./dist/lib/index.js&quot;,    // 提供 Typescript 类型支持    &quot;types&quot;: &quot;./types/index.d.ts&quot;,    ...其他略&#125;</code></pre><blockquote><p><strong>有必要的自动特性</strong></p><ul><li><p>无论你 main 入口文件是否是 ESM 版本（index.ems.js 或者 index.js），<br>但构建工具和 IDE 总是能正确识别类型并给出提示。<br>要使用此自动特性，请保证 [name].ems.js、 [name].js、[name].d.ts 中的 [name] 一致</p></li><li><p>大部分使用构建工具（Webpack、Vite等）的项目，构建工具能根据你使用的导入方式（如 ESM）自动识别并获取所需的依赖文件。<br>如本例中 main 入口文件指定的非 ESM 版本 JS。但你使用 ESM 特性它还是能正常工作的！</p></li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ubuntu 安装可视化界面</title>
+      <link href="/2023/11/27/ubuntu%E5%AE%89%E8%A3%85%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2/"/>
+      <url>/2023/11/27/ubuntu%E5%AE%89%E8%A3%85%E5%8F%AF%E8%A7%86%E5%8C%96%E7%95%8C%E9%9D%A2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>起因是想为 <code>linux</code> 安装可视化界面，各方面使用会方便很多。</p><blockquote><p>笔者使用 <code>linux</code> 版本为 <code>ubuntu 18.04</code>，对于其他版本，亦可以如法炮制或从中参照。</p></blockquote><h3 id="安装可视化界面"><a href="#安装可视化界面" class="headerlink" title="安装可视化界面"></a>安装可视化界面</h3><pre><code>// 更新 apt-get 软件包信息库sudo apt-get update// 安装 ubuntu 可视化界面sudo apt-get install -y ubuntu-desktop// 等待以上步骤完成后，重启虚拟机reboot</code></pre><p>重启虚拟机后，呈现的即是可视化界面。</p><h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>如果你正在 <code>vmware</code> 中使用 <code>ubuntu</code> ，或者其他 linux 分支（RetHat、CentOS 等等），并且你想要直接拖拽文件从你的电脑到 <code>ubuntu</code> 中，请**安装 <code>open-vm-tools-desktop</code>**，如下：（可选）</p><pre><code>sudo apt-get install open-vm-tools-desktop -y</code></pre><blockquote><p>如果你的 VM Tool 不可用，或者置灰无法重新安装，那么这对你来说则是必选的了！</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>面试时遇到过的问题</title>
+      <link href="/2022/07/06/%E9%9D%A2%E8%AF%95%E6%97%B6%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/07/06/%E9%9D%A2%E8%AF%95%E6%97%B6%E9%81%87%E5%88%B0%E8%BF%87%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>下面将介绍我在面试中遇到过的以及可能会遇到的一些问题，记录于此，用于记错和巩固</p><h3 id="已遇到的面试问题"><a href="#已遇到的面试问题" class="headerlink" title="已遇到的面试问题"></a>已遇到的面试问题</h3><p>有些遗忘了想不起了的，就不做记录了。</p><h4 id="Vue-相关"><a href="#Vue-相关" class="headerlink" title="Vue 相关"></a>Vue 相关</h4><ul><li><p>Vue 的响应式原理？</p></li><li><p>Vue computed 是怎么工作的？</p></li><li><p>Vue2 和 Vue3 相比做了哪些修改？</p></li><li><p>Vue 组合式 API 是什么？</p></li><li><p>Vuex 中 Mutation 和 Action 有什么区别？</p></li><li><p>Vue 中使用组合式 API 有什么好处？</p></li><li><p>Vue diff 过程？</p></li><li><p>Vue 双向数据绑定原理？</p></li><li><p>Vue 中 v-if 和 v-show 的区别？</p></li><li><p>Vue 相关性能优化？</p></li><li><p>Vue 中 v-for 和 v-if 可以同时使用吗？</p></li><li><p>说说 Vue 自定义指令？</p></li><li><p>Vue 自定义指令钩子函数？</p></li><li><p>Vue 生命周期钩子函数？</p></li></ul><h4 id="Webpack-相关"><a href="#Webpack-相关" class="headerlink" title="Webpack 相关"></a>Webpack 相关</h4><ul><li><p>Webpack HMR 热更新原理？</p></li><li><p>有用过哪些 Webpack 的 Loader？</p></li><li><p>有用过哪些 Webpack 的 Plugin？</p></li><li><p>Webpack 中的 Loader 和 Plugin 有什么区别？</p></li><li><p>Webpack 构建流程？</p></li><li><p>Webpack 构建速度优化？</p></li></ul><h4 id="Vite-相关"><a href="#Vite-相关" class="headerlink" title="Vite 相关"></a>Vite 相关</h4><ul><li><p>Vite 和 Webpack 的区别？</p></li><li><p>Vite 构建速度为什么快？</p></li></ul><h4 id="Javascript-相关"><a href="#Javascript-相关" class="headerlink" title="Javascript 相关"></a>Javascript 相关</h4><ul><li><p>Javascript 里实现继承的几种方式？</p></li><li><p>阐述一下 Typescript 和 Javascript 的区别？</p></li><li><p>对闭包的理解？</p></li><li><p>使用 Typescript 的好处？</p></li><li><p>form 表单提交有哪些数据格式？</p></li><li><p>说说作用域？</p></li><li><p>说说作用域链？</p></li><li><p>页面渲染流程？</p></li><li><p><code>0.1 + 0.2</code> 为什么不等于 <code>0.3</code> ？</p></li></ul><h4 id="计算机网络相关"><a href="#计算机网络相关" class="headerlink" title="计算机网络相关"></a>计算机网络相关</h4><ul><li><p>说说 CDN 原理？</p></li><li><p>HTTP 状态代 302 和 304 的区别？</p></li><li><p>HTTP 状态码 401 和 403 区别 ？</p></li><li><p>说说 DNS 解析？</p></li><li><p>说说 TCP 中三次握手和四次挥手？</p></li><li><p>HTTP(S) 协议</p></li></ul><h4 id="数据结构-x2F-排序-x2F-查找"><a href="#数据结构-x2F-排序-x2F-查找" class="headerlink" title="数据结构&#x2F;排序&#x2F;查找"></a>数据结构&#x2F;排序&#x2F;查找</h4><ul><li><p>八大排序？</p></li><li><p>数据结构：栈、队列、树、链表？</p></li><li><p>各种查找元素方式？</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 面试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP部分状态码介绍</title>
+      <link href="/2022/07/05/HTTP%E9%83%A8%E5%88%86%E7%8A%B6%E6%80%81%E7%A0%81%E4%BB%8B%E7%BB%8D/"/>
+      <url>/2022/07/05/HTTP%E9%83%A8%E5%88%86%E7%8A%B6%E6%80%81%E7%A0%81%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>介绍常用的 HTTP 状态码，以及他们之间的区别</p><h3 id="HTTP-状态码-302"><a href="#HTTP-状态码-302" class="headerlink" title="HTTP 状态码 302"></a>HTTP 状态码 302</h3><p>资源被临时移动到了其他地址，但客户端并不需要更改请求 URL</p><h3 id="HTTP-状态码-304"><a href="#HTTP-状态码-304" class="headerlink" title="HTTP 状态码 304"></a>HTTP 状态码 304</h3><p>资源没有被更改，该状态码只返回响应头，不会返回响应主体，客户端应从本地缓存中获取。</p><blockquote><p>服务器是返回 200 还是 304 状态码，需要先进行协商缓存。当客户端再次请求该资源时，通过服务器返回的 <code>Etag</code>, <code>Last-Modified</code> 等响应头，以及客户端发送的附带条件的请求标头 <code>If-None-Match</code>, <code>If-Modified-Since</code> 等，由服务器进行比对判断资源是否未被修改的。如果是则返回 304 状态码，客户端应使用本地缓存的资源，否则返回状态码 200 并返回最新的资源</p></blockquote><h3 id="HTTP-状态码-401"><a href="#HTTP-状态码-401" class="headerlink" title="HTTP 状态码 401"></a>HTTP 状态码 401</h3><p>用户未被授予访问权限，应先进行身份认证再进行访问，该状态码多用于身份认证的场景</p><blockquote><p>通常返回该状态码是指需要通过登录后才可以进行的操作，而此刻由于处于未登录状态，或者登录态已过期，所以提示未授权，需要进行身份认证</p></blockquote><h3 id="HTTP-状态码-403"><a href="#HTTP-状态码-403" class="headerlink" title="HTTP 状态码 403"></a>HTTP 状态码 403</h3><p>服务器接收到了客户端请求，但是拒绝执行此请求，该状态码多用于访问服务器资源的场景</p><blockquote><p>通常返回该状态码是指由于未登录、权限不足等原因导致不具备对该资源的访问权限</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CDN 原理介绍</title>
+      <link href="/2022/07/05/CDN%20%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/"/>
+      <url>/2022/07/05/CDN%20%E5%8E%9F%E7%90%86%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<h3 id="CDN-介绍"><a href="#CDN-介绍" class="headerlink" title="CDN 介绍"></a>CDN 介绍</h3><p>CDN 全称 Content Delivery Network，中文称之为“内容分发网络”，使用 CDN 可以有效提高网站响应速度。在响应网络资源时，同时将网络资源缓存在最靠近用户的网络节点，这样用户可以根据就近的节点和缓存的内容，尽可能快的获取到网站资源</p><h3 id="CDN-原理"><a href="#CDN-原理" class="headerlink" title="CDN 原理"></a>CDN 原理</h3><p>当客户端访问站点资源，CDN 通过负载均衡、缓存机制、内容分发策略等技术，代替源站响应客户端请求，将站点资源返回给客户端。</p><ul><li><p>负载均衡。将网络中的流量尽可能平均分配，避免节点过载瘫痪，影响正常的网络访问。</p></li><li><p>缓存机制。将服务器的资源缓存在本地和就近的 CDN 节点</p></li><li><p>内容分发策略。通过分发策略来调度通信过程中的多次路由转发和处理，减小网络延迟</p></li></ul><h3 id="使用-CDN-的优点"><a href="#使用-CDN-的优点" class="headerlink" title="使用 CDN 的优点"></a>使用 CDN 的优点</h3><ul><li><p>CDN 代替源站响应请求，减轻了服务器压力</p></li><li><p>静态资源可以放在 CDN，解决服务器网络带宽有限的问题</p></li><li><p>通过 CDN 可以有效优化网络拥堵、处理高并发、提高响应速度等</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>代码中常用的各种变量命名规则对应的命名法</title>
+      <link href="/2022/06/06/%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%90%84%E7%A7%8D%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E5%AF%B9%E5%BA%94%E7%9A%84%E5%91%BD%E5%90%8D%E6%B3%95/"/>
+      <url>/2022/06/06/%E4%BB%A3%E7%A0%81%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%90%84%E7%A7%8D%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E5%AF%B9%E5%BA%94%E7%9A%84%E5%91%BD%E5%90%8D%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>向大家介绍一下写代码中常用的各种变量命名规则对应的命名法，以防止记混记错。</p><h3 id="camelCase"><a href="#camelCase" class="headerlink" title="camelCase"></a>camelCase</h3><p>camelCase 驼峰命名法（也称“小驼峰命名法”）。首字母小写，后面的每个单词的首字母大写。示例 <code>userName</code>，<code>userAreaInfo</code></p><h3 id="kebab-case"><a href="#kebab-case" class="headerlink" title="kebab-case"></a>kebab-case</h3><p>kebab-case 短横线隔开命名法。每个单词都是小写，单词之间用短横线分隔。示例 <code>list-item</code>，<code>user-shopping-cart</code></p><h3 id="PascalCase"><a href="#PascalCase" class="headerlink" title="PascalCase"></a>PascalCase</h3><p>PascalCase 帕斯卡命名法（也称“大驼峰命名法”）。每个单词的首字母大写。示例 <code>MyUtil</code>，<code>PaidUserList</code></p><h3 id="snake-case"><a href="#snake-case" class="headerlink" title="snake_case"></a>snake_case</h3><p>snake_case 蛇形命名法（也称“下划线命名法”）。每个单词都是小写，单词之间用下划线分隔。示例 <code>goods_list</code>， <code>my_favorite_goods</code></p><h3 id="友情提醒"><a href="#友情提醒" class="headerlink" title="友情提醒"></a>友情提醒</h3><p>可以根据自己的喜好，以及项目中代码的命名风格来决定所要使用的命名法</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git 操作中的多人协作冲突和分支冲突</title>
+      <link href="/2022/05/10/git%E6%93%8D%E4%BD%9C%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%86%B2%E7%AA%81%E5%92%8C%E5%88%86%E6%94%AF%E5%86%B2%E7%AA%81/"/>
+      <url>/2022/05/10/git%E6%93%8D%E4%BD%9C%E4%B8%AD%E7%9A%84%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C%E5%86%B2%E7%AA%81%E5%92%8C%E5%88%86%E6%94%AF%E5%86%B2%E7%AA%81/</url>
+      
+        <content type="html"><![CDATA[<h3 id="本地分支操作冲突"><a href="#本地分支操作冲突" class="headerlink" title="本地分支操作冲突"></a>本地分支操作冲突</h3><ul><li><p>什么是本地分支操作冲突</p><p>本地分支操作冲突指的就是在本地两个分支进行合并时，同个文件的同一行（或者多行）出现了不同的内容，因此产生了冲突</p></li><li><p>解决本地分支冲突</p><p>冲突一般是手动解决的。依据实际项目的需求，可能以分支 A 为准，也可能以分支 B 为准，又或者将冲突的内容整合到一起等。没有固定的解决方式。当处理完了冲突后，最后再进行 <code>git add</code> 和 <code>git commit</code> 即可</p></li></ul><h3 id="多人协作分支操作冲突"><a href="#多人协作分支操作冲突" class="headerlink" title="多人协作分支操作冲突"></a>多人协作分支操作冲突</h3><ul><li><p>什么是多人协作分支操作冲突</p><p>多人协作分支操作冲突一般指多人合作时进行推送操作时发生冲突。而这种冲突一般是由于双方推送的文件内容不一致导致的。例如一方将本地仓库某分支推送到远程仓库的某分支时和另一方已推送到远程仓库该分支的文件内容出现冲突。</p></li><li><p>如何解决多人协作分支操作冲突</p><ol><li>先将要推送到远程仓库的发生冲突的分支的内容先拉取到本地</li><li>在本地将发生冲突的内容处理好。具体怎么处理看需求。</li><li>将处理好冲突后的内容重新推送到之前想要推送却发生冲突的远程仓库的分支。至此，解决。</li></ol></li></ul><h3 id="冲突文件示例并理解其含义"><a href="#冲突文件示例并理解其含义" class="headerlink" title="冲突文件示例并理解其含义"></a>冲突文件示例并理解其含义</h3><p>假设存在某 <code>txt</code> 文件，有两个分支，分支 A 和分支 B。现在我们将分支 B 合并到分支 A，合并途中在某文件产生了冲突，产生冲突的文件内容如下：</p><pre><code class="text">some text&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEADedit by branch A=======edit by branch B    &gt;&gt;&gt;&gt;&gt;&gt;&gt; B</code></pre><ul><li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> 表示当前分支，A 分支</li><li><code>edit by branch A</code> 是分支 A 与分支 B 产生冲突的文件内容</li><li><code>=======</code>是分隔符</li><li><code>edit by branch B</code> 是分支 B 与分支 A 产生冲突的文件内容</li><li><code> &gt;&gt;&gt;&gt;&gt;&gt;&gt; B</code> 表示被合并的分支，B 分支</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git tag 命令介绍和使用</title>
+      <link href="/2022/05/10/git%20tag%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/"/>
+      <url>/2022/05/10/git%20tag%E5%91%BD%E4%BB%A4%E4%BB%8B%E7%BB%8D%E5%92%8C%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="git-tag-介绍和使用"><a href="#git-tag-介绍和使用" class="headerlink" title="git tag 介绍和使用"></a>git tag 介绍和使用</h3><p>git标签用来给分支打上标签。可以使用标签来做版本记号，指向当前最后一次的提交。</p><ul><li><p>新建标签</p><pre><code class="bash">git tag &lt;tagname&gt;</code></pre><p><code>tagname</code> 为要新建的标签名。同时指定 <code>-a</code> 和 <code>-m</code> 参数可以同时指定标签名和标签的描述信息，如下示例：</p><pre><code class="bash">git tag -a &lt;tagname&gt; -m &lt;message&gt;</code></pre><p><code>tagname</code> 为要新建的标签名，<code>message</code> 为标签的描述信息。如果不指定描述信息，默认为最后一次 <code>commit</code> 提交的说明。</p></li><li><p>查看标签</p><pre><code class="bash">git tag</code></pre></li><li><p>查看指定标签</p><pre><code>gt show &lt;tagname&gt;</code></pre><p><code>tagname</code> 为要查看的标签信息以及对应的提交信息。</p></li><li><p>删除标签</p><pre><code>git tag -d &lt;tagname&gt;</code></pre><p><code>tagname</code> 为删除的标签名</p></li><li><p>推送标签到远程仓库</p><pre><code>git push &lt;remotehost&gt; &lt;tagname&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>tagname</code> 为要推送到远程仓库的的标签名</p></li><li><p>推送全部<strong>未推送过的</strong>标签到远程仓库</p><pre><code>git push &lt;remotehost&gt; --tags</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名</p></li><li><p>删除远程仓库的标签</p><pre><code>git push &lt;remotehost&gt; :refs/tags/&lt;tagname&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>tagname</code> 为要删除的远程仓库的标签</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>fatal refusing to merge unrelated histories</title>
+      <link href="/2022/05/09/fatal%20refusing%20to%20merge%20unrelated%20histories/"/>
+      <url>/2022/05/09/fatal%20refusing%20to%20merge%20unrelated%20histories/</url>
+      
+        <content type="html"><![CDATA[<h3 id="git-合并代码提示-fatal-refusing-to-merge-unrelated-histories"><a href="#git-合并代码提示-fatal-refusing-to-merge-unrelated-histories" class="headerlink" title="git 合并代码提示 fatal: refusing to merge unrelated histories"></a>git 合并代码提示 fatal: refusing to merge unrelated histories</h3><p>合并代码中出现错误 fatal: refusing to merge unrelated histories 原因是本地仓库和远程仓库实际上是两个独立不相关联的仓库。如果本地仓库是基于 <code>git clone</code> 命令从 github 远程仓库克隆到本地，则不会产生该问题</p><h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>使用 –allow-unrelated-histories 将两个不相关联的git仓库合并到一起，命令如下：</p><pre><code class="bash">git pull [remote] [branch] –allow-unrelated-histories</code></pre><p>示例如下</p><pre><code class="bash">git pull origin master –allow-unrelated-histories</code></pre><h3 id="参数介绍"><a href="#参数介绍" class="headerlink" title="参数介绍"></a>参数介绍</h3><p>–allow-unrelated-histories 表示允许合并两个不相关联的仓库</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git rebase 详解</title>
+      <link href="/2022/05/09/git%20rebase%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2022/05/09/git%20rebase%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h3 id="介绍-git-rebase"><a href="#介绍-git-rebase" class="headerlink" title="介绍 git rebase"></a>介绍 git rebase</h3><p>rebase，理解为“变基”，意思是“变更基底”。基于某分支（称为”基分支“）创建另一个分支（称为”待基变分支“），通过 rebase 操作，将待基变分支上的 Commit 暂存，然后将基分支上最新产生的 Commit<br>合并到待基变分支，最后将待基变分支上暂存的 Commit 合并到待基变分支</p><h3 id="举例详解"><a href="#举例详解" class="headerlink" title="举例详解"></a>举例详解</h3><p>Master 为主分支，同时在此是作为基分支，Feature 分支为基于 Master 创建的特性分支，同时作为待基变分支，两个分支对应的 Commit 记录如下：</p><p>Master 分支: A-&gt;B-&gt;M<br>Feature 分支: A-&gt;B-&gt;F1-&gt;F2</p><ul><li><p>由上看出，Feature 分支是基于 Master 分支上的 Commit B 创建的</p></li><li><p>Master 基于 Commit B新增 Commit M，Feature 分支基于 Commit B 新增 Commit F1、Commit F2</p></li><li><p>在 Feature 分支上执行 <code>git rebase Master</code>，首先暂存 Feature 分支的 Commit F1、Commit F2，接着将 Master 分支新产生的 Commit 进行 rebase 到 Feature<br>分支，即 Feature 分支: A-&gt;B-&gt;M，最后再将 Feature 分支暂存的 Commit 合并到 Feature 分支，也就是 A-&gt;B-&gt;M + F1-&gt;F2，即 A-&gt;B-&gt;M-&gt;F1-&gt;F2</p></li><li><p>原 Feature 分支 Commit F1、Commit F2 对应的 Commit ID, 在执行 rebase 命令后，Commit 内容不会变，但 Commit F1、Commit F2 会生成新的 Commit ID</p></li></ul><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul><li>Git Rebase 操作不会产生新的 Commit记录，这不同于 Git Merge</li><li>Git Rebase 会改写历史 Commit 记录，也就是 rebase 这个过程会生成新的 Commit ID</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>微信小程序的渲染层和逻辑层之间的通信</title>
+      <link href="/2022/05/06/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B8%B2%E6%9F%93%E5%B1%82%E5%92%8C%E9%80%BB%E8%BE%91%E5%B1%82%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/"/>
+      <url>/2022/05/06/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%B8%B2%E6%9F%93%E5%B1%82%E5%92%8C%E9%80%BB%E8%BE%91%E5%B1%82%E4%B9%8B%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1/</url>
+      
+        <content type="html"><![CDATA[<h3 id="了解渲染层和逻辑层"><a href="#了解渲染层和逻辑层" class="headerlink" title="了解渲染层和逻辑层"></a>了解渲染层和逻辑层</h3><p>小程序的运行环境分为渲染层和逻辑层。对应模板、样式、脚本在哪个层工作如下所示</p><ul><li><p>渲染层：wxss、wxml</p></li><li><p>逻辑层：javascript</p></li></ul><h3 id="渲染层和逻辑层对应线程"><a href="#渲染层和逻辑层对应线程" class="headerlink" title="渲染层和逻辑层对应线程"></a>渲染层和逻辑层对应线程</h3><p>渲染层和逻辑层分别由 2 个线程进行管理。如下所示</p><ul><li><p>渲染层：使用 WebView 线程进行渲染。由于小程序存在多个界面，所以<strong>渲染层存在多个 WebView 线程</strong></p></li><li><p>逻辑层：使用 JsCore 线程运行 JS 脚本</p></li></ul><h3 id="渲染层和逻辑层如何通信"><a href="#渲染层和逻辑层如何通信" class="headerlink" title="渲染层和逻辑层如何通信"></a>渲染层和逻辑层如何通信</h3><p>渲染层和逻辑层之间的通信是通过微信客户端做中转，其中逻辑层发送的网络请求也是经由微信客户端进行转发，下图是小程序的通信模型。（图片来源于微信官方文档）<br><img src="https://res.wx.qq.com/wxdoc/dist/assets/img/4-1.ad156d1c.png" alt="渲染层和逻辑层如何通信"></p><h3 id="渲染层和逻辑层通信方法-setData"><a href="#渲染层和逻辑层通信方法-setData" class="headerlink" title="渲染层和逻辑层通信方法 setData()"></a>渲染层和逻辑层通信方法 setData()</h3><h4 id="介绍-setData-方法"><a href="#介绍-setData-方法" class="headerlink" title="介绍 setData() 方法"></a>介绍 setData() 方法</h4><p><code>setData()</code> 方法用于将数据从逻辑层<strong>异步</strong>发送至渲染层，并<strong>同步</strong>更新 <code>this.data</code> 的值</p><h4 id="setData-方法的通信原理"><a href="#setData-方法的通信原理" class="headerlink" title="setData() 方法的通信原理"></a>setData() 方法的通信原理</h4><p>视图层和逻辑层并不具备直接通信的能力，当双方需要进行通信时，数据将被转换为字符串形式传递，<br>转换后的数据被拼接成 Javascript 代码，通过两边各自的 <code>evaluateJavascript()</code> 方法传递到两边的环境执行</p><blockquote><p>比如要逻辑层要传输数据 A 给视图层，数据 A 经过转换和拼接后的 Javascript 代码为 formattedA，通过调用视图层的 <code>evaluateJavascript(formattedA)</code> 进行执行</p></blockquote><h3 id="频繁调用-setData-的问题"><a href="#频繁调用-setData-的问题" class="headerlink" title="频繁调用 setData() 的问题"></a>频繁调用 setData() 的问题</h3><p>频繁调用 setData() 方法会造成如下问题（以下来源自微信官方文档）</p><blockquote><p>每次 setData 都会触发逻辑层虚拟 DOM 树的遍历和更新，也可能会导致触发一次完整的页面渲染流程。过于频繁（毫秒级）的调用 setData，会导致以下后果</p><ul><li><p>逻辑层 JS 线程持续繁忙，无法正常响应用户操作的事件，也无法正常完成页面切换；</p></li><li><p>视图层 JS 线程持续处于忙碌状态，逻辑层 -&gt; 视图层通信耗时上升，视图层收到消息的延时较高，渲染出现明显延迟；</p></li><li><p>视图层无法及时响应用户操作，用户滑动页面时感到明显卡顿，操作反馈延迟，用户操作事件无法及时传递到逻辑层，逻辑层亦无法及时将操作处理结果及时传递到视图层。</p></li></ul></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 微信小程序 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微信小程序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>js中的各种继承方式</title>
+      <link href="/2022/02/22/js%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/"/>
+      <url>/2022/02/22/js%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><p>利用原型链实现继承，是通过子类原型引用父类实例来实现对父类的继承，具体实现示例如下</p><pre><code class="javascript">function Super() &#123;    this.name = &#39;Rose&#39;&#125;function Sub() &#123;&#125;// 子类原型引用父类实例来实现对父类的继承Sub.prototype = new Super()</code></pre><p>优点</p><ul><li>子类可以继承父类的属性和方法</li></ul><p>缺点</p><ul><li>由于原型对象上的引用值是在实例中共享的，因此属性一般是定义在构造函数中。在父类构造函数中定义的引用值，作为原型对象被子类实例共享，这种情况是不应该的</li><li>子类实例化无法给父类构造函数传参</li></ul><h3 id="盗用构造函数继承"><a href="#盗用构造函数继承" class="headerlink" title="盗用构造函数继承"></a>盗用构造函数继承</h3><p>通过 <code>call()</code> 和 <code>apply()</code> 方法盗用 <code>this</code> 实现继承，具体实现示例如下</p><pre><code class="javascript">function Super(name) &#123;    this.name = name&#125;function Sub(name) &#123;    // 盗用 this 实现继承    Super.call(this, name) // or Super.apply(this)&#125;</code></pre><p>优点</p><ul><li>可以向父类构造函数传参</li><li>子类可以继承父类构造函数上的属性和方法</li></ul><p>缺点</p><ul><li>子类无法访问父类原型上的方法</li><li>在父类构造函数中定义的方法不能重用。每一个子类实例都会拷贝一份在父类构造函数中定义的方法，无法像原型一样共用</li></ul><h3 id="组合继承（常用的继承方式）"><a href="#组合继承（常用的继承方式）" class="headerlink" title="组合继承（常用的继承方式）"></a>组合继承（常用的继承方式）</h3><p>结合原型链继承和盗用构造函数继承，具体实现示例如下</p><pre><code class="javascript">function Super(name) &#123;    this.name = name&#125;function Sub(name, age) &#123;    // 盗用 this 实现继承    Super.call(this, name, age) // or Super.apply(this, [name, age])    this.age = age&#125;// 子类原型引用父类实例来实现对父类的继承（一般是继承原型上定义的方法，属性通常不会定义在原型对象上）Sub.prototype = new Super()</code></pre><p>优点</p><ul><li>弥补了原型链继承和盗用构造函数继承的不足</li><li><code>instanceof</code> 操作符和 <code>isPrototypeOf</code> 方法正常有效</li></ul><p>缺点</p><ul><li>父类构造函数会被执行两次。一次是调用 <code>Super.call(this, name, age)</code>，另一次是 <code>Sub.prototype = new Super()</code></li></ul><h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><p>不使用构造函数来实现继承，而是通过原型来实现对象之间的信息共享，具体实现示例如下</p><pre><code class="javascript">let prototype = &#123;    name: &#39;Nickname&#39;,    hobbys: [&#39;song&#39;, &#39;jump&#39;]&#125;// 方式一let rose = Object.create(prototype); // 创建以 prototype 作为原型对象的对象rose.name = &#39;Rose&#39;rose.hobbys.push(&#39;basketball&#39;)// 方式二let jack = Object.create(prototype, &#123; // 创建以 prototype 作为原型对象的对象    name: &#123;        value: &#39;Jack&#39;,    &#125;&#125;)</code></pre><p>优点</p><ul><li>适用于不需要创建构造函数但仍需要在对象之间共享信息的场景。利用 <code>Object.create()</code> 创建一个以指定对象为原型的对象，通过这个指定的原型对象共享信息</li></ul><p>缺点</p><ul><li>原型中的引用值在相关对象之间也是共享的，跟原型链继承类似</li></ul><h3 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h3><p>结合原型式继承和工厂函数实现继承，包装一层函数实现继承，然后增强该对象并返回，具体实现示例如下</p><pre><code class="javascript">// 使用工厂函数创建对象function createPerson(prototype) &#123;    // 创建以 prototype 作为原型对象的新对象    const instance = Object.create(prototype)    // 添加属性或方法增强新对象    instance.sayName = function () &#123;        console.log(instance.name)    &#125;    // 添加属性或方法增强新对象    instance.age = 18    return instance // 返回新对象&#125;let prototype = &#123;    name: &#39;Nickname&#39;,    hobbys: [&#39;song&#39;, &#39;jump&#39;]&#125;// 调用工厂函数传入指定原型对象，创建并返回增强后的对象const rose = createPerson(prototype)</code></pre><p>优点</p><ul><li>适用于不在乎类型和构造函数的场景，适用于只关注对象的情况</li></ul><p>缺点</p><ul><li>通过这种继承方式添加的函数难以复用，与构造函数模式类似。在构造函数模式中定义的属性和方法都被拷贝到其对象实例上，导致方法也是难以重用</li></ul><h3 id="寄生式组合继承（最佳方案）"><a href="#寄生式组合继承（最佳方案）" class="headerlink" title="寄生式组合继承（最佳方案）"></a>寄生式组合继承（最佳方案）</h3><p>通过盗用构造函数继承属性，混合原型式继承来继承方法，也就是利用寄生式继承的方式来继承父类的原型，然后将返回的新对象赋值给子类原型，具体实现示例如下</p><pre><code class="javascript">function Super(name) &#123;    this.name = name&#125;function Sub(name) &#123;    // 盗用构造函数继承属性    Super.call(this, name) // or Super.apply(this)&#125;// 混合原型式继承来继承方法Sub.prototype = Object.create(Super.prototype);// 由于上面重写原型导致默认 constructor 属性丢失，我们这里手动设置一下Sub.prototype.constructor = Sub</code></pre><p>我们将上面的代码整理封装下，改写后如下示例：</p><pre><code class="javascript">/** * 子类继承父类 * @param &#123;Function&#125; Sub 子类 * @param &#123;Function&#125; Super 父类 */// 包装成实现继承的函数function inheritPrototype(Sub, Super) &#123;    // 原型式继承来继承方法    const subPrototype = Object.create(Super.prototype)    // 由于上面重写原型导致默认 constructor 属性丢失，我们这里手动设置一下    subPrototype.constructor = Sub    // 将上面创建的新对象 subPrototype 赋值给子类原型，后续直接在子类原型上添加方法或属性增强该对象即可    Sub.prototype = subPrototype&#125;function Super(name) &#123;    this.name = name&#125;function Sub(name, age) &#123;    // 盗用构造函数继承属性    Super.call(this, name) // or Super.apply(this)    this.age = age&#125;// 子类 Sub 继承父类 SuperinheritPrototype(Sub, Super)</code></pre><p>优点</p><ul><li>只调用一次父类构造函数</li><li>避免了在子类原型上创建不必要的属性。像组合继承中，子类原型是通过引用父类实例作为原型来继承，不可避免的多余了不必要的属性</li><li><code>instanceof</code> 操作符和 <code>isPrototypeOf</code> 方法正常有效</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webpack 的 hmr 原理</title>
+      <link href="/2022/02/21/webpack%E7%9A%84hmr%E5%8E%9F%E7%90%86/"/>
+      <url>/2022/02/21/webpack%E7%9A%84hmr%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<h3 id="HMR介绍"><a href="#HMR介绍" class="headerlink" title="HMR介绍"></a>HMR介绍</h3><p>webpack 是通过“热模块替换” ，也就是 HMR（ Hot Module Replacement）来实现资源的热更新的，可以仅针对部分资源进行更新而无需重载整个页面</p><h3 id="HMR实现原理"><a href="#HMR实现原理" class="headerlink" title="HMR实现原理"></a>HMR实现原理</h3><p>HMR 的更新原理大致分为以下部分：</p><ul><li>WDS（Webpack Dev Server）与浏览器维护了一个 WebSocket，当本地资源发生变化，WDS 会向浏览器推送更新，同时会带上本次构建的 Hash。</li><li>浏览器与上一次的资源进行对比，如果对比发现有差异，则浏览器发起 Ajax 请求获取更改的内容，WDS 会返回一个 Json，该 Json 包含了所有要更新模块的 Hash 值，接着再通过 Jsonp 请求最新的模块代码。</li><li>对比新旧模块来决定是否需要更新模块，在决定更新模块后，检查模块之间的依赖关系，更新模块的同时更新模块之间的依赖引用。如果 HMR 失败了，则回退到 Live Reload 操作，也就是通过刷新浏览器来获取最新代码。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webpack 构建流程</title>
+      <link href="/2022/02/21/webpack%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/"/>
+      <url>/2022/02/21/webpack%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<p>webpack 的构建流程是一个串行的过程，从启动构建流程到结束的过程如下所示：</p><ol><li>初始化参数。将配置文件（webpack.config.js）与 shell 中的参数合并到一起，得出最终的配置</li><li>开始编译。通过第【1】步得到的最终配置来初始化 Compiler（编译器） 对象，以及注册所有配置的插件，最后吊用 Compiler 的 <code>run</code> 方法开始编译</li><li>确定入口 。根据配置里的 Entry 找到所有的入口文件</li><li>编译模块。从入口文件开始，调用所有配置的 Loader 来对模块进行翻译，再递归找出模块依赖的模块，直到所有入口依赖的模块都经过了处理</li><li>完成模块编译。通过第【4】步后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系</li><li>输出资源。根据入口和模块之间的依赖关系，组合成一个个包含多个模块的 Chunk ，再将每个 chunk 转换成单独的文件，添加到输出列表。此时也是 Webpack 提供的最后的修改输出内容的时机。</li><li>完成资源输出。确定好要输出的内容后，根据配置中的 Output（输出）确定输出的路径以及文件名，最后将文件内容写入文件系统</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DNS 查询</title>
+      <link href="/2022/02/14/DNS%E6%9F%A5%E8%AF%A2/"/>
+      <url>/2022/02/14/DNS%E6%9F%A5%E8%AF%A2/</url>
+      
+        <content type="html"><![CDATA[<h3 id="DNS-查询过程"><a href="#DNS-查询过程" class="headerlink" title="DNS 查询过程"></a>DNS 查询过程</h3><ol><li>客户端请求指定域名</li><li>查询本地 DNS 服务器缓存中是否有对应 IP 地址，如果有则返回</li><li>否则，查询本地 DNS 服务器，如果本地 DNS 服务器有则返回</li><li>否则，本地 DNS 服务器向根 DNS 服务器发起请求，根 DNS 服务器会解析根域名返回对应顶级 DNS 服务器的 IP 地址</li><li>本地 DNS 服务器向对应顶级 DNS 服务器的IP地址发起请求，顶级 DNS 服务器返回对应权威 DNS 服务器的 IP 地址</li><li>本地 DNS 服务器向对应权威 DNS 服务器的IP地址发起请求，权威 DNS 服务器会返回对应主机名的 IP 地址</li><li>本地 DNS 服务器将返回的结果保存于缓存中，以便下次使用</li><li>本地 DNS 服务器返回查询结果给客户端</li></ol><h3 id="DNS-查询中的递归查询和迭代查询"><a href="#DNS-查询中的递归查询和迭代查询" class="headerlink" title="DNS 查询中的递归查询和迭代查询"></a>DNS 查询中的递归查询和迭代查询</h3><ul><li>递归查询，指的是主机向本地 DNS 服务器发起查询。客户端只发起一次请求 ，本地 DNS 服务器会继续向下一级 DNS 服务器发起查询，最后将查询的结果返回</li><li>迭代查询，指的是本地 DNS 服务器向根 DNS 服务器的查询。客户端需要发出多次查询请求，本地 DNS 服务器只去单次查询并返回结果，下一级查询需要本地 DNS 服务器根据本次查询的结果继续去查询。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>页面渲染过程</title>
+      <link href="/2022/02/11/%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/"/>
+      <url>/2022/02/11/%E9%A1%B5%E9%9D%A2%E6%B8%B2%E6%9F%93%E8%BF%87%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="浏览器解析页面过程"><a href="#浏览器解析页面过程" class="headerlink" title="浏览器解析页面过程"></a>浏览器解析页面过程</h3><ol><li>浏览器获取到 HTML 文件，将各个标记解析成对应 DOM 节点以构建 DOM 树</li><li>解析【1】的过程中，如果遇到 CSS 文件，则<strong>并行</strong>下载</li><li>当 CSS 文件下载完毕，解析对应 CSS 样式生成对应 CSSOM 树，该过程不会<strong>阻塞</strong> DOM 的解析，但会阻塞页面渲染</li><li>解析【1】的过程中，如果遇到 Javascript 文件，则<strong>串行</strong>下载</li><li>当 Javascript 文件下载完毕，将会解析该脚本文件并执行，该过程会<strong>阻塞</strong> DOM 的解析和页面渲染</li><li>如果【1】的 DOM 树构建完成，触发 document 的 DOMContentLoaded 事件</li><li>结合 CSSOM 树和 DOM 树生成 Render Tree，根据 Render Tree 进行布局及绘制，将内容呈现到页面</li><li>页面完全加载后（CSS 文件、Javascript 文件、图片等），触发 window 的 load 事件</li></ol><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul><li><p>多个 CSS 文件下载是<strong>并行</strong>的，优先解析下载好的文件。样式的最终呈现<strong>与下载顺序无关，与优先级有关</strong></p><blockquote><ul><li>如果多个 CSS（文件）样式规则优先级相同则合并样式，否则生效规则依据样式的优先级决定</li><li>CSS（文件）的下载不会阻塞其后的 Javascript 的下载，但会阻塞 Javascript 的执行</li></ul></blockquote></li><li><p>多个 Javascript 文件的下载与解析执行均是<strong>串行</strong>的，会<strong>阻塞页面其他动作</strong>。此处不包括使用 async 和 defer 的情况</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用 git stash 贮藏文件</title>
+      <link href="/2021/11/19/%E4%BD%BF%E7%94%A8git%20stash%E8%B4%AE%E8%97%8F%E6%96%87%E4%BB%B6/"/>
+      <url>/2021/11/19/%E4%BD%BF%E7%94%A8git%20stash%E8%B4%AE%E8%97%8F%E6%96%87%E4%BB%B6/</url>
+      
+        <content type="html"><![CDATA[<h5 id="前景引入"><a href="#前景引入" class="headerlink" title="前景引入"></a>前景引入</h5><p>当你使用 Git 作为版本控制工具，当你正在开发 A<br>功能，已经开发了一定的进度，此时来了一个紧急BUG，而你应该不会想commit未开发完成的代码，也不太可能会选择回滚自己已经完成了部分的代码。不知道该怎么把A功能先暂时搁置在一边，待修复完该 BUG，再回来继续 A<br>功能的开发。接下来，我们来使用 <code>git stash</code><br>解决这个问题</p><h5 id="概念介绍"><a href="#概念介绍" class="headerlink" title="概念介绍"></a>概念介绍</h5><p>利用 <code>git stash</code> 可以将工作区的代码，暂存在一个堆栈（Stack）中，每次暂存将会对应产生一个暂存记录。stash可以译为“藏匿、隐藏、存放、贮藏”。</p><blockquote><p>堆栈（Stack）是一种数据结构，其中的数据满足后进先出，也可以说成是先进后出</p></blockquote><h5 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h5><ul><li><p>将当前工作区的更改进行贮藏</p><pre><code class="bash">git stash save -u &quot;备注信息&quot;</code></pre></li><li><p>查看堆栈中所有的贮藏记录</p><pre><code class="bash">git stash list</code></pre></li><li><p>删除所有的贮藏记录</p><pre><code class="bash">git stash clear</code></pre></li><li><p>将最近一次贮藏记录应用到工作区（贮藏记录仍会被保留）</p><pre><code class="bash">git stash apply</code></pre></li><li><p>将指定的贮藏记录应用到工作区（贮藏记录仍会被保留）</p><pre><code class="bash">git stash apply [stash]</code></pre></li></ul><p><code>stash</code>为要被应用到工作区的对应的贮藏，例如 “stash@{0}”</p><ul><li><p>将最近一次贮藏记录应用到工作区（贮藏记录同时会被删除）</p><pre><code class="bash">git stash pop</code></pre></li><li><p>将指定的贮藏记录应用到工作区（贮藏记录同时会被删除）</p><pre><code class="bash">git stash pop [stash]</code></pre><p><code>stash</code>为要被应用到工作区的对应的贮藏记录，例如 “stash@{0}”</p></li><li><p>将最近一次的贮藏记录删除</p><pre><code class="bash">git stash drop</code></pre></li><li><p>将指定的的贮藏记录删除</p><pre><code class="bash">git stash drop [stash]</code></pre></li></ul><p><code>stash</code>为要被删除的贮藏记录，例如 “stash@{0}”</p><ul><li><p>删除所有的贮藏记录</p><pre><code class="bash">git stash clear</code></pre></li></ul><h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><p><code>git stash</code> 不会暂存被 <code>.gitignore</code> 忽略的文件或文件夹</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Babel 配置问题</title>
+      <link href="/2021/10/26/Babel%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
+      <url>/2021/10/26/Babel%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="babel-x2F-core"><a href="#babel-x2F-core" class="headerlink" title="@babel&#x2F;core"></a>@babel&#x2F;core</h3><p>是 babel 进行语法转换的核心实现</p><h3 id="babel-x2F-plugin-transform-runtime"><a href="#babel-x2F-plugin-transform-runtime" class="headerlink" title="@babel&#x2F;plugin-transform-runtime"></a>@babel&#x2F;plugin-transform-runtime</h3><p>该包用于将 babel 的一些辅助函数整合到一起，以免编译输出有重复。</p><blockquote><p>由于babel依赖少数辅助函数实现某些功能，并且辅助函数会被添加到每个需要它的文件内。所以会用到<code>@babel/plugin-transform-runtime</code></p></blockquote><h3 id="babel-x2F-preset-env"><a href="#babel-x2F-preset-env" class="headerlink" title="@babel&#x2F;preset-env"></a>@babel&#x2F;preset-env</h3><p>使用预设环境。当你使用最新的JS语法，自动帮你转换兼容低版本的语法</p><h3 id="babel-loader"><a href="#babel-loader" class="headerlink" title="babel-loader"></a>babel-loader</h3><p>babel 官方制作了 loader，使babel支持在webpack构建工具中使用</p><h3 id="常用的配置如下"><a href="#常用的配置如下" class="headerlink" title="常用的配置如下"></a>常用的配置如下</h3><pre><code class="js">// webpack.config.jsmodule.exports = &#123;    // 其他项略..    module: &#123;        rules: [            // 其他 rule 略...            &#123;                test: /\.js$/,                exclude: /node_modules/,                use: &#123;                    loader: &#39;babel-loader&#39;,                    options: &#123;                        presets: [                            [                                &#39;@babel/preset-env&#39;,                                &#123;                                    // usage 表示按需加载                                    useBuiltIns: &#39;usage&#39;,                                    corejs: &#123;                                        /**                                         * corejs 的版本。低版本不在维护和更新。                                         * 官方推荐使用具体的版本号。例如 &#39;3.11&#39;，而不是 &#39;3&#39;                                         */                                        version: &#39;3.11&#39;,                                        // 提供了对处于提议阶段的 js 语法的支持                                        proposals: true                                    &#125;                                &#125;                            ]                        ],                        plugins: [&#39;@babel/plugin-transform-runtime&#39;]                    &#125;                &#125;            &#125;        ]    &#125;,&#125;</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>IntersectionObserver 的 api 怎么玩</title>
+      <link href="/2021/10/26/IntersectionObserver%E7%9A%84api%E6%80%8E%E4%B9%88%E7%8E%A9/"/>
+      <url>/2021/10/26/IntersectionObserver%E7%9A%84api%E6%80%8E%E4%B9%88%E7%8E%A9/</url>
+      
+        <content type="html"><![CDATA[<h3 id="首先来看看-MDN-的对它介绍"><a href="#首先来看看-MDN-的对它介绍" class="headerlink" title="首先来看看 MDN 的对它介绍"></a>首先来看看 MDN 的对它介绍</h3><p>IntersectionObserver，一种异步观察目标元素与其容器元素或顶级文档视窗（Viewport）相交状态的方法。</p><p><strong>看图解释相交</strong>（图片来源于网络）</p><p>Viewport 是可视区域（容器&#x2F;视窗），绿色背景的为元素（目标元素）。</p><p><img src="http://mms0.baidu.com/it/u=3362364854,2905473064&fm=253&app=138&f=PNG&fmt=auto&q=75?w=499&h=216" alt="元素和容器/视窗相交和未相交时的示例"></p><p>左图表示还未相交，而右图表示的是元素和容器&#x2F;视窗相交了。</p><h3 id="用在什么地方"><a href="#用在什么地方" class="headerlink" title="用在什么地方"></a>用在什么地方</h3><p>一般使用在需要检测元素和容器元素或视窗的交叉情况，例如</p><ul><li><p>内容出现在视窗&#x2F;容器元素窗懒加载</p></li><li><p>滚动到视窗&#x2F;容器元素底部加载更多</p></li><li><p>滚到到视窗执行动画等</p></li></ul><h3 id="为什么用它？"><a href="#为什么用它？" class="headerlink" title="为什么用它？"></a>为什么用它？</h3><ul><li>以前对于相交的检测比较麻烦，常用到 Scroll 事件</li><li>频繁调用 <code>Elment.getBoundingClientRect()</code> 等获取元素位置大小信息的属性，造成性能问题</li></ul><h3 id="IntersectionObserver-的基本用法"><a href="#IntersectionObserver-的基本用法" class="headerlink" title="IntersectionObserver 的基本用法"></a>IntersectionObserver 的基本用法</h3><p><strong>IntersectionObserver 构造器</strong></p><pre><code class="javascript">const observer = new IntersectionObserver(callback, options) // 创建观察者const target1 = document.getElementById(&#39;target1&#39;) // 要观察的元素const target2 = document.getElementById(&#39;target2&#39;)observer.observe(target1) // 观察 target1observer.observe(target2) // 同时观察 target1 和 target2</code></pre><ul><li><p>callback 当目标元素和容器元素&#x2F;视窗相交大小到达该阈值则触发该回调函数，该回调接受两个参数，形式如下：</p><pre><code class="txt">callback((entries, observer) =&gt; &#123;  // Do something&#125;;</code></pre><ul><li><p>entries</p><p>一个 <a href="#IntersectionObserverEntry%E6%8E%A5%E5%8F%A3"><code>IntersectionObserverEntry</code></a> 对象的数组，将在下面介绍，或者直接点击该链接跳转过去</p></li><li><p>observer</p><p>被调用的 <code>IntersectionObserver</code> 实例。</p></li></ul></li><li><p>options 传入的可选的参数：</p><table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td><code>options.root</code></td><td>指定根（root）元素，也就是要观察的目标元素的容器元素&#x2F;视窗。如果未指定或者为 <code>null</code>，则默认为浏览器视窗</td></tr><tr><td><code>options.rootMargin</code></td><td>该属性用于计算相交的区域范围，例如 <code>10px 20px 30px 40px</code> 分别指代 top, right, bottom, left。默认值为 0。实际的计算相交的区域范围为 <code>root.width + rootMargin</code></td></tr><tr><td><code>options.threshold</code></td><td>一个 <code>number</code> 数字，或者是一个 <code>number[]</code> 数字数组，当目标和容器元素&#x2F;视窗到达该阈值时回调函数将会执行。例如 <code>0.4</code> ，表示目标元素在容器元素&#x2F;视窗的可见性超过了 40% ，则执行回调。如果你需要可见性每增 <code>30%</code> 就调用执行回调，可以传入一个数组 <code>[0, 0.3, 0.6, 0.9, 1]</code>。（总共会调用 n 次）默认值为 <code>0</code>，只要目标元素有一个像素出现在容器元素&#x2F;视窗，则调用回调，值为 <code>1</code> 则指目标元素完全出现在容器元素&#x2F;视窗中， 回调才会被执行</td></tr></tbody></table></li></ul><p><strong>IntersectionObserver 实例的方法</strong></p><table><thead><tr><th>方法</th><th>说明</th></tr></thead><tbody><tr><td><code>IntersectionObserver.disconnect()</code></td><td>使 <code>IntersectionObserver</code> 对象停止监听工作</td></tr><tr><td><code>IntersectionObserver.observe()</code></td><td>使 <code>IntersectionObserver</code> 开始监听一个目标元素。<strong>可以监听多个目标元素</strong></td></tr><tr><td><code>IntersectionObserver.takeRecords()</code></td><td>返回所有观察目标的 <code>IntersectionObserverEntry</code> 对象数组</td></tr><tr><td><code>IntersectionObserver.unobserve()</code></td><td>使 <code>IntersectionObserver</code> 停止监听特定目标元素</td></tr></tbody></table><p><strong>注意，如果调用 <code>IntersectionObserver.takeRecords()</code> ，此方法会清除挂起的相交状态列表，因此不会运行回调方法。</strong></p><h3 id="IntersectionObserverEntry-接口"><a href="#IntersectionObserverEntry-接口" class="headerlink" title="IntersectionObserverEntry 接口"></a>IntersectionObserverEntry 接口</h3><p>该接口描述了目标元素与其根容器元素或视窗在某一特定过渡时刻的交叉状态，该接口的实例（<code>entries</code>）作为参数传递给 <code>IntersectionObserver</code> 的 <code>callback</code> 中，以下参考自 <code>MDN</code></p><table><thead><tr><th>字段</th><th>说明</th></tr></thead><tbody><tr><td><code>IntersectionObserverEntry.boundingClientRect</code></td><td>返回包含目标元素的边界信息的 <code>DOMRectReadOnly</code>。边界的计算方式与 <code>Element.getBoundingClientRect()</code> 相同</td></tr><tr><td><code>IntersectionObserverEntry.IntersectionRatio</code></td><td>返回 <code>intersectionRect</code> 与 <code>boundingClientRect</code> 的比例值。值范围为 0.0 到 1.0 之间的数字，表示在根和目标元素的相交矩形内实际上可见多少目标元素，也就是交点矩形比目标元素矩形</td></tr><tr><td><code>IntersectionObserverEntry.intersectionRect</code></td><td>返回一个 <code>DOMRectReadOnly</code> 用来描述根和目标元素的相交区域</td></tr><tr><td><code>IntersectionObserverEntry.isIntersecting</code></td><td>返回一个布尔值, 如果目标元素与相交区域观察者对象(Intersection Observer) 的根相交，则返回 <code>true</code> 。如果返回 <code>true</code>, 则 <code>IntersectionObserverEntry</code> 描述了变换到相交时的状态，白话形容就是目标元素进入根视窗了，也就是可见了; 如果返回 <code>false</code>, 那么可以由此判断,变换是从相交状态到非相交状态，白话形容就是目标元素离开根视窗了，不可见了</td></tr><tr><td><code>IntersectionObserverEntry.rootBounds</code></td><td>返回一个 <code>DOMRectReadOnly</code> 用来描述相交区域观察者(Intersection Observer)中的根。没有指定根，则根为视窗</td></tr><tr><td><code>IntersectionObserverEntry.target</code></td><td>与根出现相交区域改变的元素。白话形容就是当目标元素进入或者离开了根视窗了，而这个 <code>IntersectionObserverEntry.target</code> 指的就是这个目标元素</td></tr><tr><td><code>IntersectionObserverEntry.time</code></td><td>返回一个记录从 <code>IntersectionObserver</code> 的时间原点（时间原点一般是指创建浏览器上下文的时间）到交叉被触发的时间的时间戳。</td></tr></tbody></table><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul><li><code>IntersectionObserver</code> 对象被创建后，则无法更改其配置</li><li>该 API 的部分特性是部分是实验性技术，可能存在兼容性问题</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> javascript </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>TCP 和 IP 协议</title>
+      <link href="/2021/10/26/TCP%E5%92%8CIP%E5%8D%8F%E8%AE%AE/"/>
+      <url>/2021/10/26/TCP%E5%92%8CIP%E5%8D%8F%E8%AE%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="什么是-TCP-x2F-IP-协议"><a href="#什么是-TCP-x2F-IP-协议" class="headerlink" title="什么是 TCP&#x2F;IP 协议"></a>什么是 TCP&#x2F;IP 协议</h3><p>TCP&#x2F;IP 中的 TCP 是 Transmission Control Protocol 传输控制协议，IP 是 Internet<br>Protocol 网络协议。实现网络之间传输通信的协议簇。也就是不仅仅是指 TCP 和 IP，也包括例如 FTP、UDP 等协议。由于 TCP 和 IP 协议最具代表性，因此常称 TCP&#x2F;IP 协议</p><h3 id="TCP-协议"><a href="#TCP-协议" class="headerlink" title="TCP 协议"></a>TCP 协议</h3><p>TCP 协议位于传输层，负责通信双方的数据传输。</p><h4 id="建立-TCP-连接（三次握手）"><a href="#建立-TCP-连接（三次握手）" class="headerlink" title="建立 TCP 连接（三次握手）"></a>建立 TCP 连接（三次握手）</h4><ul><li><p>客户端发送一个 <code>SYN </code> 包给服务端，告知其其想要建立连接</p></li><li><p>如果接受同意建立连接，则返回一个 <code>SYN + ACK</code> 包给客户端，说明同意建立连接</p><blockquote><p>如何拒绝连接？服务端返回 <code>RST</code> 包来表示拒绝连接，或者不向客户端进行回复，而客户端会在等待超时后从而放弃</p></blockquote></li><li><p>客户端收到后，再次向服务端发送一个 <code>ACK</code> 包，告知其已收到了同意进行通信的消息，双方开始通信</p></li></ul><blockquote><p><strong>为什么非得是三次？</strong></p><p>为了确保通信双方都可以正常进行发送和接受。如果是两次握手，当客户端发送连接请求报文由于某些原因导致延迟、滞留丢失了，客户端将会重传发送新的连接请求报文，而之前丢失的报文，在以后的某个时间段到达了服务端，服务端确认该报文后将会建立连接，对于客户端来说该报文已失效，不会用于向服务端发送数据，但由于连接已建立，服务端会一直等待客户端发送数据，造成资源浪费；如果是四次握手，由于三次握手即可确保双方都能正常通信，则四次握手是多余不必的，</p></blockquote><h4 id="断开-TCP-连接（四次挥手）"><a href="#断开-TCP-连接（四次挥手）" class="headerlink" title="断开 TCP 连接（四次挥手）"></a>断开 TCP 连接（四次挥手）</h4><ul><li>客户端发送一个 <code>FIN</code> 包给服务端，告知其想要断开连接</li><li>服务端收到断开连接的请求后，返回一个 <code>ACK</code> 包给客户端，告知其同意断开连接</li><li>然后服务端也向客户端发送一个 <code>FIN</code> 包，告知其服务端也要断开连接了</li><li>客户端接受到该包后，返回一个 <code>ACK</code> 包告知服务端同意断开连接，双方断开连接</li></ul><blockquote><p><strong>为什么非得是四次？</strong></p><p>由于 TCP 连接是全双工，所以需要双方分别释放到对方的连接，仅单独一方释放连接，只代表不能再向对方发送数据，但连接仍处于半释放的状态。</p></blockquote><h3 id="IP-协议"><a href="#IP-协议" class="headerlink" title="IP 协议"></a>IP 协议</h3><p>IP 协议工作于网络层。主要用途如下：</p><ul><li>负责为计算机分配 IP 地址</li><li>将一个 IP 地址的数据，发送到另一个IP地址的设备上。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>font-family 怎么玩</title>
+      <link href="/2021/10/26/font-family%E6%80%8E%E4%B9%88%E7%8E%A9/"/>
+      <url>/2021/10/26/font-family%E6%80%8E%E4%B9%88%E7%8E%A9/</url>
+      
+        <content type="html"><![CDATA[<h3 id="什么是-font-family-啊？"><a href="#什么是-font-family-啊？" class="headerlink" title="什么是 font-family 啊？"></a>什么是 font-family 啊？</h3><p>定义文字所使用的字体族（family name）或者从通用字体族（generic-name）中选出的一种字体。如果不手动指定其值，则由浏览器决定</p><h3 id="什么是字体族？"><a href="#什么是字体族？" class="headerlink" title="什么是字体族？"></a>什么是字体族？</h3><ul><li><p>字体族是指代一个具体的字体名称。 <code>Microsoft YaHei</code>、<code>Arial</code> 等，表示我要使用什么字体</p></li><li><p>通用字体族是系统自带的通用的字体族，css 中有自带五个通用字体族</p><ul><li>衬线字体（Serif）在每个字母的边缘都有一个小的笔触。它们营造出一种形式感和优雅感。</li><li>无衬线字体（Sans-serif）字体线条简洁（没有小笔画）。它们营造出现代而简约的外观。</li><li>等宽字体（Monospace）这里所有字母都有相同的固定宽度。它们创造出机械式的外观。</li><li>草书字体（Cursive）模仿了人类的笔迹。</li><li>幻想字体（Fantasy）是装饰性&#x2F;俏皮的字体。</li></ul><p>这里拿 <code>sans-serif</code> 和 <code>serif</code> 做个图示（图片来源于 <a href="https://www.runoob.com/css/css-font.html">https://www.runoob.com/css/css-font.html</a>）：</p><p><img src="https://www.runoob.com/images/serif.gif" alt="`sans-serif` 和 `serif` 的区别"></p></li></ul><h3 id="font-family-的具体用法"><a href="#font-family-的具体用法" class="headerlink" title="font-family 的具体用法"></a>font-family 的具体用法</h3><p>多个属性值用 <code>,</code>分割</p><pre><code class="css">selector &#123;    /* Microsoft YaHei 和 Helvetica 为两个不同的字体，sans-serif 为通用字体族*/    font-family: &quot;Microsoft YaHei&quot;, Helvetica, sans-serif&#125;</code></pre><h3 id="使用-font-family-的注意事项"><a href="#使用-font-family-的注意事项" class="headerlink" title="使用 font-family 的注意事项"></a>使用 font-family 的注意事项</h3><ul><li><p>如果一个字体有空格，也就是由多个单词组成。比如 <code>Courier New</code> 字体，则必须使用引号包裹：<code>”Courier New“</code></p></li><li><p>一般必须提供一个字体的回退策略。应该在 <code>font-family</code> 列表最后添加一个通用字体族，因为无法保证用户的计算机内已经安装了你首选的字体，也不能保证使用 <code>@font-face</code><br>提供的字体能够正确地下载。通用字体族可以让浏览器最后回退使用你所指定的备选字体。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> css </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git 中的上游分支</title>
+      <link href="/2021/10/26/git%E4%B8%AD%E7%9A%84%E4%B8%8A%E6%B8%B8%E5%88%86%E6%94%AF/"/>
+      <url>/2021/10/26/git%E4%B8%AD%E7%9A%84%E4%B8%8A%E6%B8%B8%E5%88%86%E6%94%AF/</url>
+      
+        <content type="html"><![CDATA[<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>什么是 <code>fork</code>？在 github 的某个仓库上通过 <code>fork</code> 按钮，<code>fork</code> 一份项目到你的仓库，称其为 <code>origin（源）</code>，并且还可以关联被 <code>fork</code> 的仓库，称其为 <code>upstream（上游）</code></p><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如果我们需要参与某个项目的开发或者对其进行改进，<code>fork</code> 便是其中的一种的方式。我们将目标仓库 <code>fork</code> 一份到自己的仓库，然后在源仓库进行开发，通过向上游发起 <code>pull request（合并请求）</code>，在通过上游的 <code>review（评审）</code><br>后，便可以将更改合并到上游</p><p><strong>记住，<code>fork</code> 不同于 <code>clone</code>。<code>clone</code> 仅仅只是将目标仓库复制一份</strong></p><h3 id="相关的常用命令"><a href="#相关的常用命令" class="headerlink" title="相关的常用命令"></a>相关的常用命令</h3><h5 id="添加上游远程仓库"><a href="#添加上游远程仓库" class="headerlink" title="添加上游远程仓库"></a>添加上游远程仓库</h5><pre><code class="bash">git remote add [upstreamRepoName] [upstreamRepoAddress] </code></pre><p><code>upstreamRepoName</code>：上游仓库的别名，一般为 <code>upstream</code></p><p><code>upstreamRepoAddress</code>：上游仓库的地址</p><h5 id="获取上游最新的代码"><a href="#获取上游最新的代码" class="headerlink" title="获取上游最新的代码"></a>获取上游最新的代码</h5><pre><code class="bash">git fetch [remoteName]</code></pre><p><code>remoteName</code>：上游远程仓库的别名，一般上游仓库的别名为 <code>upstream</code></p><h5 id="合并上游的分支到源分支"><a href="#合并上游的分支到源分支" class="headerlink" title="合并上游的分支到源分支"></a>合并上游的分支到源分支</h5><pre><code class="bash">git merge [remoteName]/[branchName]</code></pre><p><code>remoteName</code>：上游远程仓库的别名，一般上游仓库的别名为 <code>upstream</code></p><p><code>branchName</code>：上游分支的对应分支名</p><h5 id="推送到-fork-的源仓库"><a href="#推送到-fork-的源仓库" class="headerlink" title="推送到 fork 的源仓库"></a>推送到 fork 的源仓库</h5><pre><code class="bash">git push</code></pre><p><code>remoteName</code>：上游远程仓库的别名，一般上游仓库的别名为 <code>upstream</code></p><p><code>branchName</code>：上游分支的对应分支名</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>git 中通过 ssh 设置免密登录</title>
+      <link href="/2021/10/26/git%E4%B8%AD%E9%80%9A%E8%BF%87ssh%E8%AE%BE%E7%BD%AE%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/"/>
+      <url>/2021/10/26/git%E4%B8%AD%E9%80%9A%E8%BF%87ssh%E8%AE%BE%E7%BD%AE%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95/</url>
+      
+        <content type="html"><![CDATA[<h4 id="前景引入"><a href="#前景引入" class="headerlink" title="前景引入"></a>前景引入</h4><p>在使用 <code>git</code> 时，可以使用 <code>SSH</code> 避免了每次推送操作等都需要输入用户名和密码的繁琐。</p><h4 id="如何使用ssh设置免密登录"><a href="#如何使用ssh设置免密登录" class="headerlink" title="如何使用ssh设置免密登录"></a>如何使用ssh设置免密登录</h4><h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><p>请先确认你是以下面这种方式 clone 项目的，则 ssh 免密登录才会生效：</p><pre><code class="bash">git clone git@github.com:xxx/xxxxxx.git</code></pre><h5 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h5><p>注意：以下命令如果无法在工作，请尝试在 <code>git bash</code> 终端环境下尝试</p><ol><li><p>使用以下命令生成 <code>SSH</code> 公钥和私钥</p><pre><code class="bash">ssh-keygen -t rsa -C email</code></pre><p><code>email</code> 为github账户邮箱。命令执行后将会在在 <code>~/.ssh</code> 目录下生成公钥和私钥</p></li><li><p>接着会提示你输入生成存储密钥（公钥和私钥）文件名 、输入密码、确<br>认密码等。可直接输入回车省略跳过，默认生成私钥文件名为 <code>id_rsa</code> 以及公钥<br>文件名为 <code>id_rsa.pub</code></p></li><li><p>执行以下命令确保 <code>ssh-agent</code> 正在运行</p><pre><code class="bash">eval `ssh-agent -s`</code></pre></li><li><p>使用下面命令将 <code>SSH</code> 私钥添加到 <code>ssh-agent</code></p><pre><code class="bash">ssh-add ~/.ssh/privatekeyname</code></pre><p>其中 <code>privatekeyname</code> 为私钥文件的名称，也就是在步骤2生成的存储私钥的文件名</p></li><li><p>进入github，将 <code>SSH</code> 公钥添加到github账户</p></li><li><p>使用以下命令测试连接</p><pre><code class="bash">ssh -T git@github.com</code></pre><p>如果该命令返回结果的信息中包含 <code>You&#39;ve successfully authenticated</code>，说明没有问题，可以使用 <code>SSH</code> 进行推送了。</p></li><li><p>最后使用相关命令则可以通过 <code>SSH</code> 进行推送了</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP 和 HTTPS 协议</title>
+      <link href="/2021/10/26/http%E5%92%8Chttps%E5%8D%8F%E8%AE%AE/"/>
+      <url>/2021/10/26/http%E5%92%8Chttps%E5%8D%8F%E8%AE%AE/</url>
+      
+        <content type="html"><![CDATA[<h3 id="HTTP-和-HTTPS-协议"><a href="#HTTP-和-HTTPS-协议" class="headerlink" title="HTTP 和 HTTPS 协议"></a>HTTP 和 HTTPS 协议</h3><ul><li><p>协议的来源</p><p>计算机相互之间需要进行网络通信需要一种协议，进而产生了 HTTP、HTTPS 协议</p><ul><li><p>HTTP 是什么</p><p>HTTP 译为 <code>超文本传输协议</code> ，英文是 <code>Hyper Text Transfer Protocol</code>，指定了客户端与服务器进行超文本（文本，视频，图片等）传输的协议</p></li></ul></li><li><p>HTTP 的原理</p><p>基于 TCP 协议传输数据</p></li><li><p>HTTP 的特点</p><ul><li>请求&#x2F;响应模式</li><li>灵活。不限制传输数据的类型</li><li>无连接。每次连接只能处理一个请求</li><li>无状态。处理事务没有记忆功能，每次数据都需要重新传递</li></ul></li><li><p>HTTP 报文组成</p><ul><li><p>请求报文（图片来源于网络）<br><img src="https://img2.baidu.com/it/u=2349534448,1105052924&fm=253&fmt=auto&app=138&f=JPEG?w=720&h=408" alt="HTTP 请求报文"></p></li><li><p>响应报文（图片来源于网络）<br><img src="https://img0.baidu.com/it/u=856107401,2167089509&fm=253&fmt=auto&app=138&f=JPEG?w=981&h=500" alt="HTTP 响应报文"></p></li></ul></li><li><p>HTTP 的弊端</p><p>由于数据明文传输，可能会出现以下问题：</p><ul><li><p>被窃听的风险。第三方可以截获并查看你的内容</p></li><li><p>被篡改的危险。第三方可以截获并修改你的内容</p></li><li><p>被冒充的风险。第三方可以伪装成通信方与你通信</p></li></ul></li><li><p>HTTPS 是什么</p><p>为了解决 HTTP 的弊端，进而出现了 HTTPS 。可以把 HTTPS 简单理解为 HTTP + SSL&#x2F;TLS，通过 SSL&#x2F;TLS 证书来验证服务器身份，并为客户端和服务器之间的通信提供加密</p><blockquote><p>SSL（Secure Socket Layer，安全套接字层）和 TLS（Transport Layer<br>Secure，传输层安全）。SSL 由 Netscape 研发，后基于 SSL 建立了 TLS。SSL&#x2F;TLS 在网络数据传输时起到保护隐私和数据的完整性</p></blockquote></li><li><p>HTTPS 的通信过程</p><p>下图描述了 HTTPS 建立通信的过程（图片来源于网络）：<br><img src="https://img2.baidu.com/it/u=39095811,1631134568&fm=253&fmt=auto&app=138&f=JPG?w=598&h=500" alt="HTTPS 通信"></p><p>一、客户端请求建立 HTTPS 连接</p><p>二、服务器向客户端发送包含服务器公钥的证书</p><p>三、客户端检查证书或者 CA（Certificate Authority，证书颁发机构）的颁发者是否受信任。否则，询问用户接受是否接受该证书</p><p>四、浏览器生成对称密钥，该密钥将使用服务器的公钥进行加密，以便安全地发送给服务器</p><p>五、服务器使用自己的私钥解密出对称密钥</p><p>六、服务器使用对称密钥加密与客户端之间的通信，而客户端则使用该对称密钥解密该通信</p></li><li><p>HTTPS 的弊端</p><ul><li>HTTPS 协议多次握手，导致页面的加载时间延长</li><li>证书需要付费，功能越强大的证书费用越高</li><li>安全算法会消耗 CPU 资源，对服务器资源占用比较高</li><li>HTTPS 连接缓存不如 HTTP 高效，建立通信导致了耗时延长</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 计算机网络 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机网络 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>linux 的 screen 命令</title>
+      <link href="/2021/10/26/linux%E7%9A%84screen%E5%91%BD%E4%BB%A4/"/>
+      <url>/2021/10/26/linux%E7%9A%84screen%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一般部署在linux的服务器的项目如何在退出shell后仍然保持进程运行状态。可以使用nohub、screen等命令解决，这里讲解screen命令</p><h3 id="screen-命令介绍"><a href="#screen-命令介绍" class="headerlink" title="screen 命令介绍"></a><code>screen</code> 命令介绍</h3><p><code>screen</code> 表示会话窗口，该会话内运行的进程在shell关闭后，仍然可以保持运行</p><h3 id="常用参数及作用"><a href="#常用参数及作用" class="headerlink" title="常用参数及作用"></a>常用参数及作用</h3><ul><li><p><code>-S &lt;会话名称&gt;</code> 新建一个会话</p></li><li><p>参数 <code>-r &lt;会话ID&gt;</code> 恢复到某个离线会话</p></li><li><p><code>-ls</code> 查看所有会话</p></li><li><p><code>ctrl+A+D</code> 退出该会话（会话仍然在后台运行）</p></li><li><p>当处于该会话内，在 Shell 中输入 <code>exit</code> 终止该会话</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Vue3 的组合式 API</title>
+      <link href="/2021/10/26/vue3%E7%9A%84%E7%BB%84%E5%90%88%E5%BC%8FAPI/"/>
+      <url>/2021/10/26/vue3%E7%9A%84%E7%BB%84%E5%90%88%E5%BC%8FAPI/</url>
+      
+        <content type="html"><![CDATA[<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>在学 Vue3 的时候接触到了组合式 API ，Vue 提供了在 <code>setup</code> 中使用组合式 API 的方式</p><h3 id="什么是组合式-API"><a href="#什么是组合式-API" class="headerlink" title="什么是组合式 API"></a>什么是组合式 API</h3><p>由于组件的逻辑关注点总是碎片化在不同的位置，使得维护和理解变得十分困难， 而组合式 API 就是用于将组件的同一个逻辑关注点相关代码收集在一起</p><h3 id="使用组合式-API-的好处"><a href="#使用组合式-API-的好处" class="headerlink" title="使用组合式 API 的好处"></a>使用组合式 API 的好处</h3><ul><li>组件不再进行逻辑处理，组件的代码量变小了、可读性变高了</li><li>逻辑关注点分离，降低了耦合性</li><li>理解组件的功能和维护组件更轻松</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> vue </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vue </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>webpack 踩坑之 process.env.NODE_ENV</title>
+      <link href="/2021/10/26/webpack%E8%B8%A9%E5%9D%91%E4%B9%8Bprocess.env.NODE_ENV/"/>
+      <url>/2021/10/26/webpack%E8%B8%A9%E5%9D%91%E4%B9%8Bprocess.env.NODE_ENV/</url>
+      
+        <content type="html"><![CDATA[<h5 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h5><p>当你尝试在 <code>webpack.config.js</code> 文件中访问 <code>process.env.NODE_ENV</code>（以下简称 <code>NODE_ENV</code>） 。很遗憾，结果是 <code>undefined</code></p><h5 id="解析原因"><a href="#解析原因" class="headerlink" title="解析原因"></a>解析原因</h5><p>webpack是在编译后运行时提供了 <code>NODE_ENV</code> 。而当 Webpack读取配置文件 <code>webpack.congig.js</code> 时，此时 <code>NODE_ENV</code> 并未赋值</p><h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>使用 npm 包 <code>cross-env</code>，该命令支持跨系统设置环境变量。使用如下命令安装：</p><pre><code class="bash">npm install cross-env -D</code></pre><p>可以通过 <code>cross-env</code> 设置环境变量 <code>NODE_ENV</code> 解决来这个问题。在 <code>package.json</code> 中的 <code>scripts</code> 字段中添加如下配置（博主用的是 webpack 5.X）：</p><pre><code class="json">&#123;  &quot;scripts&quot;: &#123;    &quot;build&quot;: &quot;cross-env NODE_ENV=production webpack&quot;,    &quot;serve&quot;: &quot;cross-env NODE_ENV=development webpack serve&quot;  &#125;&#125;</code></pre><p>至此，你可以在 <code>webpack.config.js</code> 文件中访问 <code>NODE_ENV</code> 了。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> webpack </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> webpack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>不定高度元素如何产生动画效果</title>
+      <link href="/2021/10/26/%E4%B8%8D%E5%AE%9A%E9%AB%98%E5%BA%A6%E5%85%83%E7%B4%A0%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/"/>
+      <url>/2021/10/26/%E4%B8%8D%E5%AE%9A%E9%AB%98%E5%BA%A6%E5%85%83%E7%B4%A0%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>一般对某个元素设置 <code>css</code> 从 <code>heigth: 0</code> 到 <code>height: auto</code> 添加过渡动画却没有动画效果，这是为什么</p><h3 id="高度的特性"><a href="#高度的特性" class="headerlink" title="高度的特性"></a>高度的特性</h3><p>块级元素，行内块级元素的高度默认是<strong>由内容撑起</strong>的，而行内元素不支持设置高度，下文都是针对块级元素，行内块级元素等可以设置高度的元素的讲解。</p><h3 id="为什么将高度设置为-auto、none-无法产生过渡动画"><a href="#为什么将高度设置为-auto、none-无法产生过渡动画" class="headerlink" title="为什么将高度设置为 auto、none 无法产生过渡动画"></a>为什么将高度设置为 <code>auto</code>、<code>none</code> 无法产生过渡动画</h3><p>过渡动画无法识别 <code>auto</code>、<code>none</code> 等非数值属性值</p><h3 id="不定高元素高度变化产生过渡动画的办法"><a href="#不定高元素高度变化产生过渡动画的办法" class="headerlink" title="不定高元素高度变化产生过渡动画的办法"></a>不定高元素高度变化产生过渡动画的办法</h3><ul><li><p>使用固定的数值作为属性值</p><p>例如 <code>500px</code>、<code>10%</code>、<code>20em</code> 等，都可以产生过渡动画</p><blockquote><p>弊端：如果内容的高度是动态不确定的，高度可能不足以包括内容或者产生多余的高度。例如一篇文章可能有短的有长的，高度写死可能不太好。</p></blockquote></li><li><p>使用 <code>max-height</code> 属性代替 <code>height</code></p><ol><li><p>首先需要隐藏高度的时候使用 <code>max-height：0</code> 代替 <code>height: 0</code>。因为最大高度为 <code>0</code>，高度不可能超过最大高度，所以只能为 <code>0</code></p></li><li><p>接着在需要显示高度的时候将 <code>max-heigt</code> 的属性值设为<strong>恒大于内容高度</strong>的值即可。例如 <code>999px</code>、<code>9999px</code> 等。</p></li></ol><blockquote><h4 id="关于-max-height-的工作原理"><a href="#关于-max-height-的工作原理" class="headerlink" title="关于 max-height 的工作原理"></a>关于 <code>max-height</code> 的工作原理</h4><p>当 <code>max-height</code> 增大到相等于由内容撑起的高度值时，元素高度就不会再增大了，即使 <code>max-height</code> 继续增长到大于内容的高度，因为元素的实际高度永远满足<code>实际高度 小于等于 最大高度</code><br>。举个例子，已知某元素的高度为 <code>height:200px</code>，其 <code>max-height</code> 由 <code>max-height: 0</code> 过渡到 <code>max-height: 300px</code> ，当 <code>max-height</code> 的值过渡到大于等于<code>200px</code><br>时，<code>max-height</code> 还在继续过渡，直到到达 <code>300px</code> 结束。但是，元素 <code>height</code> 已经不会变化了。</p><h4 id="使用-max-height-引发的问题"><a href="#使用-max-height-引发的问题" class="headerlink" title="使用 max-height 引发的问题"></a>使用 <code>max-height</code> 引发的问题</h4><p>很遗憾，使用 <code>max-height</code> 无法一劳永逸。当你给 <code>max-height</code> 设置较大的值时，例如 <code>9999px</code>，会发现高度的隐藏过渡动画有明显的迟钝。 原因是 <code>max-height</code> 设置较大的值时，例如是从<code>9999px</code><br>隐藏到 <code>0</code>。 当 <code>最大高度</code> 小于 <code>实际高度</code> 的时候， <code>height</code> 才会变小,因为 <code>height</code> 不可能大于 <code>max-height</code>。 因此在 <code>max-height</code> 一直减小到小于 <code>height</code><br>之前所花费的过渡时间，就是导致迟钝的原因，所以请设置适当的 <code>max-height</code> 的值。</p></blockquote></li><li><p>使用 <code>javascript</code> 进行控制。使用 <code>javascript</code> 可以精确的计算元素高度并设置高度</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> css </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>前端Javascript模块化</title>
+      <link href="/2021/10/26/%E5%89%8D%E7%AB%AFJavascript%E6%A8%A1%E5%9D%97%E5%8C%96/"/>
+      <url>/2021/10/26/%E5%89%8D%E7%AB%AFJavascript%E6%A8%A1%E5%9D%97%E5%8C%96/</url>
+      
+        <content type="html"><![CDATA[<h3 id="AMD-规范"><a href="#AMD-规范" class="headerlink" title="AMD 规范"></a>AMD 规范</h3><p>AMD（Asynchronous Module Definition）规范指异步模块定义。是 RequireJS 推广模块化规范的产物。</p><p>看个例子，AMD 规范是如何导入模块和定义模块的：</p><pre><code class="javascript">  /** * 第一个参数是依赖的模块列表 * 第二个参数是工厂函数，允许从该函数返回任何有效的返回值，暴露供外部使用。且该工厂函数的参数列表对应依赖的模块列表 * 暴露的模块名称默认是文件名称 */define([&#39;jquery&#39;], function (jquery) &#123;    console.log(jquery)    return &#123;        add: function () &#123;        &#125;,        mul: function () &#123;        &#125;    &#125;&#125;)</code></pre><blockquote><p><strong>AMD 推崇前置依赖</strong></p><p>指所需的依赖在定义模块时就要提前引入</p></blockquote><h3 id="CMD-规范"><a href="#CMD-规范" class="headerlink" title="CMD 规范"></a>CMD 规范</h3><p>CMD（Common Module Definition）规范指通用模块定义。是 SeaJS 推广模块化规范的产物。 通过一个例子，看 CMD 规范如何导入模块和定义模块：</p><pre><code class="javascript">  /** * 接收一个工厂函数作为参数。该工厂函数接受 3 个参数 * require 是一个函数，用来引入模块 * exports 是一个对象，可以在其上定义属性和方法。暴露供外部使用 * module 是一个对象，指向当前模块 */define(function (require, exports, module) &#123;    var $ = require(&#39;jquery&#39;)    exports.add = function () &#123;    &#125;    exports.mul = function () &#123;    &#125;    module.exports.sub = function () &#123;    &#125;&#125;)</code></pre><blockquote><p><strong>CMD 推崇就近依赖</strong></p><p>指依赖在需要时引入</p></blockquote><h3 id="CommonJS-规范"><a href="#CommonJS-规范" class="headerlink" title="CommonJS 规范"></a>CommonJS 规范</h3><p>CommonJS 规范是服务器模端块化规范。由 NodeJS 推广使用。来个例子，了解 CommonJS 是如何导入模块和定义模块规范的：</p><pre><code class="javascript">// a.js/** * nodejs 为每个文件提供了一个 module 对象和 exports 对象 * module 指代当前模块的对象，提供了一些属性供使用 * exports 是一个对象，暴露供外部使用。同时该对象指向 module.exports。 * module.exports === exports -&gt; true */module.exports.add = function () &#123;&#125;exports.mul = function () &#123;&#125;// b.jsvar util = require(&#39;a.js&#39;)util.add()util.mul()</code></pre><h3 id="ES-Module-规范"><a href="#ES-Module-规范" class="headerlink" title="ES Module 规范"></a>ES Module 规范</h3><p>由 ES6 引入至浏览器原生支持的模块化规范</p><pre><code class="javascript">// a.js// 导出常量 aexport const a = 10// 导出常量数组 likesconst likes = []export default likes// b.js// 从 a.js 导入常量 likes 和 a import likes, &#123; a &#125; from &#39;a.js&#39;</code></pre><h3 id="UMD-规范"><a href="#UMD-规范" class="headerlink" title="UMD 规范"></a>UMD 规范</h3><p>UMD（Universal Module Definition）规范是通用模块定义，为兼容其他模块化规范和无模块化开发的通用模块化规范，确保在多个运行环境（nodejs、浏览器端）都能正常工作。<br>最后，还是来个例子来了解它。</p><pre><code class="javascript">  (function (root, factory) &#123;    // AMD 规范或 CMD 规范    if (typeof define === &#39;function&#39;) &#123;        define(factory)    &#125;    // nodejs 使用的 CommonJS 规范    else if (typeof exports === &#39;object&#39;) &#123;         module.exports = factory()    &#125;    // 浏览器环境    else &#123;        // NumberUtil 是导出暴露的模块名称        root.NumberUtil = factory()    &#125;&#125;)(this, function () &#123;    return &#123;        add: function () &#123;        &#125;,        mul: function () &#123;        &#125;    &#125;&#125;)</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>版本控制工具git的基本使用</title>
+      <link href="/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"/>
+      <url>/2021/10/26/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7git%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</url>
+      
+        <content type="html"><![CDATA[<h3 id="什么是版本控制工具？"><a href="#什么是版本控制工具？" class="headerlink" title="什么是版本控制工具？"></a>什么是版本控制工具？</h3><p>git 是一个分布式版本控制工具，顾名思义，是一个控制项目版本管理的工具，记录和备份版本以及回撤到不同版本等操作</p><h3 id="git本地仓库的工作流和工作区域"><a href="#git本地仓库的工作流和工作区域" class="headerlink" title="git本地仓库的工作流和工作区域"></a>git本地仓库的工作流和工作区域</h3><p>git 的工作区域分为三种，如下表所示：</p><table><thead><tr><th>工作区域</th><th>说明</th></tr></thead><tbody><tr><td>工作区</td><td>本地的项目目录，也就是实际的工作目录</td></tr><tr><td>暂存区（索引区）</td><td>一个缓存区域，临时保存的改动</td></tr><tr><td>git 仓库</td><td>最终暂存区的文件都会被提交到本地git仓库</td></tr></tbody></table><p>git 操作文件时候，工作流顺序下表所示：</p><table><thead><tr><th>状态</th><th>说明</th></tr></thead><tbody><tr><td>modified（已修改）</td><td>本地文件已修改了，还未被保存到暂存区</td></tr><tr><td>staged（已暂存）</td><td>本地文件被保存在了暂存区</td></tr><tr><td>committed（已提交）</td><td>本地文件被提交到本地git仓库了</td></tr></tbody></table><p><strong>注意，这里的修改是比较广义的。删除、编辑、增加都是属于修改</strong></p><h3 id="git-本地操作的常用命令"><a href="#git-本地操作的常用命令" class="headerlink" title="git 本地操作的常用命令"></a>git 本地操作的常用命令</h3><ul><li><p>配置提交时所使用的个人信息</p><pre><code class="bash">git config --global user.name &quot;raoyingjun&quot; // 用户名git config --global user.email &quot;raoyingjun@foxmail.com&quot; // 邮箱</code></pre><p>如果 <code>--global</code> 参数不存在，配置的用户信息仅在该仓库有效</p></li><li><p>初始化本地 git 仓库</p><pre><code class="bash">git init</code></pre><p>该命令在指定目录下初始化本地 git 仓库。该目录下将会生成一个 <code>.git</code> 隐藏文件夹。就可以开始进行git的使用了</p></li><li><p>查看文件的状态</p><pre><code class="bash">git status</code></pre><p>结果包含 <code>Untracked files</code> 或者说明文件已修改但未被提交到暂存区</p></li><li><p>添加文件到暂存区</p><pre><code class="bash">git add &lt;file&gt;</code></pre><p><code>file</code> 为要被添加到暂存区的文件名。返回的结果包含 <code>Changes to be committed</code> 说明文件被添加到了暂存区，等待被提交到本地git仓库</p></li><li><p>提交更改到本地git仓库</p><pre><code class="bash">git commit</code></pre><p>该命令将会拉起安装 git 时所选择的默认编辑器，在编辑器内写入本次提交的说明。结果显示 <code>working tree clean</code> 说明工作区和暂存区是干净的，没有待暂存或待提交的文件。文件已经提交到了git本地仓库</p><p>指定 <code>-m</code> 参数可以直接写入提交说明，不会拉起编辑器，比较方便快捷，命令如下</p><pre><code class="bash">git commit -m &lt;description&gt;</code></pre><p><code>description</code> 为提交时的说明</p><p>指定 <code>-a</code> 参数设置修改文件后无需执行 git add 命令，直接提交。将会拉取编辑器，在编辑器写入提交说明，命令如下</p><pre><code class="bash">git commit -a</code></pre><p>可以同时指定 <code>-am</code> 将add添加到暂存区操作和commit提交操作合并到一起。或者使用 <code>git commit * -m </code> 也可以达到同样的效果</p><pre><code class="bash">git commit -am &lt;description&gt; // 或者git commit * -m &lt;description&gt; </code></pre><p><code>description</code> 为提交时的说明</p></li><li><p>查看提交日志记录信息</p><p>使用 <code>git log</code> 查看提交的日志记录信息，<strong>该命令只能查看到当前版本为止的记录</strong></p><pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)$ git logcommit 73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -&gt; master)Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;Date:   Wed Mar 31 17:10:31 2021 +0800    本次提交的说明</code></pre><p>使用 <code>git log --pretty=oneline</code> 查看提交的日志记录信息</p><pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)$ git log --pretty=oneline73ad93b19df64c9b79b3ae886ddf63ab1daa8b0d (HEAD -&gt; master) 本次提交的说明</code></pre><p>使用 <code>git log --oneline</code> 查看提交的日志记录信息</p><pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)$ git log --oneline73ad93b (HEAD -&gt; master) 本次提交的说明</code></pre><p>使用<code>git log --graph</code> 查看提交的日志记录信息。方便直观的查看分支合并的情况</p><pre><code class="bash">$ git log --graph*   commit 2819958ace45d4ba7377e81d539ce80ff78a16c8 (HEAD -&gt; main)|\  Merge: 8467fbd 8d2e09d| | Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;| | Date:   Thu Apr 1 18:15:52 2021 +0800| || |   本次提交的说明| || * commit 8d2e09d39e66fd3a29eb892d0346b7de4aa11adb (hotfix)| | Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;| | Date:   Thu Apr 1 17:36:31 2021 +0800| || |   本次提交的说明| |* | commit 8467fbddcffb1300f98396480290a07025def49f|/  Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;|   Date:   Thu Apr 1 17:37:26 2021 +0800||     本次提交的说明|* commit b4a6f5abf45d65e80b67d53da714cbccc9edb3f2 (origin/main, origin/hotfix)| Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;| Date:   Thu Apr 1 09:39:57 2021 +0800||     本次提交的说明|* commit ddf4e6131e6cb13ae67b99456ebe38fa96a3f7bc  Author: raoyingjun &lt;raoyingjun@foxmail.com&gt;  Date:   Wed Mar 31 23:53:54 2021 +0800      本次提交的说明</code></pre></li></ul><p>使用 <code>git reflog</code> 查看提交的日志信息，<strong>该命令可以查看所有版本的提交记录</strong></p><pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)$ git reflog73ad93b (HEAD -&gt; master) HEAD@&#123;0&#125;: commit: 本次提交的说明</code></pre><ul><li><p>从暂存区移除文件</p><pre><code class="bash">git restore --staged &lt;file&gt;</code></pre><p><code>file</code> 为从暂存区移除的文件名</p></li><li><p>丢弃修改</p><p>当文件被添加到暂存区，如果对文件进行了修改，使用以下命令来丢弃修改，回撤到文件被暂存时的状态</p><pre><code class="bash">git restore &lt;file&gt;</code></pre><p><code>file</code> 为要恢复的文件名。</p></li><li><p>比较不同工作区域的文件</p><p>使用 <code>git diff</code> 命令来比较不同区的文件的差异</p><ul><li><p>无参数传入，比较工作区和暂存区的差异</p><pre><code class="bash">git diff</code></pre></li><li><p>比较暂存区和<code>HEAD</code>的差异</p><pre><code class="bash">git diff --cached// 或者git diff --staged</code></pre></li><li><p>比较工作区和HEAD的差异</p><pre><code class="bash">git diff HEAD</code></pre></li><li><p>比较工作区和HEAD同名文件的差异</p><pre><code class="bash">git diff HEAD -- &lt;file&gt;</code></pre><p><code>file</code> 为要比较的文件</p></li><li><p>指定版本之间的比较</p><ul><li><p>比较最新的HEAD和前3次的HEAD的差异</p><pre><code class="bash">git diff HEAD^ HEAD</code></pre><p><code>HEAD^</code> 表示前1个版本，<code>HEAD^^</code> 则表示前2个版本，以此类推</p></li><li><p>比较最新的HEAD和前3个版本的比较</p><pre><code class="bash">git diff HEAD~3 HEAD</code></pre><p><code>HEAD~1</code> 表示前1个版本，<code>HEAD~4</code> 就是前4个版本，数字为几就是前几个版本</p></li><li><p>比较两个历史版本的差异</p><pre><code class="bash">git diff hash1 hash2</code></pre></li></ul></li></ul><p>命令返回的结果示例如下：</p><pre><code class="bash">HASEE@Royin MINGW64 ~/Desktop/GitProject (master)$ git diffdiff --git a/text.txt b/text.txtindex 0b4bf3f..f034430 100644--- a/text.txt+++ b/text.txt@@ -1,4 +1,5 @@ 第一行-第二行+我是第一个插入的行^M 第三行+我是最后插入的行^M</code></pre><p>以下是对 <code>git diff</code> 命令返回的结果的释义：</p><ul><li><p><code>diff --git a/text.txt b/text.txt</code> 的<code>a/text.txt</code>表示变动前的版本，<code>b/text.txt</code>表示变动后的版本</p></li><li><p><code>index 0b4bf3f..f034430</code>表示两个版本（a版本和b版本）的git哈希值</p></li><li><p><code>100644</code>表示文件的属性和权限(<code>100</code>表示是普通文件，<code>644</code>同<code>linux</code>权限)</p></li><li><p><code>--- a/text.txt</code>表示变动前的版本</p></li><li><p><code>+++ b/text.txt</code>表示变动后的版本</p></li><li><p><code>@@ -1,4 +1,5 @@</code>表示源代码的1<del>4行和目标文件的1</del>5行有差异</p></li><li><p><code>-</code>表示减少的部分</p></li><li><p><code>+</code>表示增加的部分</p></li></ul></li><li><p>版本的切换</p><ul><li><p>切换到指定的版本</p><pre><code class="bash">git reset --hard &lt;hash&gt;</code></pre><p><code>hash</code> 为要切换的版本的哈希值</p></li><li><p>切换到前1个版本</p><pre><code class="bash">git reset --hard HEAD^</code></pre><p><code>HEAD^</code> 表示前1个版本，<code>HEAD^^</code> 则表示前2个版本，以此类推</p></li><li><p>切换到前两个版本</p><pre><code class="bash">git reset --hard HEAD~1</code></pre><p><code>HEAD~1</code> 表示前1个版本，<code>HEAD~4</code> 就是前4个版本，数字为几就是前几个版本</p></li></ul></li><li><p>删除文件</p><ul><li><p>在暂存区和工作区删除该文件</p><pre><code class="bash">git rm &lt;file&gt;</code></pre><p><code>file</code> 为要删除的文件。该命令执行后无需再使用 <code>git add</code> 命令将删除操作添加到暂存区了，只用将本次删除提交到本地 git 仓库即可</p></li><li><p>仅暂存区删除该文件</p><pre><code class="bash">git rm --cached &lt;file&gt;</code></pre><p><code>file</code> 为要删除的文件。在工作区的该文件仍然保留</p></li></ul></li><li><p>工作区文件误删的补救</p><ul><li><p>从本地git仓库拉取一份回工作区</p><pre><code class="bash">git checkout &lt;file&gt;</code></pre><p><code>file</code> 为要拉回的文件</p></li><li><p>恢复工作区被删除的文件</p><pre><code class="bash">git restore &lt;file&gt;</code></pre><p><code>file</code> 为要恢复的文件</p></li></ul></li><li><p>分支介绍</p><p>git提供了分支相关的操作，用来切换到不同的分支。master 一般是主干分支，一般功能增加、BUG 修复、多人协同开发等不会直接在 master 上进行，需要另辟分支进行处理，最后处理完后合并到master</p></li><li><p>创建分支</p><pre><code class="bash">git checkout -b &lt;newbranch&gt;// orgit branch &lt;newbranch&gt;</code></pre><p><code>newbranch</code> 为要创建的分支名称。使用第一种方式创建分支时同时会切换到该分支</p></li><li><p>切换分支</p><pre><code class="bash">git checkout &lt;branchname&gt;</code></pre><p><code>branchname</code> 为要切换到的分支名称</p></li><li><p>删除分支</p><pre><code class="bash">git branch -d &lt;branchname&gt;</code></pre><p><code>branchname</code> 为要删除的分支名称。<strong>不能删除当前所在分支。如需删除，得先切换到其他分支，再执行删除</strong></p></li><li><p>查看分支</p><pre><code class="bash">git branch</code></pre><p>带 <code>*</code> 的表示当前所在的分支</p><p>指定 <code>-v</code> 参数可以查看各个分支最后一次提交的信息，命令如下</p><pre><code class="bash">git branch -v</code></pre></li><li><p>合并分支</p><pre><code class="bash">git merge &lt;branchname&gt;</code></pre><p><code>branchname</code>为要被合并的分支名称，<strong>合并到当前所在的分支</strong></p></li><li><p>重命名分支</p><pre><code>git branch -m &lt;oldbranchname&gt; &lt;newbranchname&gt;</code></pre><p><code>oldbranchname</code> 和 <code>newbranchname</code> 分别为原分支名称和新分支名称。如果 <code>newbranchname</code> 分支已存在，指定 <code>-M</code> <strong>代替</strong> <code>-m</code> 可以强制重命名为已存在的分支</p></li><li><p>添加远程仓库</p><pre><code class="bash">git remote add &lt;remotename&gt; &lt;url&gt;</code></pre><p><code>remotename</code> 为远程仓库的别名，<code>url</code> 为远程仓库的地址</p></li><li><p>查看所有的远程仓库别名</p><pre><code class="bash">git remote</code></pre><p>指定 <code>-v</code> 参数同时显示其远程仓库所对应的地址 <code>url</code></p><pre><code class="bash">git remote -v</code></pre></li><li><p>删除远程仓库</p><pre><code class="bash">git remote rm &lt;remotename&gt;</code></pre><p><code>remotename</code> 为要删除的远程仓库的名称</p></li><li><p>修改远程仓库名称</p><pre><code class="bash">git remote rename &lt;oldremotename&gt; &lt;newremotename&gt;</code></pre><p><code>oldremotename</code> 和 <code>newremotename</code> 分别表示旧名称和新名称</p></li></ul><h3 id="git-远程仓库的常用命令"><a href="#git-远程仓库的常用命令" class="headerlink" title="git 远程仓库的常用命令"></a>git 远程仓库的常用命令</h3><ul><li><p>从远程仓库克隆项目到本地</p><pre><code class="bash">git clone &lt;url&gt;</code></pre><pre><code class="bash">`url`为远程仓库的地址</code></pre></li><li><p>取回远程仓库最新内容</p><pre><code class="bash">git fetch &lt;remotehost&gt; &lt;remotebranch&gt;</code></pre><p>使用 <code>git fetch &lt;remotehost&gt; &lt;remotebranch&gt;</code> 将远程仓库的的最新内容全部取回本地。<code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为远程分支名</p><p>如果仅指定了<code>remotehost</code>，则将<code>remotehost</code>所对应的远程仓库与本地当前同名分支的最新内容取回到本地当前分支，命令如下</p><pre><code class="bash">git fetch &lt;remotehost&gt;</code></pre><p><strong><code>fetch</code> 操作不会对本地仓库做任何修改，仅仅是下载到本地</strong></p></li><li><p>将使用 <code>fetch</code> 命令下载到本地的内容合并到本地仓库</p><pre><code class="bash">git merge &lt;remotehost&gt;/&lt;remotebranch&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为远程分支名。<strong>合并到当前所在分支</strong></p></li><li><p>查看远程分支</p><pre><code class="bash">git branch -a</code></pre><p>同时也会显示本地的分支。<strong>在查看远程分支时，查看的是数据的快照，也就是上一次调用 <code>git fetch</code> 的结果。并没有与远程仓库实时的连接，也就是查看到的远程分支不一定是最新的，请先使用<code>git fetch</code><br>以确保获取到的是最新内容</strong></p></li><li><p>推送本地分支到远程仓库</p><pre><code class="bash">  git push &lt;remotehost&gt; &lt;localbranch&gt;:&lt;remotebranch&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>localbranch</code> 和 <code>remotebranch</code> 分别对应本地分支名和远程分支名。如果本地分支名和远程分支名相同，则可以略写为：</p><pre><code class="bash">git push &lt;remotehost&gt; &lt;localbranch&gt;</code></pre><p>指定<code>-u</code>参数同时指定默认远程仓库和分支，直接使用 <code>git push</code> 即可，命令如下：</p><pre><code class="bash">git push -u &lt;remotehost&gt; &lt;localbranch&gt;</code></pre><p><strong>则后面无参数的推送，拉取等命令可以无需加任何参数，默认使用在这时使用 <code>-u</code> 所指定的远程仓库和分支</strong> 。对于没有携带任何参数的推送，默认推送到当前分支。如果需要推送到其他主机或分支，请使用完整的<code>push</code>命令</p><p>如果要推送当前所在的本地分支到远程仓库同名分支，则可以直接使用以下命令：</p><pre><code class="bash">git push &lt;remotehost&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名</p></li><li><p>删除远程分支</p><pre><code class="bash">git push &lt;remotehost&gt; :&lt;remotebranchname&gt;// 或者git push &lt;remotehost&gt; --delete &lt;remotebranchname&gt;</code></pre><p><code>remtoehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranchname</code> 为要删除的远程分支的名称</p></li><li><p>拉取远程分支到本地</p><pre><code class="bash">git checkout -b &lt;localbranch&gt; &lt;remotehost&gt;/&lt;branchname&gt;</code></pre><p><code>localbranch</code> 为远程分支拉取到本地后的分支名，<code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>branchname</code><br>为要被拉取到本地的远程仓库的分支名。该命令只适用于当在远程仓库存在该分支，并且通过 <code>git fetch</code> 操作下载到了本地，且本地并没有该分支时</p></li><li><p>拉取远程仓库内容到本地</p><p><code>pull</code> 操作是将 <code>fetch</code> 和 <code>merge</code> 操作合并在一起，关系约等于 <code>pull = fetch + merge</code>，具体的命令如下：</p><pre><code class="bash">git pull &lt;remotehost&gt; &lt;remotebranch&gt;:&lt;localbranch&gt;</code></pre><p><code>remotehost</code> 为远程仓库的地址或远程仓库的别名，<code>remotebranch</code> 为要拉取的远程仓库的分支名称，<code>localbranch</code> 为要被合并的分支名称。如果本地分支名和远程分支名相同，则可以略写为：</p><pre><code class="bash">git pull &lt;remotehost&gt; &lt;localbranch&gt;</code></pre><p>如果要从远程仓库拉取的分支名和本地仓库当前所在分支名同名，则可以直接使用以下命令</p><pre><code class="bash">git pull &lt;remotehost&gt;</code></pre><p><code>remtoehost</code> 为远程仓库的地址或远程仓库的别名</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解决 git 中每次 push 或者 pull 等操作都需要需要输入账户密码</title>
+      <link href="/2021/10/26/%E8%A7%A3%E5%86%B3git%E4%B8%AD%E6%AF%8F%E6%AC%A1push%E6%88%96%E8%80%85pull%E7%AD%89%E6%93%8D%E4%BD%9C%E9%83%BD%E9%9C%80%E8%A6%81%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81/"/>
+      <url>/2021/10/26/%E8%A7%A3%E5%86%B3git%E4%B8%AD%E6%AF%8F%E6%AC%A1push%E6%88%96%E8%80%85pull%E7%AD%89%E6%93%8D%E4%BD%9C%E9%83%BD%E9%9C%80%E8%A6%81%E9%9C%80%E8%A6%81%E8%BE%93%E5%85%A5%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81/</url>
+      
+        <content type="html"><![CDATA[<h4 id="前景引入"><a href="#前景引入" class="headerlink" title="前景引入"></a>前景引入</h4><p>使用 git 时，如果每次 push 推送、pull 拉取等操作都需要输入账户密码来验证账户才允许推送，非常繁琐。问题的表现像下面这样：</p><pre><code class="bash">C:\adir\bsubdir\cproject&gt;git push originUsername for &#39;https://github.com&#39;: XXXXPassword for &#39;https://raoyingjun@foxmail.com@github.com&#39;: XXXX</code></pre><h4 id="为什么每次都需要登录"><a href="#为什么每次都需要登录" class="headerlink" title="为什么每次都需要登录"></a>为什么每次都需要登录</h4><p>如果你是下面这种方式 clone 项目的，则每次都需要进行登录：</p><pre><code class="bash">git clone https://github.com/xxx/xxxxxx.git</code></pre><p>原因如下：</p><blockquote><p>如果你使用的是 SSH 方式连接远端（remote），这样就可以在不输入用户名和密码的情况下安全地传输数据。 然而，这对 HTTP 协议来说是不可能的，每一个连接都是需要用户名和密码的。<br>当在使用双重认证的情况下会更麻烦，因为你需要输入一个随机生成并且毫无规律的 token 作为密码。</p></blockquote><p>注意，这个 token 指的是 git 的<br><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">Personal Access Token</a></p><h4 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h4><p>使用下面的命令即可解决</p><pre><code class="bash">git config --global credential.helper store</code></pre><p>其中参数 store 的含义是什么？</p><blockquote><p>“store” 模式会将凭证用明文的形式存放在磁盘中，并且永不过期。 这意味着除非你修改了你在 Git 服务器上的密码，否则你永远不需要再次输入你的凭证信息。 这种方式的缺点是你的密码是用明文的方式存放在你的 home<br>目录下。当然，除了参数 store 还有其他的参数可选</p></blockquote><p>当然，也可用通过<br><a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">设置SSH免密登录</a><br>的方式登录</p><p>以上参考自<br><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E5%87%AD%E8%AF%81%E5%AD%98%E5%82%A8">git中文使用文档</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> git </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>静态类型和动态类型以及强类型和弱类型</title>
+      <link href="/2021/10/26/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%BC%BA%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%B1%E7%B1%BB%E5%9E%8B/"/>
+      <url>/2021/10/26/%E9%9D%99%E6%80%81%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8A%A8%E6%80%81%E7%B1%BB%E5%9E%8B%E4%BB%A5%E5%8F%8A%E5%BC%BA%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%BC%B1%E7%B1%BB%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h3 id="动态类型和静态类型"><a href="#动态类型和静态类型" class="headerlink" title="动态类型和静态类型"></a>动态类型和静态类型</h3><p>动态类型指的是变量在被声明时他的类型还不确定，在给变量赋值的时候，才会从值推断出该变量的类型，同时可以随意改变变量的值，其值可以是任何类型的</p><p>拿 <code>javascript</code> 来看</p><pre><code class="javascript">var a // 此时还不确定 a 的类型a = 1 // a 为 Boolean 类型a = &#39;hello&#39; // 可以随便修改其值，a 变成了 String 类型</code></pre><p>静态类型指的是指在编译阶段，变量被声明时候其类型就被确定了，在代码运行时，也只能给该变量赋值该类型的值</p><p>拿 <code>java</code> 来看</p><pre><code class="java">String a // a 的类型为 Stringa = &quot;hello&quot; // 没问题a = 1 // 编译出错，a 必须为 String</code></pre><h3 id="强类型和弱类型"><a href="#强类型和弱类型" class="headerlink" title="强类型和弱类型"></a>强类型和弱类型</h3><p>强类型和弱类型的区别是对类型检查的严格程度</p><p>强类型是指对类型检查很严格，在编译阶段就做类型检查，不接受任何的隐式类型转换，必须得显示的做强制类型转换</p><p>拿 <code>java</code> 来说</p><pre><code class="java">if (&quot;hello&quot;) // 抛出类型错误，此处应该接收一个 Boolean 类型的值1 + &#39;1&#39; // 编译出错</code></pre><p>弱类型是指对于类型的检查很弱，不做类型检查，并且接受隐式的类型转换</p><p>拿 <code>javascript</code> 来说</p><pre><code class="javascript">if (1) // 不会报错，隐式的将 Number 类型转换成 Boolean 类型1 - &#39;s&#39; // 不会报错，返回 NaN</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 其他 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
